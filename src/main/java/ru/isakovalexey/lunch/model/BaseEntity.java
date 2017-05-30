@@ -4,7 +4,9 @@ package ru.isakovalexey.lunch.model;
  * Created by user on 29.05.2017.
  */
 public class BaseEntity {
-    private Integer id;
+    public static final int START_SEQ = 100000;
+
+    protected Integer id;
 
     protected BaseEntity() {
     }
@@ -26,9 +28,19 @@ public class BaseEntity {
     }
 
     @Override
-    public String toString() {
-        return "BaseEntity{" +
-                "id=" + id +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        BaseEntity that = (BaseEntity) o;
+        return id != null && id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return (id == null) ? 0 : id;
     }
 }
