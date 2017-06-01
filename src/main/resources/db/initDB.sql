@@ -32,7 +32,7 @@ CREATE TABLE restaurants
   registered TIMESTAMP DEFAULT now(),
   vote       INTEGER NOT NULL
 );
-CREATE UNIQUE INDEX restaurants_unique_email_idx ON restaurants (name);
+CREATE UNIQUE INDEX restaurants_unique_name_idx ON restaurants (name);
 
 CREATE TABLE meals (
   id             INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),

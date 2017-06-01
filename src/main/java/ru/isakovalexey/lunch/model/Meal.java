@@ -55,7 +55,7 @@ public class Meal extends BaseEntity {
     }
 
     public boolean isNew() {
-        return id == null;
+        return getId() == null;
     }
 
     @Override
