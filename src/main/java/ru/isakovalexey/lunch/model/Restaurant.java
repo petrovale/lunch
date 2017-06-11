@@ -1,17 +1,17 @@
 package ru.isakovalexey.lunch.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
  * Created by user on 29.05.2017.
  */
+@NamedQueries({@NamedQuery(name = Restaurant.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),})
 @Entity
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "users_unique_name_idx")})
 public class Restaurant extends NamedEntity {
+
+    public static final String DELETE = "Restaurant.delete";
 
     @NotNull
     @Column(name = "vote")

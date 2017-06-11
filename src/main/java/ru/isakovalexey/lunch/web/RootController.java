@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ru.isakovalexey.lunch.AuthorizedUser;
+import ru.isakovalexey.lunch.service.RestaurantService;
 import ru.isakovalexey.lunch.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class RootController {
     @Autowired
-    private UserService service;
+    private UserService userService;
+
+    @Autowired
+    private RestaurantService restaurantService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {
@@ -22,7 +26,7 @@ public class RootController {
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String users(Model model) {
-        model.addAttribute("users", service.getAll());
+        model.addAttribute("users", userService.getAll());
         return "users";
     }
 
@@ -31,5 +35,11 @@ public class RootController {
         int userId = Integer.valueOf(request.getParameter("userId"));
         AuthorizedUser.setId(userId);
         return "redirect:meals";
+    }
+
+    @RequestMapping(value = "/restaurants", method = RequestMethod.GET)
+    public String restaurants(Model model) {
+        model.addAttribute("restaurants", restaurantService.getAll());
+        return "restaurants";
     }
 }

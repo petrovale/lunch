@@ -11,7 +11,7 @@
 <section>
   <ul>
     <li><a href="users"><fmt:message key="users.title"/></a></li>
-    <li><a href="meals"><fmt:message key="meals.title"/></a></li>
+    <li><a href="restaurants"><fmt:message key="restaurants.title"/></a></li>
   </ul>
 </section>
 
