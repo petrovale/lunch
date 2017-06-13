@@ -14,13 +14,15 @@ import javax.persistence.*;
  * Created by user on 29.05.2017.
  */
 @NamedQueries({
-    @NamedQuery(name = User.BY_EMAIL, query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.roles WHERE u.email=?1")
+    @NamedQuery(name = User.BY_EMAIL, query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.roles WHERE u.email=?1"),
+    @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id")
 })
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
 public class User extends NamedEntity {
 
     public static final String BY_EMAIL = "User.getByEmail";
+    public static final String DELETE = "User.delete";
 
     @Column(name = "email", nullable = false, unique = true)
     @Email
@@ -107,10 +109,9 @@ public class User extends NamedEntity {
     public String toString() {
         return "User{" +
                 "id=" + getId() +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", name=" + name +
                 ", enabled=" + enabled +
-                ", registered=" + registered +
                 ", roles=" + roles +
                 '}';
     }
