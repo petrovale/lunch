@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  */
 @NamedQueries({
     @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id AND m.restaurant.id=:restaurantId"),
-    @NamedQuery(name = Meal.ALL, query = "SELECT m FROM Meal m WHERE m.restaurant.id=:restaurantId"),
+    @NamedQuery(name = Meal.ALL, query = "SELECT m FROM Meal m WHERE m.restaurant.id=:restaurantId ORDER BY m.dateTime DESC "),
 })
 @Entity
 @Table(name = "meals")

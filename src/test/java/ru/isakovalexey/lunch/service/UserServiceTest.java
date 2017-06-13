@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import ru.isakovalexey.lunch.AbstractServiceTest;
 import ru.isakovalexey.lunch.model.Role;
 import ru.isakovalexey.lunch.model.User;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;

@@ -2,11 +2,14 @@ package ru.isakovalexey.lunch.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import ru.isakovalexey.lunch.model.Meal;
 import ru.isakovalexey.lunch.repository.MealRepository;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
 import java.util.List;
+
+import static ru.isakovalexey.lunch.util.ValidationUtil.checkNotFoundWithId;
 
 /**
  * Created by user on 31.05.2017.
@@ -23,12 +26,12 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public Meal get(int id, int restaurantId) throws NotFoundException {
-        return mealRepository.get(id, restaurantId);
+        return checkNotFoundWithId(mealRepository.get(id, restaurantId), id);
     }
 
     @Override
     public void delete(int id, int restaurantId) throws NotFoundException {
-        mealRepository.delete(id, restaurantId);
+        checkNotFoundWithId(mealRepository.delete(id, restaurantId), id);
     }
 
     @Override
@@ -38,7 +41,8 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public Meal update(Meal meal, int restaurantId) throws NotFoundException {
-        return mealRepository.save(meal, restaurantId);
+        Assert.notNull(meal, "meal must not be null");
+        return checkNotFoundWithId(mealRepository.save(meal, restaurantId), meal.getId());
     }
 
     @Override
