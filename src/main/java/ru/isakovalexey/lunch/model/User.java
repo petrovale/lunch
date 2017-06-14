@@ -1,5 +1,7 @@
 package ru.isakovalexey.lunch.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.CollectionId;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -32,6 +34,7 @@ public class User extends NamedEntity {
     @Column(name = "password", nullable = false)
     @NotBlank
     @Length(min = 5)
+    //@JsonIgnore
     private String password;
 
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
@@ -44,6 +47,7 @@ public class User extends NamedEntity {
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
+    @BatchSize(size = 200)
     private Set<Role> roles;
 
     public User() {
