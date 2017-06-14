@@ -13,7 +13,7 @@ import static ru.isakovalexey.lunch.model.BaseEntity.START_SEQ;
 
 public class MealTestData {
 
-    public static final ModelMatcher<Meal> MATCHER = new ModelMatcher<>();
+    public static final ModelMatcher<Meal> MATCHER = ModelMatcher.of(Meal.class);
 
     public static final int BLACK_THAI_ID = START_SEQ + 2;
     public static final int WHITE_RABBIT_ID = START_SEQ + 3;
