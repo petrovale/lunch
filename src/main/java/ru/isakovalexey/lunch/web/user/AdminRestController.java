@@ -58,7 +58,7 @@ public class AdminRestController extends AbstractUserController {
     }
 
     @Override
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/by", produces = MediaType.APPLICATION_JSON_VALUE)
     public User getByMail(@RequestParam("email") String email) {
         return super.getByMail(email);
     }
