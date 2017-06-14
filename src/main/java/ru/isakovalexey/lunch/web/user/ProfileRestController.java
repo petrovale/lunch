@@ -8,9 +8,6 @@ import ru.isakovalexey.lunch.AuthorizedUser;
 import ru.isakovalexey.lunch.model.User;
 import ru.isakovalexey.lunch.service.UserService;
 
-/**
- * Created by user on 31.05.2017.
- */
 @RestController
 @RequestMapping(ProfileRestController.REST_URL)
 public class ProfileRestController extends AbstractUserController {

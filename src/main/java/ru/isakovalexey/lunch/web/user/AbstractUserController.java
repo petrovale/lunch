@@ -49,4 +49,9 @@ public class AbstractUserController {
         checkIdConsistent(user, id);
         service.update(user);
     }
+
+    public User getByMail(String email) {
+        log.info("getByEmail {}", email);
+        return service.getByEmail(email);
+    }
 }
