@@ -31,6 +31,9 @@ public class Meal extends BaseEntity {
     @NotBlank
     private String description;
 
+    @Column(name="restaurant_id", insertable=false, updatable=false)
+    private Integer restaurantId;
+
     //@Column(name = "price", nullable= false, precision=7, scale=2)    // Creates the database field with this size.
     //@Digits(integer=9, fraction=2)
     @Column(name="price", columnDefinition="Decimal(10,2) default '100.00'")
