@@ -18,4 +18,6 @@ public interface RestaurantService {
     Restaurant update(Restaurant restaurant) throws NotFoundException;
 
     Restaurant save(Restaurant restaurant);
+
+    void voice(int id, boolean voice);
 }

@@ -2,11 +2,14 @@ package ru.isakovalexey.lunch.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.repository.RestaurantRepository;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
 import java.util.List;
+
+import static ru.isakovalexey.lunch.util.RestaurantUtil.updateVoice;
 
 /**
  * Created by user on 31.05.2017.
@@ -44,5 +47,12 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Restaurant save(Restaurant restaurant) {
         return restaurantRepository.save(restaurant);
+    }
+
+    @Override
+    @Transactional
+    public void voice(int id, boolean voice) {
+        Restaurant restaurant = updateVoice(get(id), voice);
+        restaurantRepository.save(restaurant);
     }
 }

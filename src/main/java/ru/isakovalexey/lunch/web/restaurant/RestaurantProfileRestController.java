@@ -2,10 +2,7 @@ package ru.isakovalexey.lunch.web.restaurant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.service.RestaurantService;
 
@@ -34,5 +31,10 @@ public class RestaurantProfileRestController extends AbstractRestaurantControlle
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Restaurant get(@PathVariable("id") int id) {
         return super.get(id);
+    }
+
+    @PostMapping(value = "/{id}")
+    public void voice(@PathVariable("id") int id, @RequestParam("voice") boolean voice) {
+        super.voice(id, voice);
     }
 }

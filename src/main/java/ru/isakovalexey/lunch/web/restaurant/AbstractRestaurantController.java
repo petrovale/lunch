@@ -47,4 +47,9 @@ public abstract class AbstractRestaurantController {
         checkIdConsistent(restaurant, id);
         service.update(restaurant);
     }
+
+    public void voice(int id, boolean voice) {
+        log.info((voice ? "add voice " : "remove the voice ") + id);
+        service.voice(id, voice);
+    }
 }
