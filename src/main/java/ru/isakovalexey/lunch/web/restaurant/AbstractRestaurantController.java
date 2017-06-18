@@ -21,9 +21,9 @@ public abstract class AbstractRestaurantController {
         this.service = service;
     }
 
-    public List<Restaurant> getAll() {
-        log.info("getAll");
-        return service.getAll();
+    public List<Restaurant> getAllVoice() {
+        log.info("getAllVoice");
+        return service.getAllVoice();
     }
 
     public Restaurant get(int id) {

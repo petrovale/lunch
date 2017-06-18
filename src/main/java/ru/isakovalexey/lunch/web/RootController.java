@@ -32,7 +32,7 @@ public class RootController {
 
     @RequestMapping(value = "/restaurants", method = RequestMethod.GET)
     public String restaurants(Model model) {
-        model.addAttribute("restaurants", restaurantService.getAll());
+        model.addAttribute("restaurants", restaurantService.getAllVoice());
         return "restaurants";
     }
 }

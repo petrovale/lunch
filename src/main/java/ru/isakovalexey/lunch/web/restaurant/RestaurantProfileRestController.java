@@ -23,8 +23,8 @@ public class RestaurantProfileRestController extends AbstractRestaurantControlle
 
     @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Restaurant> getAll() {
-        return super.getAll();
+    public List<Restaurant> getAllVoice() {
+        return super.getAllVoice();
     }
 
     @Override

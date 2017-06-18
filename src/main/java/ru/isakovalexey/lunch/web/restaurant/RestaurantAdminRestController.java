@@ -36,8 +36,8 @@ public class RestaurantAdminRestController extends AbstractRestaurantController 
 
     @Override
     @GetMapping
-    public List<Restaurant> getAll() {
-        return super.getAll();
+    public List<Restaurant> getAllVoice() {
+        return super.getAllVoice();
     }
 
     @Override

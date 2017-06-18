@@ -7,6 +7,7 @@ import ru.isakovalexey.lunch.model.Restaurant;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -53,8 +54,9 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
         for (Object[] object : objects) {
             int id = ((Number) object[0]).intValue();
             String name = (String) object[1];
-            int vote = ((Number) object[2]).intValue();
-            restaurants.add(new Restaurant(id, name, vote));
+            Date date = (Date) object[2];
+            int vote = ((Number) object[3]).intValue();
+            restaurants.add(new Restaurant(id, name, vote, date));
         }
 
         return restaurants;
