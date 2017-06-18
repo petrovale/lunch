@@ -7,6 +7,7 @@ import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.repository.RestaurantRepository;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
+import java.util.Date;
 import java.util.List;
 
 import static ru.isakovalexey.lunch.util.RestaurantUtil.updateVoice;
@@ -60,5 +61,11 @@ public class RestaurantServiceImpl implements RestaurantService {
     public List<Restaurant> getAllVoice() {
         return restaurantRepository.getAllVoice();
     }
+
+    @Override
+    public List<Restaurant> getAllVoiceByDate(Date dateVoice) {
+        return restaurantRepository.getAllVoiceByDate(dateVoice);
+    }
+
 
 }

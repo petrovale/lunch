@@ -2,6 +2,7 @@ package ru.isakovalexey.lunch.repository;
 
 import ru.isakovalexey.lunch.model.Restaurant;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,4 +20,6 @@ public interface RestaurantRepository {
     List<Restaurant> getAll();
 
     List<Restaurant> getAllVoice();
+
+    List<Restaurant> getAllVoiceByDate(Date dateVoice);
 }

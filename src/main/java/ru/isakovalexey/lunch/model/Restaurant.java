@@ -14,6 +14,7 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = Restaurant.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
         @NamedQuery(name = Restaurant.ALL_VOICES, query = "SELECT r.id, r.name, r.registered, COUNT(v) FROM Restaurant r LEFT JOIN r.voices v GROUP BY r.id, r.name"),
+        @NamedQuery(name = Restaurant.ALL_VOICES_BY_Date, query = "SELECT r.id, r.name, r.registered, COUNT(v) FROM Restaurant r LEFT JOIN r.voices v ON v.dateVoice=:date GROUP BY r.id, r.name"),
 })
 @Entity
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "users_unique_name_idx")})
@@ -21,6 +22,7 @@ public class Restaurant extends NamedEntity {
 
     public static final String DELETE = "Restaurant.delete";
     public static final String ALL_VOICES = "Restaurant.allVoices";
+    public static final String ALL_VOICES_BY_Date = "Restaurant.allVoicesByDate";
 
     @NotNull
     @Column(name = "vote")

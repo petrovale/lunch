@@ -1,11 +1,13 @@
 package ru.isakovalexey.lunch.web.restaurant;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.service.RestaurantService;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,6 +27,12 @@ public class RestaurantProfileRestController extends AbstractRestaurantControlle
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAllVoice() {
         return super.getAllVoice();
+    }
+
+    @GetMapping(value = "/by", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Restaurant> getAllVoiceByDate(@RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
+        System.out.println(date);
+        return super.getAllVoiceByDate(date);
     }
 
     @Override

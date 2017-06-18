@@ -37,4 +37,9 @@ INSERT INTO meals (date_time, description, price, restaurant_id) VALUES
 INSERT INTO voices (restaurant_id, user_id) VALUES
   (100004, 100000),
   (100003, 100000),
-  (100003, 100001)
+  (100003, 100001);
+
+INSERT INTO voices (restaurant_id, user_id, date_voice, registered) VALUES
+  (100004, 100000, '2017-06-17' ,'2017-06-17 10:37:00'),
+  (100002, 100000, '2017-06-17' ,'2017-06-17 13:37:00'),
+  (100003, 100001, '2017-06-17' ,'2017-06-17 09:37:00')

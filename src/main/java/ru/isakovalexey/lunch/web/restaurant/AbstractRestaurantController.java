@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.service.RestaurantService;
 
+import java.util.Date;
 import java.util.List;
 
 import static ru.isakovalexey.lunch.util.ValidationUtil.*;
@@ -51,5 +52,10 @@ public abstract class AbstractRestaurantController {
     public void voice(int id, boolean voice) {
         log.info((voice ? "add voice " : "remove the voice ") + id);
         service.voice(id, voice);
+    }
+
+    public List<Restaurant> getAllVoiceByDate(Date dateVoice) {
+        log.info("getAllVoiceByDate {}", dateVoice);
+        return service.getAllVoiceByDate(dateVoice);
     }
 }

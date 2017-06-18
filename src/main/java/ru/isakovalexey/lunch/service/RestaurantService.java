@@ -3,6 +3,7 @@ package ru.isakovalexey.lunch.service;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,4 +23,6 @@ public interface RestaurantService {
     void voice(int id, boolean voice);
 
     List<Restaurant> getAllVoice();
+
+    List<Restaurant> getAllVoiceByDate(Date dateVoice);
 }
