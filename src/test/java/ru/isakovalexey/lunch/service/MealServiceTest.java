@@ -41,6 +41,7 @@ public class MealServiceTest extends AbstractServiceTest {
     public void testGet() throws Exception {
         Meal actual = service.get(Ugolek_MEAL_ID + 2, UGOLEK_ID);
         MATCHER.assertEquals(Ugolek_MEAL3, actual);
+        System.out.println(actual);
     }
 
     @Test

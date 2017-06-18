@@ -55,4 +55,10 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant restaurant = updateVoice(get(id), voice);
         restaurantRepository.save(restaurant);
     }
+
+    @Override
+    public List<Restaurant> getAllVoice() {
+        return restaurantRepository.getAllVoice();
+    }
+
 }

@@ -17,4 +17,6 @@ public interface RestaurantRepository {
     Restaurant get(int id);
 
     List<Restaurant> getAll();
+
+    List<Restaurant> getAllVoice();
 }

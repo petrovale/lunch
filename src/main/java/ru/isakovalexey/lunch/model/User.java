@@ -38,7 +38,7 @@ public class User extends NamedEntity {
     private String password;
 
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
-    private boolean enabled;
+    private boolean enabled = true;
 
     @Column(name = "registered", columnDefinition = "timestamp default now()")
     private Date registered = new Date();

@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS user_roles;
+DROP TABLE IF EXISTS voices;
 DROP TABLE IF EXISTS meals;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS restaurants;
@@ -41,4 +42,14 @@ CREATE TABLE meals (
   description    TEXT NOT NULL,
   price          DECIMAL(12,2) NOT NULL,
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
+);
+
+CREATE TABLE voices
+(
+  id INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  restaurant_id INTEGER NOT NULL,
+  user_id INTEGER NOT NULL,
+  registered TIMESTAMP DEFAULT now(),
+  date_voice DATE DEFAULT now(),
+  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
