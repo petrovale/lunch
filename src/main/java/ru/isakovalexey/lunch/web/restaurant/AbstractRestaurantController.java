@@ -49,11 +49,6 @@ public abstract class AbstractRestaurantController {
         service.update(restaurant);
     }
 
-    public void voice(int id, boolean voice) {
-        log.info((voice ? "add voice " : "remove the voice ") + id);
-        service.voice(id, voice);
-    }
-
     public List<Restaurant> getAllVoiceByDate(Date dateVoice) {
         log.info("getAllVoiceByDate {}", dateVoice);
         return service.getAllVoiceByDate(dateVoice);

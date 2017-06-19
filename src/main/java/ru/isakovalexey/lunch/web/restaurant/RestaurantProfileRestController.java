@@ -31,7 +31,6 @@ public class RestaurantProfileRestController extends AbstractRestaurantControlle
 
     @GetMapping(value = "/by", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAllVoiceByDate(@RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
-        System.out.println(date);
         return super.getAllVoiceByDate(date);
     }
 
@@ -39,10 +38,5 @@ public class RestaurantProfileRestController extends AbstractRestaurantControlle
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Restaurant get(@PathVariable("id") int id) {
         return super.get(id);
-    }
-
-    @PostMapping(value = "/{id}")
-    public void voice(@PathVariable("id") int id, @RequestParam("voice") boolean voice) {
-        super.voice(id, voice);
     }
 }

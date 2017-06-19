@@ -12,4 +12,6 @@ public interface VoiceService {
     Voice save(Voice voice, int restaurantId, int userId);
 
     Voice get(Date date, int userId) throws NotFoundException;
+
+    Voice voice(int restaurantId, boolean voice, int userId);
 }

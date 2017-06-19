@@ -20,8 +20,6 @@ public interface RestaurantService {
 
     Restaurant save(Restaurant restaurant);
 
-    void voice(int id, boolean voice);
-
     List<Restaurant> getAllVoice();
 
     List<Restaurant> getAllVoiceByDate(Date dateVoice);

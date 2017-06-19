@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.isakovalexey.lunch.model.Voice;
 
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -27,13 +27,24 @@ public class VoiceServiceTest extends AbstractServiceTest {
 
     @Test
     public void testGet() throws Exception {
-        Voice created = new Voice();
-        service.save(created, 100004, 100001);
+        Date date = new Date();
 
-        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date date1 = new Date();
-
-        Voice actual = service.get(date1, 100001);
+        Voice actual = service.get(date, 100000);
         System.out.println("actual " + actual);
+    }
+
+    @Test
+    public void testVoice() throws Exception {
+        /*
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 11);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        Date d = cal.getTime();
+        System.out.println(d);
+        */
+        Voice voice = service.voice(100002, true, 100000);
+        System.out.println(voice);
     }
 }

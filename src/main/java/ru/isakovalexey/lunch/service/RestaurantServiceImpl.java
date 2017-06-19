@@ -51,13 +51,6 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    @Transactional
-    public void voice(int id, boolean voice) {
-        Restaurant restaurant = updateVoice(get(id), voice);
-        restaurantRepository.save(restaurant);
-    }
-
-    @Override
     public List<Restaurant> getAllVoice() {
         return restaurantRepository.getAllVoice();
     }

@@ -21,4 +21,6 @@ public interface VoiceRepository {
 
     // ORDERED dateTime
     List<Voice> getAll(int restaurantId);
+
+    Voice voice(int restaurantId, boolean voice, int userId);
 }

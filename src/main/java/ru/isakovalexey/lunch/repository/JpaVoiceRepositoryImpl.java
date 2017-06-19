@@ -7,8 +7,9 @@ import ru.isakovalexey.lunch.model.User;
 import ru.isakovalexey.lunch.model.Voice;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TemporalType;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -25,14 +26,6 @@ public class JpaVoiceRepositoryImpl implements VoiceRepository {
     @Override
     @Transactional
     public Voice save(Voice voice, int restaurantId, int userId) {
-        /*
-        if (!voice.isNew() && get(voice.getId(), restaurantId) == null) {
-            return null;
-        }
-        */
-        if (!voice.isNew()) {
-            return null;
-        }
         voice.setRestaurant(em.getReference(Restaurant.class, restaurantId));
         voice.setUser(em.getReference(User.class, userId));
         if (voice.isNew()) {
@@ -54,17 +47,48 @@ public class JpaVoiceRepositoryImpl implements VoiceRepository {
 
     @Override
     public Voice get(Date dateVoice, int userId) {
-        return em.createNamedQuery(Voice.GET_VOICE_DATE, Voice.class)
-                .setParameter("userId", userId)
-                .setParameter("dateVoice", dateVoice)
-                .getSingleResult();
+        Voice voice;
+        try {
+            voice = em.createNamedQuery(Voice.GET_VOICE_DATE, Voice.class)
+                    .setParameter("userId", userId)
+                    .setParameter("dateVoice", dateVoice)
+                    .getSingleResult();
+        } catch (NoResultException nre) {
+            voice = null;
+        }
+        return voice;
     }
-
 
     @Override
     public List<Voice> getAll(int restaurantId) {
         return em.createNamedQuery(Voice.ALL, Voice.class)
                 .setParameter("restaurantId", restaurantId)
                 .getResultList();
+    }
+
+    @Override
+    @Transactional
+    public Voice voice(int restaurantId, boolean voice, int userId) {
+        Voice voiceUser = null;
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 11);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        Date currentDate = new Date();
+        Date beforeDate = cal.getTime();
+
+        if (currentDate.getTime() < beforeDate.getTime()) {
+            voiceUser = get(currentDate, userId);
+            if (voiceUser != null) {
+                voiceUser.setRegistered(currentDate);
+                save(voiceUser, restaurantId, userId);
+            } else {
+                voiceUser = new Voice();
+                save(voiceUser, restaurantId, userId);
+            }
+        }
+
+        return voiceUser;
     }
 }
