@@ -7,6 +7,7 @@ import ru.isakovalexey.lunch.model.Meal;
 import ru.isakovalexey.lunch.repository.MealRepository;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
+import java.util.Date;
 import java.util.List;
 
 import static ru.isakovalexey.lunch.util.ValidationUtil.checkNotFoundWithId;
@@ -35,8 +36,8 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public List<Meal> getAll(int restaurantId) {
-        return mealRepository.getAll(restaurantId);
+    public List<Meal> getAll(int restaurantId, Date date) {
+        return mealRepository.getAll(restaurantId, date);
     }
 
     @Override

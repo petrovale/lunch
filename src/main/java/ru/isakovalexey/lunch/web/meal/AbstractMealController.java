@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import ru.isakovalexey.lunch.model.Meal;
 import ru.isakovalexey.lunch.service.MealService;
 
+import java.util.Date;
 import java.util.List;
 
 import static ru.isakovalexey.lunch.util.ValidationUtil.*;
@@ -33,9 +34,9 @@ public abstract class AbstractMealController {
     }
 
 
-    public List<Meal> getAll(int restaurantId) {
+    public List<Meal> getAll(int restaurantId, Date date) {
         LOG.info("getAll for Restaurant {}", restaurantId);
-        return service.getAll(restaurantId);
+        return service.getAll(restaurantId, date);
     }
 
     public void update(Meal meal, int restaurantId) {

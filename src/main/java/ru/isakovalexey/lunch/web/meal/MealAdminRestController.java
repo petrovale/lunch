@@ -11,6 +11,7 @@ import ru.isakovalexey.lunch.model.Meal;
 import ru.isakovalexey.lunch.service.MealService;
 
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -37,8 +38,8 @@ public class MealAdminRestController extends AbstractMealController {
 
     @Override
     @GetMapping(value = "/restaurant")
-    public List<Meal> getAll(@RequestParam(value = "restaurantid") int restaurantId) {
-        return super.getAll(restaurantId);
+    public List<Meal> getAll(@RequestParam(value = "restaurantid") int restaurantId, Date date) {
+        return super.getAll(restaurantId, date);
     }
 
     @Override

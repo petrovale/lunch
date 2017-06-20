@@ -3,6 +3,7 @@ package ru.isakovalexey.lunch.service;
 import ru.isakovalexey.lunch.model.Meal;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ public interface MealService {
 
     void delete(int id, int restaurantId) throws NotFoundException;
 
-    List<Meal> getAll(int restaurantId);
+    List<Meal> getAll(int restaurantId, Date date);
 
     Meal update(Meal meal, int restaurantId) throws NotFoundException;
 

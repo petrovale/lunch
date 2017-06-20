@@ -6,6 +6,7 @@ import ru.isakovalexey.lunch.model.Meal;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import static ru.isakovalexey.lunch.MealTestData.*;
 
@@ -21,7 +22,7 @@ public class MealServiceTest extends AbstractServiceTest {
     public void testDelete() throws Exception {
         service.delete(Black_Thai_MEAL_ID, BLACK_THAI_ID);
         MATCHER.assertCollectionEquals(Arrays.asList(Black_Thai_MEAL3, Black_Thai_MEAL2),
-                service.getAll(BLACK_THAI_ID));
+                service.getAll(BLACK_THAI_ID, new Date()));
     }
 
     @Test
@@ -34,7 +35,7 @@ public class MealServiceTest extends AbstractServiceTest {
     public void testSave() throws Exception {
         Meal created = getCreated();
         service.save(created, UGOLEK_ID);
-        MATCHER.assertCollectionEquals(Arrays.asList(created, Ugolek_MEAL3, Ugolek_MEAL2, Ugolek_MEAL1), service.getAll(UGOLEK_ID));
+        MATCHER.assertCollectionEquals(Arrays.asList(created, Ugolek_MEAL3, Ugolek_MEAL2, Ugolek_MEAL1), service.getAll(UGOLEK_ID, new Date()));
     }
 
     @Test
@@ -66,6 +67,6 @@ public class MealServiceTest extends AbstractServiceTest {
 
     @Test
     public void testGetAll() throws Exception {
-        MATCHER.assertCollectionEquals(WHITE_RABBIT_MEALS, service.getAll(WHITE_RABBIT_ID));
+        MATCHER.assertCollectionEquals(WHITE_RABBIT_MEALS, service.getAll(WHITE_RABBIT_ID, new Date()));
     }
 }

@@ -1,5 +1,8 @@
 package ru.isakovalexey.lunch.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.NotBlank;
@@ -7,14 +10,16 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Created by user on 30.05.2017.
  */
 @NamedQueries({
-    @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id AND m.restaurant.id=:restaurantId"),
-    @NamedQuery(name = Meal.ALL, query = "SELECT m FROM Meal m WHERE m.restaurant.id=:restaurantId ORDER BY m.dateTime DESC "),
+        @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id AND m.restaurant.id=:restaurantId"),
+        @NamedQuery(name = Meal.ALL, query = "SELECT m FROM Meal m WHERE m.restaurant.id=:restaurantId ORDER BY m.date DESC "),
+        @NamedQuery(name = Meal.ALL_BY_DATE, query = "SELECT m FROM Meal m WHERE m.restaurant.id=:restaurantId AND m.date=:date ORDER BY m.date DESC "),
+
 })
 @Entity
 @Table(name = "meals")
@@ -22,10 +27,11 @@ public class Meal extends BaseEntity {
 
     public static final String DELETE = "Meal.delete";
     public static final String ALL = "Meal.all";
+    public static final String ALL_BY_DATE = "Meal.allByDate";
 
-    @Column(name = "date_time", nullable = false)
+    @Column(name = "date")
     @NotNull
-    private LocalDateTime dateTime;
+    private Date date = new Date();
 
     @Column(name = "description")
     @NotBlank
@@ -49,23 +55,23 @@ public class Meal extends BaseEntity {
     public Meal() {
     }
 
-    public Meal(LocalDateTime dateTime, String description, BigDecimal price) {
-        this(null ,dateTime, description, price);
+    public Meal(String description, BigDecimal price) {
+        this(null , description, price, new Date());
     }
 
-    public Meal(Integer id, LocalDateTime dateTime, String description, BigDecimal price) {
+    public Meal(Integer id, String description, BigDecimal price, Date date) {
         super(id);
-        this.dateTime = dateTime;
         this.description = description;
         this.price = price;
+        this.date = date;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getDescription() {
@@ -100,7 +106,7 @@ public class Meal extends BaseEntity {
     public String toString() {
         return "Meal{" +
                 "id=" + getId() +
-                "dateTime=" + dateTime +
+                "date=" + date +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 '}';

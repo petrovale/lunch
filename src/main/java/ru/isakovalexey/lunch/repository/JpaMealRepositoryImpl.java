@@ -7,6 +7,7 @@ import ru.isakovalexey.lunch.model.Restaurant;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,9 +51,10 @@ public class JpaMealRepositoryImpl implements MealRepository {
     }
 
     @Override
-    public List<Meal> getAll(int restaurantId) {
-        return em.createNamedQuery(Meal.ALL, Meal.class)
+    public List<Meal> getAll(int restaurantId, Date date) {
+        return em.createNamedQuery(Meal.ALL_BY_DATE, Meal.class)
                 .setParameter("restaurantId", restaurantId)
+                .setParameter("date", date)
                 .getResultList();
     }
 }

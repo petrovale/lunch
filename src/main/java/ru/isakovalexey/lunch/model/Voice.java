@@ -1,5 +1,6 @@
 package ru.isakovalexey.lunch.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -27,6 +28,7 @@ public class Voice extends BaseEntity {
 
     @Column(name = "date_voice")
    // @Temporal(TemporalType.DATE)
+    @JsonIgnore
     private Date dateVoice = new Date();
 
     @Column(name="restaurant_id", insertable=false, updatable=false)
@@ -36,6 +38,7 @@ public class Voice extends BaseEntity {
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
+    @JsonIgnore
     private Restaurant restaurant;
 
     @Column(name="user_id", insertable=false, updatable=false)
@@ -45,6 +48,7 @@ public class Voice extends BaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
+    @JsonIgnore
     private User user;
 
     public Voice() {

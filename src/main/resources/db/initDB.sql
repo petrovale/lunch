@@ -38,7 +38,7 @@ CREATE UNIQUE INDEX restaurants_unique_name_idx ON restaurants (name);
 CREATE TABLE meals (
   id             INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   restaurant_id  INTEGER NOT NULL,
-  date_time      TIMESTAMP NOT NULL,
+  date           DATE DEFAULT now(),
   description    TEXT NOT NULL,
   price          DECIMAL(12,2) NOT NULL,
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE

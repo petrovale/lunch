@@ -9,6 +9,7 @@ import ru.isakovalexey.lunch.model.Voice;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -70,15 +71,9 @@ public class JpaVoiceRepositoryImpl implements VoiceRepository {
     @Transactional
     public Voice voice(int restaurantId, boolean voice, int userId) {
         Voice voiceUser = null;
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 11);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
         Date currentDate = new Date();
-        Date beforeDate = cal.getTime();
 
-        if (currentDate.getTime() < beforeDate.getTime()) {
+        if (!LocalTime.now().isAfter(LocalTime.of(14, 0))) {
             voiceUser = get(currentDate, userId);
             if (voiceUser != null) {
                 voiceUser.setRegistered(currentDate);

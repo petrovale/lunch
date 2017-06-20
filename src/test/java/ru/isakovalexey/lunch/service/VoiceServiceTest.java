@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.isakovalexey.lunch.model.Voice;
 
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -44,7 +45,8 @@ public class VoiceServiceTest extends AbstractServiceTest {
         Date d = cal.getTime();
         System.out.println(d);
         */
-        Voice voice = service.voice(100002, true, 100000);
+
+        Voice voice = service.voice(100004, true, 100000);
         System.out.println(voice);
     }
 }
