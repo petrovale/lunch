@@ -47,7 +47,7 @@ public class RestaurantAdminRestController extends AbstractRestaurantController 
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Restaurant> createWithLocation(@Valid @RequestBody Restaurant restaurant) {
+    public ResponseEntity<Restaurant> createWithLocation(@RequestBody Restaurant restaurant) {
         Restaurant created = super.create(restaurant);
 
 //        HttpHeaders httpHeaders = new HttpHeaders();
