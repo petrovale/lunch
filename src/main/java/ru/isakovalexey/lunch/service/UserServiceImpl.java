@@ -4,14 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import ru.isakovalexey.lunch.AuthorizedUser;
 import ru.isakovalexey.lunch.model.User;
 import ru.isakovalexey.lunch.repository.UserRepository;
+import ru.isakovalexey.lunch.to.UserTo;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
 import java.util.List;
 
+import static ru.isakovalexey.lunch.util.UserUtil.prepareToSave;
+import static ru.isakovalexey.lunch.util.UserUtil.updateFromTo;
 import static ru.isakovalexey.lunch.util.ValidationUtil.checkNotFoundWithId;
 
 /**
@@ -55,7 +59,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void update(User user) {
-        userRepository.save(user);
+        Assert.notNull(user, "user must not be null");
+        userRepository.save(prepareToSave(user));
+    }
+
+    @Transactional
+    @Override
+    public void update(UserTo userTo) {
+        User user = updateFromTo(get(userTo.getId()), userTo);
+        userRepository.save(prepareToSave(user));
     }
 
     @Override

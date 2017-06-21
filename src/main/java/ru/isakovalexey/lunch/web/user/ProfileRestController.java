@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.isakovalexey.lunch.AuthorizedUser;
 import ru.isakovalexey.lunch.model.User;
 import ru.isakovalexey.lunch.service.UserService;
+import ru.isakovalexey.lunch.to.UserTo;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(ProfileRestController.REST_URL)
@@ -29,8 +32,8 @@ public class ProfileRestController extends AbstractUserController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody User user) {
-        super.update(user, AuthorizedUser.id());
+    public void update(@Valid @RequestBody UserTo userTo) {
+        super.update(userTo, AuthorizedUser.id());
     }
 
     @GetMapping(value = "/text")

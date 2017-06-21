@@ -1,5 +1,6 @@
 package ru.isakovalexey.lunch.util;
 
+import ru.isakovalexey.lunch.HasId;
 import ru.isakovalexey.lunch.model.BaseEntity;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
@@ -35,12 +36,12 @@ public class ValidationUtil {
         }
     }
 
-    public static void checkIdConsistent(BaseEntity entity, int id) {
+    public static void checkIdConsistent(HasId bean, int id) {
 //      http://stackoverflow.com/a/32728226/548473
-        if (entity.isNew()) {
-            entity.setId(id);
-        } else if (entity.getId() != id) {
-            throw new IllegalArgumentException(entity + " must be with id=" + id);
+        if (bean.isNew()) {
+            bean.setId(id);
+        } else if (bean.getId() != id) {
+            throw new IllegalArgumentException(bean + " must be with id=" + id);
         }
     }
 }

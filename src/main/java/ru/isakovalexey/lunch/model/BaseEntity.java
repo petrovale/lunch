@@ -1,6 +1,7 @@
 package ru.isakovalexey.lunch.model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import ru.isakovalexey.lunch.HasId;
 
 import javax.persistence.*;
 
@@ -13,7 +14,7 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 @MappedSuperclass
 @Access(AccessType.FIELD)
 //@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE, setterVisibility = NONE)
-public class BaseEntity {
+public class BaseEntity implements HasId {
     public static final int START_SEQ = 100000;
 
     @Id
@@ -57,5 +58,10 @@ public class BaseEntity {
     @Override
     public int hashCode() {
         return (id == null) ? 0 : id;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Entity %s (%s)", getClass().getName(), getId());
     }
 }

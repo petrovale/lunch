@@ -5,15 +5,11 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.model.User;
 import ru.isakovalexey.lunch.model.Voice;
-import ru.isakovalexey.lunch.util.VoiceUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import java.time.LocalTime;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by user on 17.06.2017.

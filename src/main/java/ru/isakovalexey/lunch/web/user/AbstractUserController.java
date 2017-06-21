@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.isakovalexey.lunch.model.User;
 import ru.isakovalexey.lunch.service.UserService;
+import ru.isakovalexey.lunch.to.UserTo;
 
 import java.util.List;
 
@@ -48,6 +49,12 @@ public class AbstractUserController {
         log.info("update {} with id={}", user, id);
         checkIdConsistent(user, id);
         service.update(user);
+    }
+
+    public void update(UserTo userTo, int id) {
+        log.info("update {} with id={}", userTo, id);
+        checkIdConsistent(userTo, id);
+        service.update(userTo);
     }
 
     public User getByMail(String email) {
