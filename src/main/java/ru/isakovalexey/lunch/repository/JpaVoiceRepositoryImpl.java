@@ -39,15 +39,6 @@ public class JpaVoiceRepositoryImpl implements VoiceRepository {
     }
 
     @Override
-    @Transactional
-    public boolean delete(int id, int restaurantId) {
-        return em.createNamedQuery(Voice.DELETE)
-                .setParameter("id", id)
-                .setParameter("restaurantId", restaurantId)
-                .executeUpdate() != 0;
-    }
-
-    @Override
     public Voice get(Date dateVoice, int userId) {
         Voice voice;
         try {
@@ -59,32 +50,5 @@ public class JpaVoiceRepositoryImpl implements VoiceRepository {
             voice = null;
         }
         return voice;
-    }
-
-    @Override
-    public List<Voice> getAll(int restaurantId) {
-        return em.createNamedQuery(Voice.ALL, Voice.class)
-                .setParameter("restaurantId", restaurantId)
-                .getResultList();
-    }
-
-    @Override
-    @Transactional
-    public Voice voice(int restaurantId, boolean voice, int userId) {
-        Voice voiceUser = null;
-        Date currentDate = new Date();
-
-        if (!LocalTime.now().isAfter(VoiceUtil.getTime())) {
-            voiceUser = get(currentDate, userId);
-            if (voiceUser != null) {
-                voiceUser.setRegistered(currentDate);
-                save(voiceUser, restaurantId, userId);
-            } else {
-                voiceUser = new Voice();
-                save(voiceUser, restaurantId, userId);
-            }
-        }
-
-        return voiceUser;
     }
 }

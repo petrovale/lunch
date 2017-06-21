@@ -8,9 +8,13 @@ import ru.isakovalexey.lunch.util.VoiceUtil;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
+
+import static ru.isakovalexey.lunch.VoiceTestData.MATCHER;
 
 /**
  * Created by user on 17.06.2017.
@@ -25,15 +29,32 @@ public class VoiceServiceTest extends AbstractServiceTest {
         Date date = new Date();
 
         VoiceUtil.setTime(LocalTime.now().plusHours(1));
-        service.voice(100004, true, 100000);
-        service.get(date, 100000);
+        Voice newVoice = service.voice(100004, true, 100000);
+        newVoice.setRestaurantId(100004);
+        newVoice.setUserId(100000);
+        MATCHER.assertEquals(newVoice, service.get(date, 100000));
     }
 
     @Test(expected = NotFoundException.class)
     public void testAfterVotingIsClosed() throws Exception {
         Date date = new Date();
 
+        VoiceUtil.setTime(LocalTime.now().plusHours(-1));
         service.voice(100004, true, 100000);
         service.get(date, 100000);
     }
+
+    @Test
+    public void testReVote() throws Exception {
+        Date date = new Date();
+        VoiceUtil.setTime(LocalTime.now().plusHours(1));
+
+        Voice firstVoice = service.voice(100003, true, 100000);
+        Voice secondVoice = service.voice(100004, true, 100000);
+        secondVoice.setRestaurantId(100004);
+        secondVoice.setUserId(100000);
+
+        MATCHER.assertEquals(secondVoice, service.get(date, 100000));
+    }
+
 }

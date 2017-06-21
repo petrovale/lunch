@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.isakovalexey.lunch.model.Voice;
 import ru.isakovalexey.lunch.repository.VoiceRepository;
+import ru.isakovalexey.lunch.util.VoiceUtil;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
+import java.time.LocalTime;
 import java.util.Date;
 
 import static ru.isakovalexey.lunch.util.ValidationUtil.checkNotFoundWithId;
@@ -27,7 +29,22 @@ public class VoiceServiceImpl implements VoiceService {
     }
 
     @Override
+    @Transactional
     public Voice voice(int restaurantId, boolean voice, int userId) {
-        return repository.voice(restaurantId, voice, userId);
+        Voice voiceUser = null;
+        Date currentDate = new Date();
+
+        if (!LocalTime.now().isAfter(VoiceUtil.getTime())) {
+            voiceUser = repository.get(currentDate, userId);
+            if (voiceUser != null) {
+                voiceUser.setRegistered(currentDate);
+                voiceUser = repository.save(voiceUser, restaurantId, userId);
+            } else {
+                voiceUser = new Voice();
+                voiceUser = repository.save(voiceUser, restaurantId, userId);
+            }
+        }
+
+        return voiceUser;
     }
 }
