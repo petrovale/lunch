@@ -9,6 +9,8 @@ import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
 import java.util.Date;
 
+import static ru.isakovalexey.lunch.util.ValidationUtil.checkNotFoundWithId;
+
 @Service
 public class VoiceServiceImpl implements VoiceService {
 
@@ -20,13 +22,8 @@ public class VoiceServiceImpl implements VoiceService {
     }
 
     @Override
-    public Voice save(Voice voice, int restaurantId, int userId) {
-        return repository.save(voice, restaurantId, userId);
-    }
-
-    @Override
     public Voice get(Date date, int userId) throws NotFoundException {
-        return repository.get(date, userId);
+        return checkNotFoundWithId(repository.get(date, userId), userId);
     }
 
     @Override

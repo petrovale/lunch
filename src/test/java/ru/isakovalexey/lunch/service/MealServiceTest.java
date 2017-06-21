@@ -19,7 +19,7 @@ import static ru.isakovalexey.lunch.MealTestData.*;
 public class MealServiceTest extends AbstractServiceTest {
 
     @Autowired
-    protected MealService service;
+    private MealService service;
 
     @Test
     public void testDelete() throws Exception {

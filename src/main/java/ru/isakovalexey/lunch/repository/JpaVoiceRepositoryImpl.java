@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.model.User;
 import ru.isakovalexey.lunch.model.Voice;
+import ru.isakovalexey.lunch.util.VoiceUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -73,7 +74,7 @@ public class JpaVoiceRepositoryImpl implements VoiceRepository {
         Voice voiceUser = null;
         Date currentDate = new Date();
 
-        if (!LocalTime.now().isAfter(LocalTime.of(14, 0))) {
+        if (!LocalTime.now().isAfter(VoiceUtil.getTime())) {
             voiceUser = get(currentDate, userId);
             if (voiceUser != null) {
                 voiceUser.setRegistered(currentDate);

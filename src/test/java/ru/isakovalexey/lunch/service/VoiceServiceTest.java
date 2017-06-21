@@ -2,8 +2,12 @@ package ru.isakovalexey.lunch.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.isakovalexey.lunch.matcher.ModelMatcher;
 import ru.isakovalexey.lunch.model.Voice;
+import ru.isakovalexey.lunch.util.VoiceUtil;
+import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,39 +18,22 @@ import java.util.Date;
 public class VoiceServiceTest extends AbstractServiceTest {
 
     @Autowired
-    protected VoiceService service;
+    private VoiceService service;
 
     @Test
-    public void testSave() throws Exception {
-        Voice created = new Voice();
-        service.save(created, 100004, 100001);
-        Voice created1 = new Voice();
-        service.save(created1, 100004, 100001);
-        Voice created2 = new Voice();
-        service.save(created2, 100004, 100001);
-    }
-
-    @Test
-    public void testGet() throws Exception {
+    public void testBeforeCloseOfVoting() throws Exception {
         Date date = new Date();
 
-        Voice actual = service.get(date, 100000);
-        System.out.println("actual " + actual);
+        VoiceUtil.setTime(LocalTime.now().plusHours(1));
+        service.voice(100004, true, 100000);
+        service.get(date, 100000);
     }
 
-    @Test
-    public void testVoice() throws Exception {
-        /*
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 11);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        Date d = cal.getTime();
-        System.out.println(d);
-        */
+    @Test(expected = NotFoundException.class)
+    public void testAfterVotingIsClosed() throws Exception {
+        Date date = new Date();
 
-        Voice voice = service.voice(100004, true, 100000);
-        System.out.println(voice);
+        service.voice(100004, true, 100000);
+        service.get(date, 100000);
     }
 }
