@@ -11,18 +11,6 @@ import java.util.List;
  */
 public class RestaurantUtil {
 
-    public static Restaurant updateVoice(Restaurant restaurant, boolean voice) {
-        int voiceRestaurant = restaurant.getVote();
-
-        if (voice) {
-            restaurant.setVote(voiceRestaurant + 1);
-
-        } else {
-            restaurant.setVote(voiceRestaurant - 1);
-        }
-        return restaurant;
-    }
-
     public static List<Restaurant> getWithVoice(List<Object[]> objects) {
         List<Restaurant> restaurants = new ArrayList<>();
 

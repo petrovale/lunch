@@ -23,7 +23,7 @@ Documentation for REST
 
 # Restaurant Requests
 
-##Get all the restaurants with voices for today
+## Get all the restaurants with voices for today
 
 ##### Request:
 
@@ -291,7 +291,7 @@ Error:
 ```
 HTTP 404 NOT FOUND
 ```
-#Login
+# Login
 ## Authorization
 All available resources are exposed via REST URIs,
 which, together with HTTP verbs, can cover all the actions that can be performed and need to be secured. 

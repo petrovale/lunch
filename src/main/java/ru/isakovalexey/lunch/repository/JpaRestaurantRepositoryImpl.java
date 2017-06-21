@@ -43,7 +43,7 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     public List<Restaurant> getAll() {
-        return em.createQuery("SELECT r FROM Restaurant r", Restaurant.class).getResultList();
+        return em.createQuery("SELECT r FROM Restaurant r ORDER BY r.name", Restaurant.class).getResultList();
     }
 
     @Override

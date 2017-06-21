@@ -10,7 +10,7 @@ import ru.isakovalexey.lunch.util.exception.NotFoundException;
 import java.util.Date;
 import java.util.List;
 
-import static ru.isakovalexey.lunch.util.RestaurantUtil.updateVoice;
+import static ru.isakovalexey.lunch.util.ValidationUtil.checkNotFoundWithId;
 
 /**
  * Created by user on 31.05.2017.
@@ -27,12 +27,12 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public Restaurant get(int id) throws NotFoundException {
-        return restaurantRepository.get(id);
+        return checkNotFoundWithId(restaurantRepository.get(id), id);
     }
 
     @Override
     public void delete(int id) throws NotFoundException {
-        restaurantRepository.delete(id);
+        checkNotFoundWithId(restaurantRepository.delete(id), id);
     }
 
     @Override
