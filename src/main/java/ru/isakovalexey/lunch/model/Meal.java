@@ -17,8 +17,8 @@ import java.util.Date;
  */
 @NamedQueries({
         @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id AND m.restaurant.id=:restaurantId"),
-        @NamedQuery(name = Meal.ALL, query = "SELECT m FROM Meal m WHERE m.restaurant.id=:restaurantId ORDER BY m.date DESC "),
-        @NamedQuery(name = Meal.ALL_BY_DATE, query = "SELECT m FROM Meal m WHERE m.restaurant.id=:restaurantId AND m.date=:date ORDER BY m.date DESC "),
+        @NamedQuery(name = Meal.ALL, query = "SELECT m FROM Meal m WHERE m.restaurant.id=:restaurantId ORDER BY m.description DESC "),
+        @NamedQuery(name = Meal.ALL_BY_DATE, query = "SELECT m FROM Meal m WHERE m.restaurant.id=:restaurantId AND m.date=:date ORDER BY m.description DESC "),
 
 })
 @Entity
