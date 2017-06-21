@@ -275,7 +275,7 @@ Error:
 
 Request:
 ```
-POST http://localhost:8080/lunch/rest/profile/restaurants/100003?vote=true HTTP/1.1
+POST http://localhost:8080/lunch/rest/profile/restaurants/100003/vote HTTP/1.1
 Content-Type: application/json
 Host: localhost:8080
 Authorization: Basic

@@ -12,5 +12,5 @@ public interface VoiceService {
 
     Voice get(Date date, int userId) throws NotFoundException;
 
-    Voice voice(int restaurantId, boolean voice, int userId);
+    Voice voice(int restaurantId, int userId);
 }

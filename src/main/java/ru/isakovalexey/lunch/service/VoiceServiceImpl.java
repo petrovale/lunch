@@ -30,7 +30,7 @@ public class VoiceServiceImpl implements VoiceService {
 
     @Override
     @Transactional
-    public Voice voice(int restaurantId, boolean voice, int userId) {
+    public Voice voice(int restaurantId, int userId) {
         Voice voiceUser = null;
         Date currentDate = new Date();
 

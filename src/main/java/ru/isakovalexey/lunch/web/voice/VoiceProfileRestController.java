@@ -26,11 +26,12 @@ public class VoiceProfileRestController {
     @Autowired
     VoiceService service;
 
-    @PostMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Voice> voice(@PathVariable("id") int restaurantId, @RequestParam("vote") boolean voice) {
-        log.info((voice ? "Voice for a restaurant " : "Do not vote ") + restaurantId);
+    @PostMapping(value = "/{id}/vote", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Voice> voice(@PathVariable("id") int restaurantId) {
+        log.info("Voice for a restaurant " + restaurantId);
+
         int userId = AuthorizedUser.id();
-        Voice vote = service.voice(restaurantId, voice, userId);
+        Voice vote = service.voice(restaurantId, userId);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")

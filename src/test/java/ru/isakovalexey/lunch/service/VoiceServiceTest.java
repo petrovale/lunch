@@ -29,7 +29,7 @@ public class VoiceServiceTest extends AbstractServiceTest {
         Date date = new Date();
 
         VoiceUtil.setTime(LocalTime.now().plusHours(1));
-        Voice newVoice = service.voice(100004, true, 100000);
+        Voice newVoice = service.voice(100004, 100000);
         newVoice.setRestaurantId(100004);
         newVoice.setUserId(100000);
         MATCHER.assertEquals(newVoice, service.get(date, 100000));
@@ -40,7 +40,7 @@ public class VoiceServiceTest extends AbstractServiceTest {
         Date date = new Date();
 
         VoiceUtil.setTime(LocalTime.now().plusHours(-1));
-        service.voice(100004, true, 100000);
+        service.voice(100004, 100000);
         service.get(date, 100000);
     }
 
@@ -49,8 +49,8 @@ public class VoiceServiceTest extends AbstractServiceTest {
         Date date = new Date();
         VoiceUtil.setTime(LocalTime.now().plusHours(1));
 
-        Voice firstVoice = service.voice(100003, true, 100000);
-        Voice secondVoice = service.voice(100004, true, 100000);
+        Voice firstVoice = service.voice(100003, 100000);
+        Voice secondVoice = service.voice(100004, 100000);
         secondVoice.setRestaurantId(100004);
         secondVoice.setUserId(100000);
 
