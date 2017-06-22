@@ -75,4 +75,16 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
                 .andExpect(content().json("{'cause':'ValidationException'}"))
                 .andDo(print());
     }
+
+    @Test
+    @Transactional(propagation = Propagation.NEVER)
+    public void testDuplicate() throws Exception {
+        UserTo updatedTo = new UserTo(null, "newName", "admin@gmail.com", "newPassword");
+
+        mockMvc.perform(put(REST_URL).contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(USER))
+                .content(JsonUtil.writeValue(updatedTo)))
+                .andExpect(status().isConflict())
+                .andDo(print());
+    }
 }

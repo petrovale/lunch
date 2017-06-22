@@ -1,10 +1,15 @@
 package ru.isakovalexey.lunch.util.exception;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * Created by user on 30.05.2017.
  */
-public class NotFoundException extends RuntimeException {
+public class NotFoundException extends ApplicationException {
+    private static final String EXCEPTION_COMMON_NOT_FOUND = "exception.common.notFound";
+
+    //  http://stackoverflow.com/a/22358422/548473
     public NotFoundException(String message) {
-        super(message);
+        super(EXCEPTION_COMMON_NOT_FOUND, HttpStatus.UNPROCESSABLE_ENTITY, message);
     }
 }
