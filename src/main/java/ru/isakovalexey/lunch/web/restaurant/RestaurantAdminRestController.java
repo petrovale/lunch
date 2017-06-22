@@ -8,7 +8,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.service.RestaurantService;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 

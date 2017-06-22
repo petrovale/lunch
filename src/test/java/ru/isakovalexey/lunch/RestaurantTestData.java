@@ -13,7 +13,6 @@ import static ru.isakovalexey.lunch.model.BaseEntity.START_SEQ;
  * Created by user on 21.06.2017.
  */
 public class RestaurantTestData {
-    private static final Logger LOG = LoggerFactory.getLogger(RestaurantTestData.class);
 
     public static final int BLACK_THAI_ID = START_SEQ + 2;
     public static final int WHITE_RABBIT_ID = START_SEQ + 3;

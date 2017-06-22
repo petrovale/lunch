@@ -2,7 +2,6 @@ package ru.isakovalexey.lunch.web.meal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import ru.isakovalexey.lunch.model.Meal;
 import ru.isakovalexey.lunch.service.MealService;
 

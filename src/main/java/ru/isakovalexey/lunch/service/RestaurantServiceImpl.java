@@ -2,7 +2,6 @@ package ru.isakovalexey.lunch.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.repository.RestaurantRepository;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;

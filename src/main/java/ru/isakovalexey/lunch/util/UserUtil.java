@@ -1,6 +1,5 @@
 package ru.isakovalexey.lunch.util;
 
-import ru.isakovalexey.lunch.model.Role;
 import ru.isakovalexey.lunch.model.User;
 import ru.isakovalexey.lunch.to.UserTo;
 

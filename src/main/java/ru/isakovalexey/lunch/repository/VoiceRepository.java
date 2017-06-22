@@ -1,10 +1,8 @@
 package ru.isakovalexey.lunch.repository;
 
-import ru.isakovalexey.lunch.model.Meal;
 import ru.isakovalexey.lunch.model.Voice;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by user on 17.06.2017.

@@ -1,12 +1,8 @@
 package ru.isakovalexey.lunch.model;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import ru.isakovalexey.lunch.HasId;
 
 import javax.persistence.*;
-
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 
 /**
  * Created by user on 29.05.2017.
