@@ -67,6 +67,14 @@ public class Restaurant extends NamedEntity {
         this.registered = registered;
     }
 
+    public List<Voice> getVoices() {
+        return voices;
+    }
+
+    public void setVoices(List<Voice> voices) {
+        this.voices = voices;
+    }
+
     @Override
     public String toString() {
         return "Restaurant{" +

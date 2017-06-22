@@ -23,8 +23,12 @@ public class VoiceProfileRestController {
 
     static final String REST_URL = "/rest/profile/restaurants";
 
+    private VoiceService service;
+
     @Autowired
-    VoiceService service;
+    public VoiceProfileRestController(VoiceService service) {
+        this.service = service;
+    }
 
     @PostMapping(value = "/{id}/vote", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Voice> voice(@PathVariable("id") int restaurantId) {

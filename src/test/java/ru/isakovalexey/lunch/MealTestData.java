@@ -2,7 +2,6 @@ package ru.isakovalexey.lunch;
 
 import ru.isakovalexey.lunch.matcher.ModelMatcher;
 import ru.isakovalexey.lunch.model.Meal;
-import sun.util.resources.LocaleData;
 
 import java.math.BigDecimal;
 import java.text.ParseException;

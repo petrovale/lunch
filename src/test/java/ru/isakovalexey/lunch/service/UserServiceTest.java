@@ -18,7 +18,6 @@ import java.util.Date;
 import static ru.isakovalexey.lunch.UserTestData.*;
 
 public class UserServiceTest extends AbstractServiceTest {
-    private static final Logger LOG = LoggerFactory.getLogger(UserServiceTest.class);
 
     @Autowired
     private UserService service;
@@ -55,7 +54,7 @@ public class UserServiceTest extends AbstractServiceTest {
 
     @Test
     public void testGetNotFound() throws Exception {
-        User user = service.get(1);
+        service.get(1);
     }
 
     @Test

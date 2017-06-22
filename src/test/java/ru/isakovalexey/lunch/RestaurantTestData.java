@@ -1,7 +1,5 @@
 package ru.isakovalexey.lunch;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ru.isakovalexey.lunch.matcher.ModelMatcher;
 import ru.isakovalexey.lunch.model.Restaurant;
 

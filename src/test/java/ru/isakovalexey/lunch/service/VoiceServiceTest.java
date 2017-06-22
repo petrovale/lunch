@@ -2,7 +2,6 @@ package ru.isakovalexey.lunch.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.isakovalexey.lunch.matcher.ModelMatcher;
 import ru.isakovalexey.lunch.model.Voice;
 import ru.isakovalexey.lunch.util.VoiceUtil;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
@@ -45,7 +44,7 @@ public class VoiceServiceTest extends AbstractServiceTest {
         Date date = new Date();
         VoiceUtil.setTime(LocalTime.now().plusHours(1));
 
-        Voice firstVoice = service.voice(100003, 100000);
+        service.voice(100003, 100000);
         Voice secondVoice = service.voice(100004, 100000);
         secondVoice.setRestaurantId(100004);
         secondVoice.setUserId(100000);

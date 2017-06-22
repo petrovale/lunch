@@ -1,8 +1,6 @@
 package ru.isakovalexey.lunch.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.CollectionId;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -66,6 +64,7 @@ public class User extends NamedEntity {
         this.email = email;
         this.password = password;
         this.enabled = enabled;
+        this.registered = registered;
         setRoles(roles);
     }
 

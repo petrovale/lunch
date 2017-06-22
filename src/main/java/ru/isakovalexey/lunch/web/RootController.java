@@ -5,11 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ru.isakovalexey.lunch.AuthorizedUser;
 import ru.isakovalexey.lunch.service.RestaurantService;
 import ru.isakovalexey.lunch.service.UserService;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class RootController {
