@@ -28,7 +28,8 @@ public class MealProfileRestController extends AbstractMealController {
 
     @Override
     @GetMapping(value = "/{restaurantid}/lunch")
-    public List<Meal> getAll(@PathVariable(value = "restaurantid") int restaurantId,@RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
+    public List<Meal> getAll(@PathVariable(value = "restaurantid") int restaurantId,
+                             @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
         return super.getAll(restaurantId, date);
     }
 }
