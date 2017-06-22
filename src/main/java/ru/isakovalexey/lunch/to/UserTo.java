@@ -1,9 +1,9 @@
 package ru.isakovalexey.lunch.to;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 public class UserTo extends BaseTo implements Serializable {
@@ -16,7 +16,7 @@ public class UserTo extends BaseTo implements Serializable {
     @NotBlank
     private String email;
 
-    @Size(min = 5, max = 64, message = " must between 5 and 64 characters")
+    @Length(min = 5, max = 32)
     private String password;
 
     public UserTo() {

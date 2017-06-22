@@ -2,9 +2,13 @@ package ru.isakovalexey.lunch.web.user;
 
 import org.junit.Test;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.isakovalexey.lunch.TestUtil;
 import ru.isakovalexey.lunch.model.Role;
 import ru.isakovalexey.lunch.model.User;
+import ru.isakovalexey.lunch.to.UserTo;
+import ru.isakovalexey.lunch.util.UserUtil;
 import ru.isakovalexey.lunch.web.AbstractControllerTest;
 import ru.isakovalexey.lunch.web.json.JsonUtil;
 
@@ -33,6 +37,12 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    public void testGetUnauth() throws Exception {
+        mockMvc.perform(get(REST_URL))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
     public void testDelete() throws Exception {
         mockMvc.perform(delete(REST_URL)
                 .with(userHttpBasic(USER)))
@@ -42,14 +52,27 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testUpdate() throws Exception {
-        User updated = new User(USER_ID, "newName", "newemail@ya", "newPassword", Role.ROLE_USER);
+        UserTo updatedTo = new UserTo(null , "newName", "newemail@ya", "newPassword");
         mockMvc.perform(put(REST_URL)
                 .with(userHttpBasic(USER))
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(updated)))
+                .content(JsonUtil.writeValue(updatedTo)))
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        MATCHER.assertEquals(updated, new User(userService.getByEmail("newemail@ya")));
+        MATCHER.assertEquals(UserUtil.updateFromTo(new User(USER), updatedTo), userService.getByEmail("newemail@ya"));
+    }
+
+    @Test
+    public void testUpdateInvalid() throws Exception {
+        UserTo updatedTo = new UserTo(null, null, "password", null);
+
+        mockMvc.perform(put(REST_URL).contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(USER))
+                .content(JsonUtil.writeValue(updatedTo)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(content().json("{'cause':'ValidationException'}"))
+                .andDo(print());
     }
 }

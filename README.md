@@ -307,9 +307,21 @@ which, together with HTTP verbs, can cover all the actions that can be performed
 Username:admin@gmail.com
 Password:admin
 Roles: ["ROLE_USER","ROLE_ADMIN"]
+Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu
 ```
 ```
 Username:user@yandex.ru
 Password:password
 Role: ["ROLE_USER"]
+Authorization: Basic dXNlckB5YW5kZXgucnU6cGFzc3dvcmQ=
+```
+
+### User
+CURL:
+
+```
+curl 'http://localhost:8080/lunch/rest/profile -u admin@gmail.com:admin
+curl 'http://localhost:8080/lunch/rest/profile' -i -H'Authorization:Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
+curl 'http://localhost:8080/lunch/rest/admin/users/by?email=admin@gmail.com' -i -H'Authorization:Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
+curl 'http://localhost:8080/lunch/rest/admin/users' -i -d'{"name" : "NewUser", "email" : "new@mail.ru","password" : "123456"}' -H'Authorization:Basic YWRtaW5AZ21haWwuY29tOmFkbWlu' -H'Content-Type: application/json'
 ```

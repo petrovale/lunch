@@ -3,6 +3,7 @@ package ru.isakovalexey.lunch.web.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.isakovalexey.lunch.AuthorizedUser;
 import ru.isakovalexey.lunch.model.User;
@@ -32,7 +33,7 @@ public class ProfileRestController extends AbstractUserController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@Valid @RequestBody UserTo userTo, @AuthenticationPrincipal AuthorizedUser authorizedUser) {
+    public void update(@Valid @RequestBody UserTo userTo, @AuthenticationPrincipal AuthorizedUser authorizedUser, BindingResult result) {
         super.update(userTo, authorizedUser.getId());
     }
 
