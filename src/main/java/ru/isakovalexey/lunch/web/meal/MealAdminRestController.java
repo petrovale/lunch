@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import ru.isakovalexey.lunch.View;
 import ru.isakovalexey.lunch.model.Meal;
 import ru.isakovalexey.lunch.service.MealService;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Date;
 import java.util.List;
@@ -43,13 +46,13 @@ public class MealAdminRestController extends AbstractMealController {
     }
 
     @Override
-    @PutMapping(value = "/{restaurantId}/meals", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody Meal meal, @PathVariable(value = "restaurantid") int restaurantId) {
+    @PutMapping(value = "/{restaurantid}/meals", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void update(@Validated(View.ValidatedUI.class) @RequestBody Meal meal, @PathVariable(value = "restaurantid") int restaurantId) {
         super.update(meal, restaurantId);
     }
 
-    @PostMapping(value = "/{restaurantId}/meals", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Meal> createWithLocation(@RequestBody Meal meal, @PathVariable(value = "restaurantid") int restaurantId) {
+    @PostMapping(value = "/{restaurantid}/meals", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Meal> createWithLocation(@Validated(View.ValidatedUI.class) @RequestBody Meal meal, @PathVariable(value = "restaurantid") int restaurantId) {
         Meal created = super.create(meal, restaurantId);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()

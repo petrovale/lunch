@@ -3,9 +3,11 @@ package ru.isakovalexey.lunch.model;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.NotBlank;
+import ru.isakovalexey.lunch.View;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -27,11 +29,11 @@ public class Meal extends BaseEntity {
     public static final String ALL_BY_DATE = "Meal.allByDate";
 
     @Column(name = "date")
-    @NotNull
+    @NotNull(groups = {View.ValidatedUI.class, Default.class})
     private Date date = new Date();
 
     @Column(name = "description")
-    @NotBlank
+    @NotBlank(groups = {View.ValidatedUI.class, Default.class})
     private String description;
 
     @Column(name="restaurant_id", insertable=false, updatable=false)
@@ -40,7 +42,7 @@ public class Meal extends BaseEntity {
     //@Column(name = "price", nullable= false, precision=7, scale=2)    // Creates the database field with this size.
     //@Digits(integer=9, fraction=2)
     @Column(name="price", columnDefinition="Decimal(10,2) default '100.00'")
-    @NotNull
+    @NotNull(groups = {View.ValidatedUI.class, Default.class})
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.LAZY)
