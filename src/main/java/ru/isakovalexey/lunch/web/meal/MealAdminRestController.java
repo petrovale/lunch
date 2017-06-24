@@ -11,7 +11,6 @@ import ru.isakovalexey.lunch.View;
 import ru.isakovalexey.lunch.model.Meal;
 import ru.isakovalexey.lunch.service.MealService;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.Date;
 import java.util.List;

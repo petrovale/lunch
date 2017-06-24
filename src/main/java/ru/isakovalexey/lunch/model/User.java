@@ -4,6 +4,7 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
@@ -27,6 +28,7 @@ public class User extends NamedEntity {
     @Column(name = "email", nullable = false, unique = true)
     @Email
     @NotBlank
+    @SafeHtml
     private String email;
 
     @Column(name = "password", nullable = false)

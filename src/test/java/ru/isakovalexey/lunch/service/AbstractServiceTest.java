@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 abstract public class AbstractServiceTest {
-    private static final Logger LOG = LoggerFactory.getLogger(AbstractServiceTest.class);
+    private static final Logger log = LoggerFactory.getLogger(AbstractServiceTest.class);
 
     private static StringBuilder results = new StringBuilder();
 
@@ -42,7 +42,7 @@ abstract public class AbstractServiceTest {
         protected void finished(long nanos, Description description) {
             String result = String.format("%-95s %7d", description.getDisplayName(), TimeUnit.NANOSECONDS.toMillis(nanos));
             results.append(result).append('\n');
-            LOG.info(result + " ms\n");
+            log.info(result + " ms\n");
         }
     };
 
@@ -53,7 +53,7 @@ abstract public class AbstractServiceTest {
 
     @AfterClass
     public static void printResult() {
-        LOG.info("\n---------------------------------" +
+        log.info("\n---------------------------------" +
                 "\nTest                 Duration, ms" +
                 "\n---------------------------------\n" +
                 results +

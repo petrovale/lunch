@@ -33,13 +33,14 @@ Documentation for REST
 HTTP/1.1
 GET /lunch/rest/profile/restaurants/by?date=2017-06-18
 Host: localhost:8080
-Authorization: Basic
+Authorization: Basic dXNlckB5YW5kZXgucnU6cGFzc3dvcmQ=
 ```
 ##### Returns:
 ```
 HTTP/1.1 200 
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
+Date: Sat, 20 Jun 2017 13:09:33 GMT
 [
       {
       "id": 100003,
@@ -64,6 +65,13 @@ Transfer-Encoding: chunked
 
 ##### Error:
 ```
+HTTP/1.1 500 
+Content-Type: application/json;charset=UTF-8
+{
+"url":"http://localhost:8080/lunch/rest/profile/restaurants/by",
+"cause":"MissingServletRequestParameterException",
+"details":["Required Date parameter 'date' is not present"]
+}
 ```
 
 ## Get all the restaurants with votes for all time
@@ -74,7 +82,7 @@ Transfer-Encoding: chunked
 ```
 GET /lunch/rest/profile/restaurants
 Host: localhost:8080
-Auth: Basic 
+Auth: Basic dXNlckB5YW5kZXgucnU6cGFzc3dvcmQ=
 ```
 
 ##### Returns:
@@ -104,18 +112,13 @@ Date: Thu, 15 Jun 2017 19:36:07 GMT
 ]
 ```
 
-##### Error:
-
-```
-HTTP 204 NO CONTENT
-```
 ## Get restaurant
 Request:
 ```
 HTTP/1.1
 GET /lunch/rest/profile/restaurants/100003
 Host: localhost:8080
-Authorization: Basic
+Authorization: Basic dXNlckB5YW5kZXgucnU6cGFzc3dvcmQ=
 ```
 Returns:
 ```
@@ -132,6 +135,13 @@ Date: Tue, 20 Jun 2017 17:43:14 GMT
 ```
 Error:
 ```
+HTTP/1.1 422 
+Content-Type: application/json;charset=UTF-8
+{
+   "url": "http://localhost:8080/lunch/rest/profile/restaurants/100007",
+   "cause": "NotFoundException",
+   "details": ["Not found entity with id=100007"]
+}
 ```
 ## Add restaurant
 Request:
@@ -140,7 +150,7 @@ HTTP/1.1
 POST /lunch/rest/admin/restaurants
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Basic
+Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu
 {
    "name": "Black Rabbit"
 }
@@ -160,13 +170,20 @@ Date: Tue, 20 Jun 2017 18:08:42 GMT
 ```
 Error:
 ```
+HTTP/1.1 409 
+Content-Type: application/json;charset=UTF-8
+{
+   "url": "http://localhost:8080/lunch/rest/admin/restaurants",
+   "cause": "PSQLException",
+   "details": ["Restaurant with this name already exists"]
+}
 ```
 ## Remove restaurant
 Request:
 ```
 DELETE /lunch/rest/admin/restaurants/100004 HTTP/1.1
 Host: localhost:8080
-Authorization: Basic
+Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu
 ```
 Returns:
 ```
@@ -175,13 +192,18 @@ HTTP/1.1 200
 ```
 Error:
 ```
+{
+   "url": "http://localhost:8080/lunch/rest/admin/restaurants/100005",
+   "cause": "NotFoundException",
+   "details": ["Not found entity with id=100005"]
+}
 ```
 ## Update restaurant
 Request:
 ```
 PUT /lunch/rest/admin/restaurants/100004 HTTP/1.1
 Host: localhost:8080
-Authorization: Basic 
+Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu 
 {
    "name": "Update Black Rabbit"
 }
@@ -192,6 +214,13 @@ HTTP/1.1 200
 ```
 Error:
 ```
+HTTP/1.1 409 
+Content-Type: application/json;charset=UTF-8
+{
+   "url": "http://localhost:8080/lunch/rest/admin/restaurants/100009",
+   "cause": "PSQLException",
+   "details": ["Restaurant with this name already exists"]
+}
 ```
 
 # Lunch Requests
@@ -202,7 +231,7 @@ Request:
 ```
 GET /lunch/rest/profile/restaurants/100003/lunch?date=2017-05-30 HTTP/1.1
 Host: localhost:8080
-Authorization: Basic
+Authorization: Basic dXNlckB5YW5kZXgucnU6cGFzc3dvcmQ=
 ```
 
 Returns:
@@ -241,12 +270,18 @@ Date: Mon, 19 Jun 2017 20:07:55 GMT
 Error:
 
 ```
-
+HTTP/1.1 500 
+Content-Type: application/json;charset=UTF-8
+{
+   "url": "http://localhost:8080/lunch/rest/profile/restaurants/100002/lunch",
+   "cause": "MissingServletRequestParameterException",
+   "details": ["Required Date parameter 'date' is not present"]
+}
 ```
 
 # Meal Requests
 
-## Meal for a restaurant
+## Get Meal for a restaurant
 
 Request:
 ```
@@ -270,6 +305,48 @@ Date: Mon, 19 Jun 2017 19:03:45 GMT
 ```
 Error:
 ```
+HTTP/1.1 422 
+Content-Type: application/json;charset=UTF-8
+{
+   "url": "http://localhost:8080/lunch/rest/profile/restaurants/100004/meals/100013",
+   "cause": "NotFoundException",
+   "details": ["Not found entity with id=100013"]
+}
+```
+## Add Meal for the restaurant
+Request:
+```
+HTTP/1.1
+POST /lunch/rest/admin/restaurants/100002/meals
+Host: localhost:8080
+Content-Type: application/json;charset=UTF-8
+Authorization: Basic
+{
+   "description": "Новый обед",
+   "price": 500
+}
+```
+Returns:
+```
+HTTP/1.1 201 
+Content-Type: application/json;charset=UTF-8
+Date: Sat, 24 Jun 2017 13:09:33 GMT
+{
+   "id": 100019,
+   "date": "2017-06-24T13:09:33.823+0000",
+   "description": "Новый обед",
+   "price": 500,
+}
+```
+Error:
+```
+HTTP/1.1 409 
+Content-Type: application/json;charset=UTF-8
+{
+   "url": "http://localhost:8080/lunch/rest/admin/restaurants/100007/meals",
+   "cause": "PSQLException",
+   "details": Подробности: Ключ (restaurant_id)=(100007) отсутствует в таблице \"restaurants\"."]
+}
 ```
 # Vote Requests
 
@@ -284,14 +361,24 @@ Authorization: Basic
 ```
 Returns:
 ```
+HTTP/1.1 201 
+Date: Sat, 24 Jun 2017 13:30:49 GMT
+Content-Type: application/json;charset=UTF-8
 {
    "id": 100017,
-   "registered": "2017-06-19T16:39:09.342+0000"
+   "registered": "2017-06-24T13:30:50.308+0000"
 }
 ```
 Error:
 ```
-HTTP 404 NOT FOUND
+HTTP/1.1 451 
+Content-Type: application/json;charset=UTF-8
+Date: Sat, 24 Jun 2017 13:27:05 GMT
+{
+   "url": "http://localhost:8080/lunch/rest/profile/restaurants/100002/vote",
+   "cause": "ApplicationException",
+   "details": ["The voting was closed at 11:00"]
+}
 ```
 # Login
 ## Authorization
@@ -324,4 +411,46 @@ curl 'http://localhost:8080/lunch/rest/profile -u admin@gmail.com:admin
 curl 'http://localhost:8080/lunch/rest/profile' -i -H'Authorization:Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
 curl 'http://localhost:8080/lunch/rest/admin/users/by?email=admin@gmail.com' -i -H'Authorization:Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
 curl 'http://localhost:8080/lunch/rest/admin/users' -i -d'{"name" : "NewUser", "email" : "new@mail.ru","password" : "123456"}' -H'Authorization:Basic YWRtaW5AZ21haWwuY29tOmFkbWlu' -H'Content-Type: application/json'
+```
+
+## Add User
+Request:
+```
+HTTP/1.1
+POST /lunch/rest/admin/users
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu
+{
+   "name": "New2",
+   "email": "new2@yandex.ru",
+   "password": "passwordNew",
+   "roles": ["ROLE_USER"]
+}
+
+```
+Returns:
+```
+HTTP/1.1 201 
+Content-Type: application/json;charset=UTF-8
+Date: Sat, 24 Jun 2017 13:49:28 GMT
+{
+   "id": 100017,
+   "name": "New2",
+   "email": "new2@yandex.ru",
+   "password": "passwordNew",
+   "enabled": true,
+   "registered": "2017-06-24T13:49:28.418+0000",
+   "roles": ["ROLE_USER"]
+}
+```
+Error:
+```
+HTTP/1.1 422 
+Content-Type: application/json;charset=UTF-8
+{
+   "url": "http://localhost:8080/lunch/rest/admin/users",
+   "cause": "ValidationException",
+   "details": ["Password must not be empty"]
+}
 ```

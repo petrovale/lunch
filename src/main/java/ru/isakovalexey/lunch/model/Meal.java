@@ -3,6 +3,7 @@ package ru.isakovalexey.lunch.model;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import ru.isakovalexey.lunch.View;
 
 import javax.persistence.*;
@@ -34,6 +35,7 @@ public class Meal extends BaseEntity {
 
     @Column(name = "description")
     @NotBlank(groups = {View.ValidatedUI.class, Default.class})
+    @SafeHtml(groups = {View.ValidatedUI.class})
     private String description;
 
     @Column(name="restaurant_id", insertable=false, updatable=false)
@@ -99,6 +101,14 @@ public class Meal extends BaseEntity {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public Integer getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(Integer restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     @Override
