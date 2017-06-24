@@ -50,7 +50,7 @@ public class UserServiceTest extends AbstractServiceTest {
         MATCHER.assertEquals(ADMIN, user);
     }
 
-    @Test
+    @Test(expected = NotFoundException.class)
     public void testGetNotFound() throws Exception {
         service.get(1);
     }
