@@ -53,6 +53,8 @@ public class RestaurantAdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testDelete() throws Exception {
+        WHITE_RABBIT.setVote(0);
+        UGOLEK.setVote(0);
         mockMvc.perform(delete(REST_URL + BLACK_THAI_ID)
                 .with(userHttpBasic(ADMIN)))
                 .andDo(print())

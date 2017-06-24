@@ -43,6 +43,7 @@ public class VoiceProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testAfterVotingIsClosed() throws Exception {
+        VoiceUtil.setTime(LocalTime.now().plusHours(-1));
         mockMvc.perform(post(REST_URL + WHITE_RABBIT_ID + "/vote")
                 .with(userHttpBasic(USER)))
                 .andExpect(status().isUnavailableForLegalReasons())

@@ -1,6 +1,7 @@
 ## The voting system to decide where to lunch
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/df7dfc76c727400497f8a2e05482deb7)](https://www.codacy.com/app/petrovaleOrganization/lunch?utm_source=github.com&utm_medium=referral&utm_content=petrovale/lunch&utm_campaign=badger)
+[![Build Status](https://travis-ci.org/petrovale/lunch.svg?branch=master)](https://travis-ci.org/petrovale/lunch)
 
 Design and implement a REST API using Hibernate/Spring/SpringMVC (or Spring-Boot) without frontend.
 
