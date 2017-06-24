@@ -5,7 +5,6 @@ import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.isakovalexey.lunch.TestUtil;
-import ru.isakovalexey.lunch.model.Role;
 import ru.isakovalexey.lunch.model.User;
 import ru.isakovalexey.lunch.to.UserTo;
 import ru.isakovalexey.lunch.util.UserUtil;

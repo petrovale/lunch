@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.springframework.http.MediaType;
 import ru.isakovalexey.lunch.web.AbstractControllerTest;
 
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -13,7 +12,6 @@ import static ru.isakovalexey.lunch.MealTestData.*;
 import static ru.isakovalexey.lunch.MealTestData.BLACK_THAI_ID;
 import static ru.isakovalexey.lunch.MealTestData.Black_Thai_MEAL_ID;
 import static ru.isakovalexey.lunch.TestUtil.userHttpBasic;
-import static ru.isakovalexey.lunch.UserTestData.ADMIN;
 import static ru.isakovalexey.lunch.UserTestData.USER;
 
 /**

@@ -3,7 +3,6 @@ package ru.isakovalexey.lunch.web.restaurant;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 import ru.isakovalexey.lunch.TestUtil;
-import ru.isakovalexey.lunch.model.User;
 import ru.isakovalexey.lunch.web.AbstractControllerTest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
