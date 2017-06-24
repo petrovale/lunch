@@ -33,8 +33,8 @@ public class MealServiceTest extends AbstractServiceTest {
     @Test
     public void testSave() throws Exception {
         Meal created = getCreated();
-        service.save(created, UGOLEK_ID);
-        MATCHER.assertCollectionEquals(Arrays.asList(Ugolek_MEAL1, Ugolek_MEAL3, Ugolek_MEAL2, created), service.getAll(UGOLEK_ID, getDate()));
+        service.save(created, BLACK_THAI_ID);
+        MATCHER.assertCollectionEquals(Arrays.asList(created, Black_Thai_MEAL3, Black_Thai_MEAL2, Black_Thai_MEAL1), service.getAll(BLACK_THAI_ID, getDate()));
     }
 
     @Test

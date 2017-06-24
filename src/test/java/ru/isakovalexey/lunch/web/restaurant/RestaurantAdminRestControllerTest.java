@@ -99,6 +99,9 @@ public class RestaurantAdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testCreate() throws Exception {
+        BLACK_THAI.setVote(0);
+        WHITE_RABBIT.setVote(0);
+        UGOLEK.setVote(0);
         Restaurant expected = new Restaurant(null, "New", 0);
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
