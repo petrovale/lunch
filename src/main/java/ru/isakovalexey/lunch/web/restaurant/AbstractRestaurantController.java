@@ -18,9 +18,6 @@ import java.util.List;
 
 import static ru.isakovalexey.lunch.util.ValidationUtil.*;
 
-/**
- * Created by user on 15.06.2017.
- */
 public abstract class AbstractRestaurantController {
     private static final Logger log = LoggerFactory.getLogger(AbstractRestaurantController.class);
 

@@ -1,0 +1,201 @@
+grigory.kislin [2:45 AM] 
+что-то не спится:) счас начну:
+
++1. По read.me (API) (edited)
+
+[2:45] 
+```
+Ok 1. формат - :+1:
+```
+[2:47] 
+2. мноого пользователей пригодят посмотреть еду и проголосовать
+было бы очень хорошо сделать для этого 1 вызов сервиса, а не N-ресторанов+1
+
+[2:48] 
+3. Lunch in the restaurant *today*, при этом требуется *date*
+где то несоответствие (edited)
+
+[2:48]
+ ```
+Ok 4. update meal отсутствует в API
+```
+[2:50] 
+```
+Ok 5. коррекция - в Requests в Vote есть http://localhost:8080, выше нет
+```
+[2:52] 
+6. /lunch/rest/profile/restaurants
+вот тут сомнительно profile....
+это все таки профиль, а не  разрешение на запрос информации
+если в topjava еда относится к юзеру, то тут рестораны- никак
+
+[2:55] 
+- 2. код
+javadoc Created by user - исправть в IDEA File templates (edited)
+
+[2:56] 
+- 3 модель
+- Voice
+Voice.registered и dateVoice - не лучшее решение дублировать. особенно когда этих голосов много (edited)
+
+[2:59] 
+restaurantId и restaurant, User/userId - я так понимаю для избавления от to. мне кажется с to проще
+я такого не встречал в проектах, думаю что не очень
+если у тебя есть на эту тему ссылки- кинь плз (edited)
+
+[3:01] 
+```
+Ok 
+- Meal
+ValidatedUI->ValidatedREST
+```
+[3:02] 
+```
+Ok
+price- default '100.00' - почему так?
+```
+[3:02] 
+вообще int а уж тем более long должно хватить
+
+[3:05] 
+
+-Restaurant.vote
+это же тоже дублирование! ты хранишь в Vote ссылку на Restaurant. что будет если данные разойдутся?
+и в ТЗ нигде нет, что юзер может смотреть голоса. по мне- так не может (edited)
+
+[3:06] 
+кроме того у тебя еще и List<Voice> voices
+
+[3:07] 
+-4 репозиторий. 
+я больше люблю data-jpa. и d spring-boot он по умолчанию и кода меньше и можно на не-sql переключаться (edited)
+
+grigory.kislin [3:22 AM] 
+Restaurant.vote- а вот тут я вижу ты все в кучу смешал и сам запутался
+ты это поле используешь только для передачи наружу из getAllVoice(), когда перегоняешь в RestaurantUtil
+те вместо List<Object[]> сделай List<RestorantTO> и new RestorantTO в Restaurant.ALL_VOICES
+а в модели это поле у тебя Column
+вот тебе пример, что не надо все в кучу валить - дели явно на модель и to
+
+[3:22] 
+по поводу больших сомнений в этих методах уже написал
+
+[3:23] 
+ALL_VOICES_BY_Date- стили смешал
+
+[3:24] 
+если много юзеров- закешируй еду+рестораны и отдавай. и принимай голоса. все!
+представляешь на больших данный ск-ко будет весить твой ALL_VOICES??
+а ты каждому юзеру его даешь дернуть (edited)
+
+[3:26] 
+JpaUserRepositoryImpl 62: em.createQuery("SELECT u FROM User u ORDER BY u.name, u.email", *User.class*).getResultList()
+
+[3:27] 
+и почему тут не named query?
+
+[3:30] 
+JpaVoiceRepositoryImpl
+38 dateVoice->date
+
+[3:30] 
+45 catch (NoResultException nre)- в topjava было лучше, без этого
+
+[3:32] 
+база - лучше без установки, чтоб твое тестовое быстро можно было запустить
+и если не так- как минимум в read.me писать что нужно, чтобы запуститься
+
+[3:33] 
+initDB.sql - meals.price - а тут не вижу default 100.00
+
+[3:34] 
+TABLE voices - ничего не забыл?
+
+[3:36] 
+restaurant_id - ?
+unique можно - restaurant_id, user_id, date_voice (edited)
+
+[3:38] 
+я думаю, если нужно время, то сделать time поле (без дублирование date) (edited)
+
+[3:42] 
+- VoiceServiceImpl
+думаю что сравнение 41 тоже можно в VoiceUtil вынести (edited)
+
+[3:43] 
+!isAfter лучше как isBefore
+
+[3:45] 
+43-49 убери. тут все одинаково. можешь из Voice убрать Date dateVoice = new Date()
+dateVoice  -> date (edited)
+
+[3:48] 
+и в save можно передавать date, restaurantId, userId в результате
+
+[3:48] 
+и- в логике ошибка, плохо читал ТЗ!! (edited)
+
+[3:49] 
+после 11 нельза менять голос, а голосовать можно
+
+[3:52] 
+в MealProfileRestController и MealAdminRestController одинаковые методы get/getAll
+зачем? не надо в API такого (думаю что это следствие введения в url  profile) (edited)
+
+[3:53] 
+что для юзер хорошо, для остальных плохо
+
+[3:54] 
+ProfileRestController
+39-43 уши!
+
+[3:55] 
+я таки склоняюсь к to, не надо будет View
+
+[3:59] 
+NotFoundException.EXCEPTION_COMMON_NOT_FOUND и EXCEPTION_VOTING_RESTRICTION не нашел в app.properties
+
+[4:00] 
+по сути у тебя app.properties- уши
+
+[4:04] 
+spring-db.xml
+55-64 - тоже уши
+
+[4:07] 
+LUNCH_ROOT- без этого ничего не запустится! и ни слова в read.me. лучше в classpath вынести, если вообще i18n тебе тут нужна
+
+[4:07] 
+spring-security.xml
+10 webjars - уши
+
+[4:08] 
+а вот encodingFiletr для UTF-8 можно и оставить
+
+[4:10] 
+AbstractServiceTest
+printResult()- уши!
+см в конце https://github.com/JavaWebinar/topjava10/blob/doc/doc/graduation.md Экзюпери
+GitHub
+JavaWebinar/topjava10
+Contribute to topjava10 development by creating an account on GitHub.
+ 
+(edited)
+
+[4:12] 
+MealTestData- както у тебя буквы скачут. можно и самелом и uppercase. но не смешивай
+
+[4:13] 
+MealTestData.getDate() на индуский код походе. погугли как дату получить. а еще лучше было LocatDateTime использовать
+
+grigory.kislin [4:18 AM] 
+Итого из основного- используй TO- код станет чище
+удаляй все лишнее (например i18n у тебя)
+НЕ надо измышлений с количествами голосов
+не надо profile в url API для еды-ресторанов
+юзай data-jpa и java 8 time API
+и - неверно прочитал ТЗ про голосование.
+
+но в целом, тк все на topjava основано и не поломал ничего, неплохо:)
+подумай про мастерждава и тестовое собеседование. 
+и пиши в группу выпускников в канал interview как процесс собеседований идет

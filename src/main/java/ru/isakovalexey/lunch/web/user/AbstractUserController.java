@@ -11,10 +11,6 @@ import java.util.List;
 import static ru.isakovalexey.lunch.util.ValidationUtil.checkIdConsistent;
 import static ru.isakovalexey.lunch.util.ValidationUtil.checkNew;
 
-/**
- * Created by user on 31.05.2017.
- */
-
 public class AbstractUserController {
     private static final Logger log = LoggerFactory.getLogger(AbstractUserController.class);
 

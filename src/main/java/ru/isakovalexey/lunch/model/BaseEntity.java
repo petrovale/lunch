@@ -4,9 +4,6 @@ import ru.isakovalexey.lunch.HasId;
 
 import javax.persistence.*;
 
-/**
- * Created by user on 29.05.2017.
- */
 @MappedSuperclass
 @Access(AccessType.FIELD)
 //@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE, setterVisibility = NONE)

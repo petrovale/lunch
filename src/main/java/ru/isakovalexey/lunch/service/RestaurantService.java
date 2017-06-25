@@ -6,9 +6,6 @@ import ru.isakovalexey.lunch.util.exception.NotFoundException;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by user on 30.05.2017.
- */
 public interface RestaurantService {
     Restaurant get(int id) throws NotFoundException;
 

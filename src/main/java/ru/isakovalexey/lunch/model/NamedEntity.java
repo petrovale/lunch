@@ -6,9 +6,6 @@ import org.hibernate.validator.constraints.SafeHtml;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-/**
- * Created by user on 29.05.2017.
- */
 @MappedSuperclass
 public class NamedEntity extends BaseEntity {
 

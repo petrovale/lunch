@@ -230,7 +230,8 @@ Content-Type: application/json;charset=UTF-8
 Request:
 
 ```
-GET /lunch/rest/profile/restaurants/100003/lunch?date=2017-05-30 HTTP/1.1
+HTTP/1.1
+GET /lunch/rest/profile/restaurants/100003/lunch?date=2017-05-30
 Host: localhost:8080
 Authorization: Basic dXNlckB5YW5kZXgucnU6cGFzc3dvcmQ=
 ```
@@ -288,7 +289,7 @@ Request:
 ```
 GET /lunch/rest/profile/restaurants/100004/meals/100012
 Host: localhost:8080
-Auth: Basic 
+Auth: Basic dXNlckB5YW5kZXgucnU6cGFzc3dvcmQ=
 ```
 Returns:
 ```
@@ -321,7 +322,7 @@ HTTP/1.1
 POST /lunch/rest/admin/restaurants/100002/meals
 Host: localhost:8080
 Content-Type: application/json;charset=UTF-8
-Authorization: Basic
+Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu
 {
    "description": "Новый обед",
    "price": 500
@@ -349,16 +350,47 @@ Content-Type: application/json;charset=UTF-8
    "details": Подробности: Ключ (restaurant_id)=(100007) отсутствует в таблице \"restaurants\"."]
 }
 ```
+## Update Meal for the restaurant
+Request:
+```
+HTTP/1.1
+PUT /lunch/rest/admin/restaurants/100002/meals
+Host: localhost:8080
+Content-Type: application/json;charset=UTF-8
+Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu
+{
+   "id": 100007,
+   "description": "Обновленный обед",
+   "price": 500
+}
+```
+Returns:
+```
+HTTP/1.1 200 
+Date: Sun, 25 Jun 2017 08:55:24 GMT
+```
+Error:
+```
+HTTP/1.1 422 
+Content-Type: application/json;charset=UTF-8
+Date: Sun, 25 Jun 2017 09:13:18 GMT
+{
+   "url": "http://localhost:8080/lunch/rest/admin/restaurants/100002/meals",
+   "cause": "ValidationException",
+   "details": ["description must not be empty"]
+}
+```
 # Vote Requests
 
 ## Vote for a restaurant
 
 Request:
 ```
-POST http://localhost:8080/lunch/rest/profile/restaurants/100003/vote HTTP/1.1
+HTTP/1.1
+POST /lunch/rest/profile/restaurants/100003/vote
 Content-Type: application/json
 Host: localhost:8080
-Authorization: Basic
+Authorization: Basic dXNlckB5YW5kZXgucnU6cGFzc3dvcmQ=
 ```
 Returns:
 ```
@@ -423,9 +455,9 @@ Host: localhost:8080
 Content-Type: application/json
 Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu
 {
-   "name": "New2",
-   "email": "new2@yandex.ru",
-   "password": "passwordNew",
+   "name": "New",
+   "email": "new@yandex.ru",
+   "password": "newPassword",
    "roles": ["ROLE_USER"]
 }
 
@@ -437,9 +469,9 @@ Content-Type: application/json;charset=UTF-8
 Date: Sat, 24 Jun 2017 13:49:28 GMT
 {
    "id": 100017,
-   "name": "New2",
-   "email": "new2@yandex.ru",
-   "password": "passwordNew",
+   "name": "New",
+   "email": "new@yandex.ru",
+   "password": "newPassword",
    "enabled": true,
    "registered": "2017-06-24T13:49:28.418+0000",
    "roles": ["ROLE_USER"]

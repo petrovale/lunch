@@ -11,9 +11,6 @@ import java.util.*;
 
 import javax.persistence.*;
 
-/**
- * Created by user on 29.05.2017.
- */
 @NamedQueries({
     @NamedQuery(name = User.BY_EMAIL, query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.roles WHERE u.email=?1"),
     @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id")

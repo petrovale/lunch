@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by user on 16.06.2017.
- */
 public class RestaurantUtil {
 
     public static List<Restaurant> getWithVoice(List<Object[]> objects) {

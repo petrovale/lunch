@@ -11,9 +11,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.Date;
 
-/**
- * Created by user on 17.06.2017.
- */
 @Repository
 @Transactional(readOnly = true)
 public class JpaVoiceRepositoryImpl implements VoiceRepository {

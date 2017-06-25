@@ -12,9 +12,6 @@ import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * Created by user on 30.05.2017.
- */
 @NamedQueries({
         @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id AND m.restaurant.id=:restaurantId"),
         @NamedQuery(name = Meal.ALL, query = "SELECT m FROM Meal m WHERE m.restaurant.id=:restaurantId ORDER BY m.description DESC "),
@@ -30,12 +27,12 @@ public class Meal extends BaseEntity {
     public static final String ALL_BY_DATE = "Meal.allByDate";
 
     @Column(name = "date")
-    @NotNull(groups = {View.ValidatedUI.class, Default.class})
+    @NotNull(groups = {View.ValidatedREST.class, Default.class})
     private Date date = new Date();
 
     @Column(name = "description")
-    @NotBlank(groups = {View.ValidatedUI.class, Default.class})
-    @SafeHtml(groups = {View.ValidatedUI.class})
+    @NotBlank(groups = {View.ValidatedREST.class, Default.class})
+    @SafeHtml(groups = {View.ValidatedREST.class})
     private String description;
 
     @Column(name="restaurant_id", insertable=false, updatable=false)
@@ -43,8 +40,8 @@ public class Meal extends BaseEntity {
 
     //@Column(name = "price", nullable= false, precision=7, scale=2)    // Creates the database field with this size.
     //@Digits(integer=9, fraction=2)
-    @Column(name="price", columnDefinition="Decimal(10,2) default '100.00'")
-    @NotNull(groups = {View.ValidatedUI.class, Default.class})
+    @Column(name="price", columnDefinition="Decimal(10,2) default '0.00'")
+    @NotNull(groups = {View.ValidatedREST.class, Default.class})
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.LAZY)

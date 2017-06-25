@@ -4,9 +4,6 @@ import ru.isakovalexey.lunch.HasId;
 import ru.isakovalexey.lunch.model.BaseEntity;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
-/**
- * Created by user on 30.05.2017.
- */
 public class ValidationUtil {
     private ValidationUtil() {
     }

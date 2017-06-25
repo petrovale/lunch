@@ -2,9 +2,6 @@ package ru.isakovalexey.lunch.util.exception;
 
 import org.springframework.http.HttpStatus;
 
-/**
- * Created by user on 30.05.2017.
- */
 public class NotFoundException extends ApplicationException {
     private static final String EXCEPTION_COMMON_NOT_FOUND = "exception.common.notFound";
 

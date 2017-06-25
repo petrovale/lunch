@@ -10,9 +10,6 @@ import ru.isakovalexey.lunch.service.RestaurantService;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by user on 15.06.2017.
- */
 @RestController
 @RequestMapping(value = RestaurantProfileRestController.REST_URL)
 public class RestaurantProfileRestController extends AbstractRestaurantController {

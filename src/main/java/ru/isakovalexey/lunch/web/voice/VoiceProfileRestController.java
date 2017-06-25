@@ -13,9 +13,6 @@ import ru.isakovalexey.lunch.service.VoiceService;
 
 import java.net.URI;
 
-/**
- * Created by user on 18.06.2017.
- */
 @RestController
 @RequestMapping(value = VoiceProfileRestController.REST_URL)
 public class VoiceProfileRestController {

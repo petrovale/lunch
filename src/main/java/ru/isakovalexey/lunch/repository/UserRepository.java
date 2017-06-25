@@ -4,9 +4,6 @@ import ru.isakovalexey.lunch.model.User;
 
 import java.util.List;
 
-/**
- * Created by user on 30.05.2017.
- */
 public interface UserRepository {
     User save(User user);
 

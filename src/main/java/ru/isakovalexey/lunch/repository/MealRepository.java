@@ -5,9 +5,6 @@ import ru.isakovalexey.lunch.model.Meal;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by user on 30.05.2017.
- */
 public interface MealRepository {
     // null if updated meal do not belong to restaurantId
     Meal save(Meal meal, int restaurantId);

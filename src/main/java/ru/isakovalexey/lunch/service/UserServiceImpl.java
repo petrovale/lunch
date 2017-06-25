@@ -18,9 +18,6 @@ import static ru.isakovalexey.lunch.util.UserUtil.prepareToSave;
 import static ru.isakovalexey.lunch.util.UserUtil.updateFromTo;
 import static ru.isakovalexey.lunch.util.ValidationUtil.checkNotFoundWithId;
 
-/**
- * Created by user on 31.05.2017.
- */
 @Service("userService")
 public class UserServiceImpl implements UserService, UserDetailsService {
 

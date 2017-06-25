@@ -10,9 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-/**
- * Created by user on 30.05.2017.
- */
 @Repository
 @Transactional(readOnly = true)
 public class JpaUserRepositoryImpl implements UserRepository {

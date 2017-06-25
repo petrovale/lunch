@@ -5,9 +5,6 @@ import ru.isakovalexey.lunch.model.Restaurant;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by user on 30.05.2017.
- */
 public interface RestaurantRepository {
     Restaurant save(Restaurant restaurant);
 

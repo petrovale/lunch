@@ -4,9 +4,6 @@ import ru.isakovalexey.lunch.model.Voice;
 
 import java.util.Date;
 
-/**
- * Created by user on 17.06.2017.
- */
 public interface VoiceRepository {
     // null if updated voice do not belong to restaurantId
     Voice save(Voice voice, int restaurantId, int userId);

@@ -12,9 +12,6 @@ import java.util.List;
 
 import static ru.isakovalexey.lunch.util.ValidationUtil.checkNotFoundWithId;
 
-/**
- * Created by user on 31.05.2017.
- */
 @Service
 public class MealServiceImpl implements MealService {
 

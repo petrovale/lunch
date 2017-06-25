@@ -10,9 +10,6 @@ import javax.persistence.PersistenceContext;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by user on 30.05.2017.
- */
 @Repository
 @Transactional
 public class JpaMealRepositoryImpl implements MealRepository {

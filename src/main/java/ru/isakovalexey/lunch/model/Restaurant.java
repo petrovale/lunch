@@ -5,9 +5,6 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by user on 29.05.2017.
- */
 @NamedQueries({
         @NamedQuery(name = Restaurant.DELETE, query = "DELETE FROM Restaurant r WHERE r.id=:id"),
         @NamedQuery(name = Restaurant.ALL_VOICES, query = "SELECT r.id, r.name, r.registered, COUNT(v) FROM Restaurant r LEFT JOIN r.voices v GROUP BY r.id, r.name ORDER BY r.name"),
