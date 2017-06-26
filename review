@@ -95,16 +95,20 @@ ALL_VOICES_BY_Date- стили смешал
 JpaUserRepositoryImpl 62: em.createQuery("SELECT u FROM User u ORDER BY u.name, u.email", *User.class*).getResultList()
 ```
 [3:27] 
+```
 и почему тут не named query?
-
+```
 [3:30] 
+```
 JpaVoiceRepositoryImpl
 38 dateVoice->date
-
+```
 [3:30] 
+```
 45 catch (NoResultException nre)- в topjava было лучше, без этого
-
+```
 [3:32] 
+
 база - лучше без установки, чтоб твое тестовое быстро можно было запустить
 и если не так- как минимум в read.me писать что нужно, чтобы запуститься
 

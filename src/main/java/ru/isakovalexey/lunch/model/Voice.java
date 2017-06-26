@@ -11,7 +11,7 @@ import java.util.Date;
 @NamedQueries({
         @NamedQuery(name = Voice.ALL, query = "SELECT v FROM Voice v WHERE v.restaurant.id=:restaurantId"),
         @NamedQuery(name = Voice.DELETE, query = "DELETE FROM Voice v WHERE v.id=:id AND v.restaurant.id=:restaurantId"),
-        @NamedQuery(name = Voice.GET_VOICE_DATE, query = "SELECT v FROM Voice v WHERE v.user.id=:userId AND v.dateVoice=:dateVoice"),
+        @NamedQuery(name = Voice.GET_VOICE_DATE, query = "SELECT v FROM Voice v WHERE v.user.id=:userId AND v.dateVoice=:date"),
 })
 
 @Entity

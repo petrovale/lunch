@@ -1,5 +1,6 @@
 package ru.isakovalexey.lunch.repository;
 
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.isakovalexey.lunch.model.Restaurant;
@@ -7,9 +8,9 @@ import ru.isakovalexey.lunch.model.User;
 import ru.isakovalexey.lunch.model.Voice;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.Date;
+import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
@@ -32,16 +33,11 @@ public class JpaVoiceRepositoryImpl implements VoiceRepository {
     }
 
     @Override
-    public Voice get(Date dateVoice, int userId) {
-        Voice voice;
-        try {
-            voice = em.createNamedQuery(Voice.GET_VOICE_DATE, Voice.class)
-                    .setParameter("userId", userId)
-                    .setParameter("dateVoice", dateVoice)
-                    .getSingleResult();
-        } catch (NoResultException nre) {
-            voice = null;
-        }
-        return voice;
+    public Voice get(Date date, int userId) {
+        List<Voice> voice = em.createNamedQuery(Voice.GET_VOICE_DATE, Voice.class)
+                .setParameter("userId", userId)
+                .setParameter("date", date)
+                .getResultList();
+        return DataAccessUtils.singleResult(voice);
     }
 }

@@ -2,14 +2,18 @@ package ru.isakovalexey.lunch.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import ru.isakovalexey.lunch.model.Voice;
 import ru.isakovalexey.lunch.util.VoiceUtil;
 import ru.isakovalexey.lunch.util.exception.ApplicationException;
+import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
 
 import static ru.isakovalexey.lunch.RestaurantTestData.*;
+import static ru.isakovalexey.lunch.UserTestData.ADMIN_ID;
 import static ru.isakovalexey.lunch.UserTestData.USER_ID;
 import static ru.isakovalexey.lunch.VoiceTestData.MATCHER;
 
@@ -54,4 +58,15 @@ public class VoiceServiceTest extends AbstractServiceTest {
         MATCHER.assertEquals(secondVoice, service.get(date, USER_ID));
     }
 
+    @Test(expected = NotFoundException.class)
+    public void testGetNotFound() throws Exception {
+        service.get(new Date(), 1);
+    }
+
+    @Test
+    public void testGet() throws Exception {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = sdf.parse("2017-06-20");
+        Assert.notNull(service.get(date, ADMIN_ID), "voice not found");
+    }
 }
