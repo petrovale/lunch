@@ -91,8 +91,9 @@ ALL_VOICES_BY_Date- стили смешал
 а ты каждому юзеру его даешь дернуть (edited)
 
 [3:26] 
+```
 JpaUserRepositoryImpl 62: em.createQuery("SELECT u FROM User u ORDER BY u.name, u.email", *User.class*).getResultList()
-
+```
 [3:27] 
 и почему тут не named query?
 
