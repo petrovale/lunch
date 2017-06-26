@@ -10,29 +10,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.isakovalexey.lunch.MealTestData.*;
 import static ru.isakovalexey.lunch.MealTestData.BLACK_THAI_ID;
-import static ru.isakovalexey.lunch.MealTestData.Black_Thai_MEAL_ID;
+import static ru.isakovalexey.lunch.MealTestData.BLACK_THAI_MEAL_ID;
 import static ru.isakovalexey.lunch.TestUtil.userHttpBasic;
 import static ru.isakovalexey.lunch.UserTestData.USER;
 
-/**
- * Created by user on 23.06.2017.
- */
 public class MealProfileRestControllerTest extends AbstractControllerTest {
     private static final String REST_URL = MealProfileRestController.REST_URL + '/';
 
     @Test
     public void testGet() throws Exception {
-        mockMvc.perform(get(REST_URL + BLACK_THAI_ID + "/meals/" + Black_Thai_MEAL_ID)
+        mockMvc.perform(get(REST_URL + BLACK_THAI_ID + "/meals/" + BLACK_THAI_MEAL_ID)
                 .with(userHttpBasic(USER)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentMatcher(Black_Thai_MEAL1));
+                .andExpect(MATCHER.contentMatcher(BLACK_THAI_MEAL1));
     }
 
     @Test
     public void testGetUnauth() throws Exception {
-        mockMvc.perform(get(REST_URL + BLACK_THAI_ID + "/meals/" + Black_Thai_MEAL_ID))
+        mockMvc.perform(get(REST_URL + BLACK_THAI_ID + "/meals/" + BLACK_THAI_MEAL_ID))
                 .andExpect(status().isUnauthorized());
     }
 
@@ -46,7 +43,7 @@ public class MealProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetForbidden() throws Exception {
-        mockMvc.perform(get(MealAdminRestController.REST_URL + '/' + BLACK_THAI_ID + "/meals/" + Black_Thai_MEAL_ID)
+        mockMvc.perform(get(MealAdminRestController.REST_URL + '/' + BLACK_THAI_ID + "/meals/" + BLACK_THAI_MEAL_ID)
                 .with(userHttpBasic(USER)))
                 .andExpect(status().isForbidden());
     }
@@ -58,6 +55,6 @@ public class MealProfileRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentListMatcher(Black_Thai_MEAL3, Black_Thai_MEAL2, Black_Thai_MEAL1));
+                .andExpect(MATCHER.contentListMatcher(BLACK_THAI_MEAL3, BLACK_THAI_MEAL2, BLACK_THAI_MEAL1));
     }
 }

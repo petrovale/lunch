@@ -1,8 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<fmt:setBundle basename="messages.app"/>
 
 <html>
 
@@ -10,8 +6,8 @@
 
 <section>
   <ul>
-    <li><a href="users"><fmt:message key="users.title"/></a></li>
-    <li><a href="restaurants"><fmt:message key="restaurants.title"/></a></li>
+    <li><a href="users">Users</a></li>
+    <li><a href="restaurants">Restaurants</a></li>
   </ul>
 </section>
 

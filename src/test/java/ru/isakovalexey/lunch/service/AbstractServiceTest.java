@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-abstract public class AbstractServiceTest {
+public abstract class AbstractServiceTest {
     private static final Logger log = LoggerFactory.getLogger(AbstractServiceTest.class);
 
     private static StringBuilder results = new StringBuilder();
@@ -49,15 +49,5 @@ abstract public class AbstractServiceTest {
     static {
         // needed only for java.util.logging (postgres driver)
         SLF4JBridgeHandler.install();
-    }
-
-    @AfterClass
-    public static void printResult() {
-        log.info("\n---------------------------------" +
-                "\nTest                 Duration, ms" +
-                "\n---------------------------------\n" +
-                results +
-                "---------------------------------\n");
-        results.setLength(0);
     }
 }

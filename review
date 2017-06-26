@@ -30,9 +30,10 @@ Ok 5. коррекция - в Requests в Vote есть http://localhost:8080, �
 если в topjava еда относится к юзеру, то тут рестораны- никак
 
 [2:55] 
+```
 - 2. код
 javadoc Created by user - исправть в IDEA File templates (edited)
-
+```
 [2:56] 
 - 3 модель
 - Voice
@@ -55,8 +56,9 @@ Ok
 price- default '100.00' - почему так?
 ```
 [3:02] 
+```
 вообще int а уж тем более long должно хватить
-
+```
 [3:05] 
 
 -Restaurant.vote
@@ -146,33 +148,40 @@ dateVoice  -> date (edited)
 что для юзер хорошо, для остальных плохо
 
 [3:54] 
+```
 ProfileRestController
 39-43 уши!
-
+```
 [3:55] 
 я таки склоняюсь к to, не надо будет View
 
 [3:59] 
+```
 NotFoundException.EXCEPTION_COMMON_NOT_FOUND и EXCEPTION_VOTING_RESTRICTION не нашел в app.properties
-
+```
 [4:00] 
+```
 по сути у тебя app.properties- уши
-
+```
 [4:04] 
+```
 spring-db.xml
 55-64 - тоже уши
-
+```
 [4:07] 
 LUNCH_ROOT- без этого ничего не запустится! и ни слова в read.me. лучше в classpath вынести, если вообще i18n тебе тут нужна
 
 [4:07] 
+```
 spring-security.xml
 10 webjars - уши
-
+```
 [4:08] 
+```
 а вот encodingFiletr для UTF-8 можно и оставить
-
+```
 [4:10] 
+```
 AbstractServiceTest
 printResult()- уши!
 см в конце https://github.com/JavaWebinar/topjava10/blob/doc/doc/graduation.md Экзюпери
@@ -181,10 +190,11 @@ JavaWebinar/topjava10
 Contribute to topjava10 development by creating an account on GitHub.
  
 (edited)
-
+```
 [4:12] 
+```
 MealTestData- както у тебя буквы скачут. можно и самелом и uppercase. но не смешивай
-
+```
 [4:13] 
 MealTestData.getDate() на индуский код походе. погугли как дату получить. а еще лучше было LocatDateTime использовать
 

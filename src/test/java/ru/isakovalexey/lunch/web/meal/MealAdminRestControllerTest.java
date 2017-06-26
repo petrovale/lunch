@@ -29,17 +29,17 @@ public class MealAdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGet() throws Exception {
-        mockMvc.perform(get(REST_URL + BLACK_THAI_ID + "/meals/" + Black_Thai_MEAL_ID)
+        mockMvc.perform(get(REST_URL + BLACK_THAI_ID + "/meals/" + BLACK_THAI_MEAL_ID)
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentMatcher(Black_Thai_MEAL1));
+                .andExpect(MATCHER.contentMatcher(BLACK_THAI_MEAL1));
     }
 
     @Test
     public void testGetUnauth() throws Exception {
-        mockMvc.perform(get(REST_URL + BLACK_THAI_ID + "/meals/" + Black_Thai_MEAL_ID))
+        mockMvc.perform(get(REST_URL + BLACK_THAI_ID + "/meals/" + BLACK_THAI_MEAL_ID))
                 .andExpect(status().isUnauthorized());
     }
 
@@ -53,18 +53,18 @@ public class MealAdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetForbidden() throws Exception {
-        mockMvc.perform(get(REST_URL + BLACK_THAI_ID + "/meals/" + Black_Thai_MEAL_ID)
+        mockMvc.perform(get(REST_URL + BLACK_THAI_ID + "/meals/" + BLACK_THAI_MEAL_ID)
                 .with(userHttpBasic(USER)))
                 .andExpect(status().isForbidden());
     }
 
     @Test
     public void testDelete() throws Exception {
-        mockMvc.perform(delete(REST_URL + BLACK_THAI_ID + "/meals/" + Black_Thai_MEAL_ID)
+        mockMvc.perform(delete(REST_URL + BLACK_THAI_ID + "/meals/" + BLACK_THAI_MEAL_ID)
                 .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isOk());
-        MATCHER.assertCollectionEquals(Arrays.asList(Black_Thai_MEAL3, Black_Thai_MEAL2), service.getAll(BLACK_THAI_ID, getDate()));
+        MATCHER.assertCollectionEquals(Arrays.asList(BLACK_THAI_MEAL3, BLACK_THAI_MEAL2), service.getAll(BLACK_THAI_ID, getDate()));
     }
 
     @Test
@@ -100,7 +100,7 @@ public class MealAdminRestControllerTest extends AbstractControllerTest {
         created.setId(returned.getId());
 
         MATCHER.assertEquals(created, returned);
-        MATCHER.assertCollectionEquals(Arrays.asList(created, Black_Thai_MEAL3, Black_Thai_MEAL2, Black_Thai_MEAL1), service.getAll(BLACK_THAI_ID, getDate()));
+        MATCHER.assertCollectionEquals(Arrays.asList(created, BLACK_THAI_MEAL3, BLACK_THAI_MEAL2, BLACK_THAI_MEAL1), service.getAll(BLACK_THAI_ID, getDate()));
     }
 
     @Test
@@ -110,7 +110,7 @@ public class MealAdminRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentListMatcher(Black_Thai_MEAL3, Black_Thai_MEAL2, Black_Thai_MEAL1));
+                .andExpect(MATCHER.contentListMatcher(BLACK_THAI_MEAL3, BLACK_THAI_MEAL2, BLACK_THAI_MEAL1));
     }
 
     @Test
@@ -128,7 +128,7 @@ public class MealAdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testUpdateInvalid() throws Exception {
-        Meal invalid = new Meal(Black_Thai_MEAL_ID, null, null, getDate());
+        Meal invalid = new Meal(BLACK_THAI_MEAL_ID, null, null, getDate());
         mockMvc.perform(put(REST_URL + BLACK_THAI_ID + "/meals")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(invalid))

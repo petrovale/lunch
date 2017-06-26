@@ -36,9 +36,4 @@ public class ProfileRestController extends AbstractUserController {
     public void update(@Valid @RequestBody UserTo userTo, @AuthenticationPrincipal AuthorizedUser authorizedUser, BindingResult result) {
         super.update(userTo, authorizedUser.getId());
     }
-
-    @GetMapping(value = "/text")
-    public String testUTF() {
-        return "Русский текст";
-    }
 }

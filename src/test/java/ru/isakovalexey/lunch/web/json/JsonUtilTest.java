@@ -10,10 +10,10 @@ public class JsonUtilTest {
 
     @Test
     public void testReadWriteValue() throws Exception {
-        String json = JsonUtil.writeValue(MealTestData.Ugolek_MEAL3);
+        String json = JsonUtil.writeValue(MealTestData.UGOLEK_MEAL3);
         System.out.println(json);
         Meal meal = JsonUtil.readValue(json, Meal.class);
-        MealTestData.MATCHER.assertEquals(MealTestData.Ugolek_MEAL3, meal);
+        MealTestData.MATCHER.assertEquals(MealTestData.UGOLEK_MEAL3, meal);
     }
 
     @Test

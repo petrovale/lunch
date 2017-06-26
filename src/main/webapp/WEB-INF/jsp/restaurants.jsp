@@ -16,13 +16,13 @@
 </head>
 <body>
 <section>
-    <h3><fmt:message key="restaurants.title"/></h3>
+    <h3>"Restaurants"</h3>
 
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
-            <th><fmt:message key="restaurants.name"/></th>
-            <th><fmt:message key="restaurants.vote"/></th>
+            <th>name</th>
+            <th>Vote</th>
         </tr>
         </thead>
         <c:forEach items="${restaurants}" var="restaurant">
