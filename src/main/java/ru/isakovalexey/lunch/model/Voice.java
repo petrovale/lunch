@@ -53,8 +53,8 @@ public class Voice extends BaseEntity {
         return date;
     }
 
-    public void setDate(Date dateVoice) {
-        this.date = dateVoice;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Restaurant getRestaurant() {

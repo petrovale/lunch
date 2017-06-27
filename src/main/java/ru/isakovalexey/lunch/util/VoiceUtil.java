@@ -13,4 +13,7 @@ public class VoiceUtil {
         VoiceUtil.limitTime = limitTime;
     }
 
+    public static boolean checkingTimeForSecondVote () {
+        return LocalTime.now().isBefore(VoiceUtil.getTime());
+    }
 }

@@ -42,13 +42,30 @@ public class VoiceProfileRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    public void testAfterVotingIsClosed() throws Exception {
+    public void testAfterClosingRepeatVoting() throws Exception {
         VoiceUtil.setTime(LocalTime.now().plusHours(-1));
+
+        mockMvc.perform(post(REST_URL + WHITE_RABBIT_ID + "/vote")
+                .with(userHttpBasic(USER)))
+                .andDo(print());
+
         mockMvc.perform(post(REST_URL + WHITE_RABBIT_ID + "/vote")
                 .with(userHttpBasic(USER)))
                 .andExpect(status().isUnavailableForLegalReasons())
                 .andExpect(content().json("{'cause':'ApplicationException'}"))
                 .andDo(print());
+    }
+
+    @Test
+    public void testAfterVotingIsClosed() throws Exception {
+        VoiceUtil.setTime(LocalTime.now().plusHours(-1));
+
+        ResultActions action = mockMvc.perform(post(REST_URL + WHITE_RABBIT_ID + "/vote")
+                .with(userHttpBasic(USER)))
+                .andDo(print());
+
+        Voice returned = MATCHER.fromJsonAction(action);
+        Assert.notNull(returned, "voice not found");
     }
 
     @Test

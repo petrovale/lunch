@@ -10,9 +10,9 @@ import ru.isakovalexey.lunch.util.VoiceUtil;
 import ru.isakovalexey.lunch.util.exception.ApplicationException;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
-import java.time.LocalTime;
 import java.util.Date;
 
+import static java.util.Objects.isNull;
 import static ru.isakovalexey.lunch.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
@@ -35,22 +35,18 @@ public class VoiceServiceImpl implements VoiceService {
     @Override
     @Transactional
     public Voice voice(int restaurantId, int userId) {
-        Voice voiceUser;
         Date currentDate = new Date();
+        Voice voiceUser = repository.get(currentDate, userId);
 
-        if (!LocalTime.now().isAfter(VoiceUtil.getTime())) {
-            voiceUser = repository.get(currentDate, userId);
-            if (voiceUser != null) {
-                voiceUser.setDate(currentDate);
-                voiceUser = repository.save(voiceUser, restaurantId, userId);
-            } else {
-                voiceUser = new Voice();
-                voiceUser = repository.save(voiceUser, restaurantId, userId);
-            }
+        if (isNull(voiceUser)) {
+            voiceUser = new Voice();
+            return repository.save(voiceUser, restaurantId, userId);
+
+        } else if (VoiceUtil.checkingTimeForSecondVote()) {
+            return repository.save(voiceUser, restaurantId, userId);
+
         } else {
             throw new ApplicationException(EXCEPTION_VOTING_RESTRICTION, HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS, VoiceUtil.getTime().toString());
         }
-
-        return voiceUser;
     }
 }
