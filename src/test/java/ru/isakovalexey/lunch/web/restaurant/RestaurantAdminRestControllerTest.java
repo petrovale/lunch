@@ -23,9 +23,6 @@ import static ru.isakovalexey.lunch.TestUtil.userHttpBasic;
 import static ru.isakovalexey.lunch.UserTestData.ADMIN;
 import static ru.isakovalexey.lunch.UserTestData.USER;
 
-/**
- * Created by user on 22.06.2017.
- */
 public class RestaurantAdminRestControllerTest extends AbstractControllerTest {
     private static final String REST_URL = RestaurantAdminRestController.REST_URL + '/';
 
@@ -53,8 +50,6 @@ public class RestaurantAdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testDelete() throws Exception {
-        WHITE_RABBIT.setVote(0);
-        UGOLEK.setVote(0);
         mockMvc.perform(delete(REST_URL + BLACK_THAI_ID)
                 .with(userHttpBasic(ADMIN)))
                 .andDo(print())
@@ -99,10 +94,7 @@ public class RestaurantAdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testCreate() throws Exception {
-        BLACK_THAI.setVote(0);
-        WHITE_RABBIT.setVote(0);
-        UGOLEK.setVote(0);
-        Restaurant expected = new Restaurant(null, "New", 0);
+        Restaurant expected = new Restaurant(null, "New");
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
@@ -140,7 +132,7 @@ public class RestaurantAdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testCreateInvalid() throws Exception {
-        Restaurant expected = new Restaurant(null, "", 0);
+        Restaurant expected = new Restaurant(null, "");
         mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
@@ -166,7 +158,7 @@ public class RestaurantAdminRestControllerTest extends AbstractControllerTest {
     @Test
     @Transactional(propagation = Propagation.NEVER)
     public void testCreateDuplicate() throws Exception {
-        Restaurant expected = new Restaurant(null, "White Rabbit", 0);
+        Restaurant expected = new Restaurant(null, "White Rabbit");
         mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))

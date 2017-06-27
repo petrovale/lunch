@@ -20,9 +20,6 @@ public class Restaurant extends NamedEntity {
     public static final String ALL_WITH_MEALS_BY_DATE = "Restaurant.allWithMealsByDate";
     public static final String ALL = "Restaurant.all";
 
-    @Column(name = "vote")
-    private Integer vote = 0;
-
     @Column(name = "registered", columnDefinition = "timestamp default now()")
     private Date registered = new Date();
 
@@ -38,29 +35,20 @@ public class Restaurant extends NamedEntity {
     }
 
     public Restaurant(Restaurant r) {
-        this(r.getId(), r.getName(), r.getVote(), r.getRegistered());
+        this(r.getId(), r.getName(), r.getRegistered());
     }
 
     public Restaurant(String name) {
-        this(null, name, 0);
+        this(null, name);
     }
 
-    public Restaurant(Integer id, String name, Integer vote) {
-        this(id, name, vote, new Date());
+    public Restaurant(Integer id, String name) {
+        this(id, name, new Date());
     }
 
-    public Restaurant(Integer id, String name, Integer vote, Date registered) {
+    public Restaurant(Integer id, String name, Date registered) {
         super(id, name);
-        this.vote = vote;
         this.registered = registered;
-    }
-
-    public Integer getVote() {
-        return vote;
-    }
-
-    public void setVote(Integer vote) {
-        this.vote = vote;
     }
 
     public Date getRegistered() {
@@ -92,7 +80,6 @@ public class Restaurant extends NamedEntity {
         return "Restaurant{" +
                 "id=" + getId() +
                 ", name=" + name +
-                ", vote=" + vote +
                 ", registered=" + registered +
                 '}';
     }

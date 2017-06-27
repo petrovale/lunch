@@ -20,7 +20,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test
     public void testSave() throws Exception {
-        Restaurant newRestaurant = new Restaurant(null, "New", 0);
+        Restaurant newRestaurant = new Restaurant("New");
         Restaurant created = service.save(newRestaurant);
         newRestaurant.setId(created.getId());
         MATCHER.assertCollectionEquals(Arrays.asList(BLACK_THAI, newRestaurant, WHITE_RABBIT, UGOLEK), service.getAll());
@@ -28,7 +28,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test(expected = DataAccessException.class)
     public void testDuplicateNameSave() throws Exception {
-        service.save(new Restaurant(null, "Black Thai", 0));
+        service.save(new Restaurant(null, "Black Thai"));
     }
 
     @Test
@@ -73,8 +73,6 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     @Test
     public void testDelete() throws Exception {
         service.delete(BLACK_THAI_ID);
-        WHITE_RABBIT.setVote(0);
-        UGOLEK.setVote(0);
         MATCHER.assertCollectionEquals(Arrays.asList(WHITE_RABBIT, UGOLEK), service.getAll());
     }
 

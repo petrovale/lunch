@@ -15,9 +15,9 @@ INSERT INTO user_roles (role, user_id) VALUES
   ('ROLE_ADMIN', 100001),
   ('ROLE_USER', 100001);
 
-INSERT INTO restaurants (name, vote) VALUES ('Black Thai', 0);
-INSERT INTO restaurants (name, vote) VALUES ('White Rabbit', 0);
-INSERT INTO restaurants (name, vote) VALUES ('Уголек', 0);
+INSERT INTO restaurants (name) VALUES ('Black Thai');
+INSERT INTO restaurants (name) VALUES ('White Rabbit');
+INSERT INTO restaurants (name) VALUES ('Уголек');
 
 INSERT INTO meals (date, description, price, restaurant_id) VALUES
   ('2017-05-30', 'борщ', 500.00, 100002),
