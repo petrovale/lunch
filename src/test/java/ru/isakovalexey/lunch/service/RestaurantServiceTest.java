@@ -31,15 +31,6 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testGetAllVoices() throws Exception {
-        List<Restaurant> all = service.getAllVoice();
-        BLACK_THAI.setVote(0);
-        WHITE_RABBIT.setVote(1);
-        UGOLEK.setVote(2);
-        MATCHER.assertCollectionEquals(Arrays.asList(BLACK_THAI, WHITE_RABBIT, UGOLEK), all);
-    }
-
-    @Test
     public void testGet() throws Exception {
         Restaurant restaurant = service.get(BLACK_THAI_ID);
         MATCHER.assertEquals(BLACK_THAI, restaurant);
@@ -56,7 +47,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sdf.parse("2017-06-18");
 
-        List<Restaurant> all = service.getAllVoiceByDate(date);
+        List<Restaurant> all = service.getAllWithVoicesByDate(date);
         WHITE_RABBIT.setVote(1);
         UGOLEK.setVote(1);
         MATCHER.assertCollectionEquals(Arrays.asList(BLACK_THAI, WHITE_RABBIT, UGOLEK), all);

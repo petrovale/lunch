@@ -37,13 +37,75 @@ Documentation for REST
 
 # Restaurant Requests
 
-## Get all the restaurants with voices for today
+## Get all the restaurants with Lunches by date
+##### Request:
+```
+HTTP/1.1
+GET /lunch/rest/profile/restaurants/lunches/by-date?date=2017-05-30
+Host: localhost:8080
+Authorization: Basic dXNlckB5YW5kZXgucnU6cGFzc3dvcmQ=
+```
+##### Returns:
+```
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Date: Tue, 27 Jun 2017 07:53:26 GMT
+[
+      {
+      "id": 100003,
+      "name": "White Rabbit",
+      "vote": 0,
+      "registered": "2017-06-27T07:52:04.813+0000",
+      "voices": null,
+      "meals": [
+           {"id": 100010, "date": "2017-05-29T21:00:00.000+0000", "description": "каша молочная", "restaurantId": 100003, "price": 500},
+           {"id": 100009, "date": "2017-05-29T21:00:00.000+0000", "description": "салат по сезону", "restaurantId": 100003, "price": 100},
+           {"id": 100008, "date": "2017-05-29T21:00:00.000+0000", "description": "омлет со спаржей","restaurantId": 100003, "price": 500}
+      ]            
+   },
+      {
+      "id": 100004,
+      "name": "Уголек",
+      "vote": 0,
+      "registered": "2017-06-27T07:52:04.835+0000",
+      "voices": null,
+      "meals": [
+           {"id": 100011, "date": "2017-05-29T21:00:00.000+0000", "description": "суп фасолевый", "restaurantId": 100004, "price": 200},
+           {"id": 100013, "date": "2017-05-29T21:00:00.000+0000", "description": "суп -харчо", "restaurantId": 100004, "price": 300}
+      ]
+   },
+      {
+      "id": 100002,
+      "name": "Black Thai",
+      "vote": 0,
+      "registered": "2017-06-27T07:52:04.788+0000",
+      "voices": null,
+      "meals": [
+           {"id": 100005, "date": "2017-05-29T21:00:00.000+0000", "description": "борщ", "restaurantId": 100002, "price": 500},
+           {"id": 100006, "date": "2017-05-29T21:00:00.000+0000", "description": "каша гречневая", "restaurantId": 100002, "price": 300},
+           {"id": 100007, "date": "2017-05-29T21:00:00.000+0000", "description": "котлета кур", "restaurantId": 100002, "price": 700}
+      ]
+   }
+]
+```
+##### Error:
+```
+HTTP/1.1 500 
+Content-Type: application/json;charset=UTF-8
+{
+   "url": "http://localhost:8080/lunch/rest/profile/restaurants/lunches/by-date",
+   "cause": "MissingServletRequestParameterException",
+   "details": ["Required Date parameter 'date' is not present"]
+}
+```
+
+## Get all the restaurants with votes by date
 
 ##### Request:
 
 ```
 HTTP/1.1
-GET /lunch/rest/profile/restaurants/by?date=2017-06-18
+GET /lunch/rest/profile/restaurants/votes/by-date?date=2017-06-18
 Host: localhost:8080
 Authorization: Basic dXNlckB5YW5kZXgucnU6cGFzc3dvcmQ=
 ```
@@ -80,14 +142,13 @@ Date: Sat, 20 Jun 2017 13:09:33 GMT
 HTTP/1.1 500 
 Content-Type: application/json;charset=UTF-8
 {
-"url":"http://localhost:8080/lunch/rest/profile/restaurants/by",
+"url":"http://localhost:8080/lunch/rest/profile/restaurants/votes/by-date",
 "cause":"MissingServletRequestParameterException",
 "details":["Required Date parameter 'date' is not present"]
 }
 ```
 
-## Get all the restaurants with votes for all time
-
+## Get all the restaurants
 
 ##### Request:
 
@@ -106,20 +167,17 @@ Transfer-Encoding: chunked
 Date: Thu, 15 Jun 2017 19:36:07 GMT
 
 [
-   {
-      "id":100002,
-      "name":"Black Thai",
-      "vote":13
+      {
+      "id": 100002,
+      "name": "Black Thai",
    },
-   {
-      "id":100003,
-      "name":"White Rabbit",
-      "vote":0
+      {
+      "id": 100003,
+      "name": "White Rabbit",
    },
-   {
-      "id":100004,
-      "name":"Уголек",
-      "vote":5
+      {
+      "id": 100004,
+      "name": "Уголек",
    }
 ]
 ```
@@ -236,7 +294,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 # Lunch Requests
-## Lunch in the restaurant today
+## Lunch in the restaurant by date
 
 Request:
 
@@ -399,8 +457,8 @@ Request:
 ```
 HTTP/1.1
 POST /lunch/rest/profile/restaurants/100003/vote
-Content-Type: application/json
 Host: localhost:8080
+Content-Type: application/json
 Authorization: Basic dXNlckB5YW5kZXgucnU6cGFzc3dvcmQ=
 ```
 Returns:

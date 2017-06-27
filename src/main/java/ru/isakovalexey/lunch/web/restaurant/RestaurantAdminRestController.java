@@ -35,15 +35,15 @@ public class RestaurantAdminRestController extends AbstractRestaurantController 
     }
 
     @Override
-    @GetMapping
-    public List<Restaurant> getAllVoice() {
-        return super.getAllVoice();
-    }
-
-    @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@Valid @RequestBody Restaurant restaurant, @PathVariable("id") int id) {
         super.update(restaurant, id);
+    }
+
+    @Override
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Restaurant> getAll() {
+        return super.getAll();
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -47,15 +47,11 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public List<Restaurant> getAllVoice() {
-        return restaurantRepository.getAllVoice();
+    public List<Restaurant> getAllWithVoicesByDate(Date dateVoice) {
+        return restaurantRepository.getAllWithVoicesByDate(dateVoice);
     }
 
     @Override
-    public List<Restaurant> getAllVoiceByDate(Date dateVoice) {
-        return restaurantRepository.getAllVoiceByDate(dateVoice);
-    }
-
     public List<Restaurant> getAllWithMealsByDate(Date date) {
         return restaurantRepository.getAllWithMealsByDate(date);
     }

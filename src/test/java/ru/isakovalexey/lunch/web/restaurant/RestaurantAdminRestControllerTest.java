@@ -117,9 +117,6 @@ public class RestaurantAdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetAll() throws Exception {
-        BLACK_THAI.setVote(0);
-        WHITE_RABBIT.setVote(1);
-        UGOLEK.setVote(2);
         TestUtil.print(mockMvc.perform(get(REST_URL)
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())

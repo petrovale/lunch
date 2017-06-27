@@ -43,8 +43,8 @@ public class RestaurantProfileRestControllerTest extends AbstractControllerTest{
     @Test
     public void testGetAll() throws Exception {
         BLACK_THAI.setVote(0);
-        WHITE_RABBIT.setVote(1);
-        UGOLEK.setVote(2);
+        WHITE_RABBIT.setVote(0);
+        UGOLEK.setVote(0);
         TestUtil.print(mockMvc.perform(get(REST_URL)
                 .with(userHttpBasic(USER)))
                 .andExpect(status().isOk())
@@ -53,11 +53,11 @@ public class RestaurantProfileRestControllerTest extends AbstractControllerTest{
     }
 
     @Test
-    public void testGetAllByDate() throws Exception {
+    public void testGetAllWithByDate() throws Exception {
         BLACK_THAI.setVote(0);
         WHITE_RABBIT.setVote(1);
         UGOLEK.setVote(1);
-        TestUtil.print(mockMvc.perform(get(REST_URL + "by?date=" + "2017-06-18")
+        TestUtil.print(mockMvc.perform(get(REST_URL + "votes/by-date?date=" + "2017-06-18")
                 .with(userHttpBasic(USER)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))

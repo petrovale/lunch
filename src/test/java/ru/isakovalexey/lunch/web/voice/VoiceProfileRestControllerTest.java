@@ -73,6 +73,6 @@ public class VoiceProfileRestControllerTest extends AbstractControllerTest {
         UGOLEK.setVote(0);
         WHITE_RABBIT.setVote(1);
         RestaurantTestData.MATCHER.assertCollectionEquals(
-                Arrays.asList(BLACK_THAI, WHITE_RABBIT, UGOLEK), service.getAllVoiceByDate(new Date()));
+                Arrays.asList(BLACK_THAI, WHITE_RABBIT, UGOLEK), service.getAllWithVoicesByDate(new Date()));
     }
 }

@@ -16,9 +16,7 @@ public interface RestaurantRepository {
 
     List<Restaurant> getAll();
 
-    List<Restaurant> getAllVoice();
-
-    List<Restaurant> getAllVoiceByDate(Date dateVoice);
+    List<Restaurant> getAllWithVoicesByDate(Date dateVoice);
 
     List<Restaurant> getAllWithMealsByDate(Date date);
 }

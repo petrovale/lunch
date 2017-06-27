@@ -47,16 +47,8 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     @Transactional
-    public List<Restaurant> getAllVoice() {
-        List<Object[]> objects = em.createNamedQuery(Restaurant.ALL_VOICES, Object[].class)
-                .getResultList();
-        return getWithVoice(objects);
-    }
-
-    @Override
-    @Transactional
-    public List<Restaurant> getAllVoiceByDate(Date dateVoice) {
-        List<Object[]> objects = em.createNamedQuery(Restaurant.ALL_VOICES_BY_DATE, Object[].class)
+    public List<Restaurant> getAllWithVoicesByDate(Date dateVoice) {
+        List<Object[]> objects = em.createNamedQuery(Restaurant.ALL_WITH_VOICES_BY_DATE, Object[].class)
                 .setParameter("date", dateVoice)
                 .getResultList();
         //getWithVoice->createWithVoices?

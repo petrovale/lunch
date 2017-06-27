@@ -21,14 +21,15 @@ public class RestaurantProfileRestController extends AbstractRestaurantControlle
     }
 
     @Override
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Restaurant> getAllVoice() {
-        return super.getAllVoice();
+    @GetMapping(value = "/votes/by-date", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Restaurant> getAllWithVoicesByDate(@RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
+        return super.getAllWithVoicesByDate(date);
     }
 
-    @GetMapping(value = "/by", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Restaurant> getAllVoiceByDate(@RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
-        return super.getAllVoiceByDate(date);
+    @Override
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Restaurant> getAll() {
+        return super.getAll();
     }
 
     @Override

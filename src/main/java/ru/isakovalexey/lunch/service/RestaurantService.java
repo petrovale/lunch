@@ -17,9 +17,7 @@ public interface RestaurantService {
 
     Restaurant save(Restaurant restaurant);
 
-    List<Restaurant> getAllVoice();
-
-    List<Restaurant> getAllVoiceByDate(Date dateVoice);
+    List<Restaurant> getAllWithVoicesByDate(Date dateVoice);
 
     List<Restaurant> getAllWithMealsByDate(Date date);
 }
