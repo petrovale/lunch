@@ -28,27 +28,9 @@ public class MealAdminRestControllerTest extends AbstractControllerTest {
     private MealService service;
 
     @Test
-    public void testGet() throws Exception {
-        mockMvc.perform(get(REST_URL + BLACK_THAI_ID + "/meals/" + BLACK_THAI_MEAL_ID)
-                .with(userHttpBasic(ADMIN)))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentMatcher(BLACK_THAI_MEAL1));
-    }
-
-    @Test
     public void testGetUnauth() throws Exception {
         mockMvc.perform(get(REST_URL + BLACK_THAI_ID + "/meals/" + BLACK_THAI_MEAL_ID))
                 .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    public void testGetNotFound() throws Exception {
-        mockMvc.perform(get(REST_URL + BLACK_THAI_ID + "/meals/" + 1)
-                .with(userHttpBasic(ADMIN)))
-                .andExpect(status().isUnprocessableEntity())
-                .andDo(print());
     }
 
     @Test
@@ -101,16 +83,6 @@ public class MealAdminRestControllerTest extends AbstractControllerTest {
 
         MATCHER.assertEquals(created, returned);
         MATCHER.assertCollectionEquals(Arrays.asList(created, BLACK_THAI_MEAL3, BLACK_THAI_MEAL2, BLACK_THAI_MEAL1), service.getAll(BLACK_THAI_ID, getDate()));
-    }
-
-    @Test
-    public void testGetAll() throws Exception {
-        mockMvc.perform(get(REST_URL + BLACK_THAI_ID + "/lunch?date=" + "2017-05-30")
-                .with(userHttpBasic(ADMIN)))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentListMatcher(BLACK_THAI_MEAL3, BLACK_THAI_MEAL2, BLACK_THAI_MEAL1));
     }
 
     @Test

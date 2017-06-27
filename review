@@ -135,9 +135,10 @@ unique можно - restaurant_id, user_id, date_voice (edited)
 я думаю, если нужно время, то сделать time поле (без дублирование date) (edited)
 ```
 [3:42] 
+```
 - VoiceServiceImpl
 думаю что сравнение 41 тоже можно в VoiceUtil вынести (edited)
-
+```
 [3:43] 
 ```
 !isAfter лучше как isBefore
@@ -160,9 +161,10 @@ dateVoice  -> date (edited)
 после 11 нельза менять голос, а голосовать можно
 ```
 [3:52] 
+```
 в MealProfileRestController и MealAdminRestController одинаковые методы get/getAll
 зачем? не надо в API такого (думаю что это следствие введения в url  profile) (edited)
-
+```
 [3:53] 
 ```
 что для юзер хорошо, для остальных плохо

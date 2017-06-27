@@ -26,22 +26,9 @@ public class MealAdminRestController extends AbstractMealController {
     }
 
     @Override
-    @GetMapping(value = "/{restaurantId}/meals/{mealId}")
-    public Meal get(@PathVariable("restaurantId") int restaurantId, @PathVariable(value = "mealId") int mealId) {
-        return super.get(mealId, restaurantId);
-    }
-
-    @Override
     @DeleteMapping("/{restaurantId}/meals/{mealId}")
     public void delete(@PathVariable("restaurantId") int restaurantId, @PathVariable(value = "mealId") int mealId) {
         super.delete(mealId, restaurantId);
-    }
-
-    @Override
-    @GetMapping(value = "/{restaurantid}/lunch")
-    public List<Meal> getAll(@PathVariable(value = "restaurantid") int restaurantId,
-                             @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
-        return super.getAll(restaurantId, date);
     }
 
     @Override
