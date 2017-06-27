@@ -69,10 +69,10 @@ public class VoiceProfileRestControllerTest extends AbstractControllerTest {
         Voice returnedSecond = MATCHER.fromJsonAction(actionSecond);
         Assert.notNull(returnedSecond, "voice not found");
 
-        BLACK_THAI.setVote(0);
-        UGOLEK.setVote(0);
-        WHITE_RABBIT.setVote(1);
-        RestaurantTestData.MATCHER.assertCollectionEquals(
-                Arrays.asList(BLACK_THAI, WHITE_RABBIT, UGOLEK), service.getAllWithVoicesByDate(new Date()));
+        BLACK_THAI_TO.setVote(0);
+        UGOLEK_TO.setVote(0);
+        WHITE_RABBIT_TO.setVote(1);
+        RestaurantTestData.MATCHER_WITH_VOICES.assertCollectionEquals(
+                Arrays.asList(BLACK_THAI_TO, WHITE_RABBIT_TO, UGOLEK_TO), service.getAllWithVoicesByDate(new Date()));
     }
 }

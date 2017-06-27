@@ -1,6 +1,7 @@
 package ru.isakovalexey.lunch.service;
 
 import ru.isakovalexey.lunch.model.Restaurant;
+import ru.isakovalexey.lunch.to.RestaurantTo;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
 import java.util.Date;
@@ -17,7 +18,7 @@ public interface RestaurantService {
 
     Restaurant save(Restaurant restaurant);
 
-    List<Restaurant> getAllWithVoicesByDate(Date dateVoice);
+    List<RestaurantTo> getAllWithVoicesByDate(Date date);
 
     List<Restaurant> getAllWithMealsByDate(Date date);
 }

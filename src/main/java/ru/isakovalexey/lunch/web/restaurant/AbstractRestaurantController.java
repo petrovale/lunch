@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.service.RestaurantService;
+import ru.isakovalexey.lunch.to.RestaurantTo;
 import ru.isakovalexey.lunch.util.exception.ErrorInfo;
 import ru.isakovalexey.lunch.web.ExceptionInfoHandler;
 
@@ -59,7 +60,7 @@ public abstract class AbstractRestaurantController {
         return service.getAll();
     }
 
-    public List<Restaurant> getAllWithVoicesByDate(Date date) {
+    public List<RestaurantTo> getAllWithVoicesByDate(Date date) {
         log.info("getAllVoiceByDate {}", date);
         return service.getAllWithVoicesByDate(date);
     }

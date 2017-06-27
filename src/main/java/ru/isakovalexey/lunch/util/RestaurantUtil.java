@@ -1,25 +1,26 @@
 package ru.isakovalexey.lunch.util;
 
-import ru.isakovalexey.lunch.model.Restaurant;
+import ru.isakovalexey.lunch.to.RestaurantTo;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class RestaurantUtil {
 
-    public static List<Restaurant> getWithVoice(List<Object[]> objects) {
-        List<Restaurant> restaurants = new ArrayList<>();
+    public static List<RestaurantTo> createWithVoice(List<Object[]> objects) {
+       List<RestaurantTo> restaurantsTo = new ArrayList<>();
 
-        for (Object[] object : objects) {
-            int id = ((Number) object[0]).intValue();
-            String name = (String) object[1];
-            Date registered = (Date) object[2];
-            int vote = ((Number) object[3]).intValue();
-            restaurants.add(new Restaurant(id, name, vote, registered));
-        }
+        objects.forEach(obj -> {
+            restaurantsTo.add(new RestaurantTo(
+                    ((Number) obj[0]).intValue(),
+                    (String) obj[1],
+                    ((Number) obj[3]).intValue(),
+                    LocalDateTime.ofInstant(((Date) obj[2]).toInstant(), ZoneId.systemDefault())));});
 
-        return restaurants;
+        return restaurantsTo;
     }
 
 }

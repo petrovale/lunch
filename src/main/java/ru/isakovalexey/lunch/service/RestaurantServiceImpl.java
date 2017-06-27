@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.repository.RestaurantRepository;
+import ru.isakovalexey.lunch.to.RestaurantTo;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
 import java.util.Date;
@@ -47,8 +48,8 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public List<Restaurant> getAllWithVoicesByDate(Date dateVoice) {
-        return restaurantRepository.getAllWithVoicesByDate(dateVoice);
+    public List<RestaurantTo> getAllWithVoicesByDate(Date date) {
+        return restaurantRepository.getAllWithVoicesByDate(date);
     }
 
     @Override

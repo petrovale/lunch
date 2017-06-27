@@ -53,7 +53,7 @@ public class RestaurantRestControllerTest extends AbstractControllerTest{
     }
 
     @Test
-    public void testGetAllWithByDate() throws Exception {
+    public void testGetAllWithVoicesByDate() throws Exception {
         BLACK_THAI.setVote(0);
         WHITE_RABBIT.setVote(1);
         UGOLEK.setVote(1);

@@ -3,13 +3,13 @@ package ru.isakovalexey.lunch.repository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.isakovalexey.lunch.model.Restaurant;
+import ru.isakovalexey.lunch.to.RestaurantTo;
+import ru.isakovalexey.lunch.util.RestaurantUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Date;
 import java.util.List;
-
-import static ru.isakovalexey.lunch.util.RestaurantUtil.getWithVoice;
 
 @Repository
 @Transactional(readOnly = true)
@@ -47,12 +47,11 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     @Transactional
-    public List<Restaurant> getAllWithVoicesByDate(Date dateVoice) {
+    public List<RestaurantTo> getAllWithVoicesByDate(Date dateVoice) {
         List<Object[]> objects = em.createNamedQuery(Restaurant.ALL_WITH_VOICES_BY_DATE, Object[].class)
                 .setParameter("date", dateVoice)
                 .getResultList();
-        //getWithVoice->createWithVoices?
-        return getWithVoice(objects);
+        return RestaurantUtil.createWithVoice(objects);
     }
 
     @Override

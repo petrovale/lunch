@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.util.Assert;
 import ru.isakovalexey.lunch.model.Restaurant;
+import ru.isakovalexey.lunch.to.RestaurantTo;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
 import java.text.SimpleDateFormat;
@@ -47,10 +48,11 @@ public class RestaurantServiceTest extends AbstractServiceTest {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sdf.parse("2017-06-18");
 
-        List<Restaurant> all = service.getAllWithVoicesByDate(date);
-        WHITE_RABBIT.setVote(1);
-        UGOLEK.setVote(1);
-        MATCHER.assertCollectionEquals(Arrays.asList(BLACK_THAI, WHITE_RABBIT, UGOLEK), all);
+        List<RestaurantTo> all = service.getAllWithVoicesByDate(date);
+        WHITE_RABBIT_TO.setVote(1);
+        UGOLEK_TO.setVote(1);
+        MATCHER_WITH_VOICES.assertCollectionEquals(
+                Arrays.asList(BLACK_THAI_TO, WHITE_RABBIT_TO, UGOLEK_TO), all);
     }
 
     @Test

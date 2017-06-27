@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.service.RestaurantService;
+import ru.isakovalexey.lunch.to.RestaurantTo;
 
 import java.util.Date;
 import java.util.List;
@@ -22,7 +23,7 @@ public class RestaurantRestController extends AbstractRestaurantController {
 
     @Override
     @GetMapping(value = "/votes/by-date", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Restaurant> getAllWithVoicesByDate(@RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
+    public List<RestaurantTo> getAllWithVoicesByDate(@RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
         return super.getAllWithVoicesByDate(date);
     }
 
