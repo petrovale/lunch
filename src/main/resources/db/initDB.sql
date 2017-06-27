@@ -48,7 +48,6 @@ CREATE TABLE voices
   id INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   restaurant_id INTEGER NOT NULL,
   user_id INTEGER NOT NULL,
-  registered TIMESTAMP DEFAULT now(),
   date DATE DEFAULT now(),
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
