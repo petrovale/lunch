@@ -6,7 +6,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ru.isakovalexey.lunch.TestUtil;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.service.RestaurantService;
 import ru.isakovalexey.lunch.web.AbstractControllerTest;
@@ -28,25 +27,6 @@ public class RestaurantAdminRestControllerTest extends AbstractControllerTest {
 
     @Autowired
     private RestaurantService restaurantService;
-
-    @Test
-    public void testGet() throws Exception {
-        mockMvc.perform(get(REST_URL + BLACK_THAI_ID)
-                .with(userHttpBasic(ADMIN)))
-                .andExpect(status().isOk())
-                .andDo(print())
-                // https://jira.spring.io/browse/SPR-14472
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentMatcher(BLACK_THAI));
-    }
-
-    @Test
-    public void testGetNotFound() throws Exception {
-        mockMvc.perform(get(REST_URL + 1)
-                .with(userHttpBasic(ADMIN)))
-                .andExpect(status().isUnprocessableEntity())
-                .andDo(print());
-    }
 
     @Test
     public void testDelete() throws Exception {
@@ -105,15 +85,6 @@ public class RestaurantAdminRestControllerTest extends AbstractControllerTest {
 
         MATCHER.assertEquals(expected, returned);
         MATCHER.assertCollectionEquals(Arrays.asList(BLACK_THAI, expected, WHITE_RABBIT, UGOLEK), restaurantService.getAll());
-    }
-
-    @Test
-    public void testGetAll() throws Exception {
-        TestUtil.print(mockMvc.perform(get(REST_URL)
-                .with(userHttpBasic(ADMIN)))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentListMatcher(BLACK_THAI, WHITE_RABBIT, UGOLEK)));
     }
 
     @Test
