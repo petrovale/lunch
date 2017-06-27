@@ -1,6 +1,8 @@
 package ru.isakovalexey.lunch.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.repository.RestaurantRepository;
@@ -27,33 +29,45 @@ public class RestaurantServiceImpl implements RestaurantService {
         return checkNotFoundWithId(restaurantRepository.get(id), id);
     }
 
+    @CacheEvict(value = "restaurants", allEntries = true)
     @Override
     public void delete(int id) throws NotFoundException {
         checkNotFoundWithId(restaurantRepository.delete(id), id);
     }
 
+    @Cacheable("restaurants")
     @Override
     public List<Restaurant> getAll() {
         return restaurantRepository.getAll();
     }
 
+    @CacheEvict(value = "restaurants", allEntries = true)
     @Override
     public Restaurant update(Restaurant restaurant) throws NotFoundException {
         return restaurantRepository.save(restaurant);
     }
 
+    @CacheEvict(value = "restaurants", allEntries = true)
     @Override
     public Restaurant save(Restaurant restaurant) {
         return restaurantRepository.save(restaurant);
     }
 
+    @Cacheable("restaurants")
     @Override
     public List<RestaurantTo> getAllWithVoicesByDate(Date date) {
         return restaurantRepository.getAllWithVoicesByDate(date);
     }
 
+    @Cacheable("restaurants")
     @Override
     public List<Restaurant> getAllWithMealsByDate(Date date) {
         return restaurantRepository.getAllWithMealsByDate(date);
+    }
+
+    @CacheEvict(value = "restaurants", allEntries = true)
+    @Override
+    public void evictCache() {
+        // only for evict cache
     }
 }

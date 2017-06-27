@@ -21,4 +21,6 @@ public interface RestaurantService {
     List<RestaurantTo> getAllWithVoicesByDate(Date date);
 
     List<Restaurant> getAllWithMealsByDate(Date date);
+
+    void evictCache();
 }

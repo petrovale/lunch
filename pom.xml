@@ -38,6 +38,8 @@
 
         <!--Tools-->
         <ehcache.version>2.10.3</ehcache.version>
+        <!--Tools-->
+        <ehcache.version>2.10.3</ehcache.version>
     </properties>
 
     <build>
@@ -144,6 +146,12 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate-validator.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>${ehcache.version}</version>
         </dependency>
 
         <!--http://hibernate.org/validator/documentation/getting-started/#unified-expression-language-el-->
