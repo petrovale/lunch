@@ -13,9 +13,9 @@ import static ru.isakovalexey.lunch.RestaurantTestData.*;
 import static ru.isakovalexey.lunch.TestUtil.userHttpBasic;
 import static ru.isakovalexey.lunch.UserTestData.USER;
 
-public class RestaurantProfileRestControllerTest extends AbstractControllerTest{
+public class RestaurantRestControllerTest extends AbstractControllerTest{
 
-    private static final String REST_URL = RestaurantProfileRestController.REST_URL + '/';
+    private static final String REST_URL = RestaurantRestController.REST_URL + '/';
 
     @Test
     public void testGet() throws Exception {

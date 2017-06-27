@@ -11,12 +11,12 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = RestaurantProfileRestController.REST_URL)
-public class RestaurantProfileRestController extends AbstractRestaurantController {
-    static final String REST_URL = "/rest/profile/restaurants";
+@RequestMapping(value = RestaurantRestController.REST_URL)
+public class RestaurantRestController extends AbstractRestaurantController {
+    static final String REST_URL = "/rest/restaurants";
 
     @Autowired
-    public RestaurantProfileRestController(RestaurantService service) {
+    public RestaurantRestController(RestaurantService service) {
         super(service);
     }
 

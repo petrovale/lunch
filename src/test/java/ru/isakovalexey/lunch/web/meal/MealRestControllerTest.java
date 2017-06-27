@@ -14,8 +14,8 @@ import static ru.isakovalexey.lunch.MealTestData.BLACK_THAI_MEAL_ID;
 import static ru.isakovalexey.lunch.TestUtil.userHttpBasic;
 import static ru.isakovalexey.lunch.UserTestData.USER;
 
-public class MealProfileRestControllerTest extends AbstractControllerTest {
-    private static final String REST_URL = MealProfileRestController.REST_URL + '/';
+public class MealRestControllerTest extends AbstractControllerTest {
+    private static final String REST_URL = MealRestController.REST_URL + '/';
 
     @Test
     public void testGet() throws Exception {
