@@ -1,5 +1,7 @@
 package ru.isakovalexey.lunch.web.meal;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
@@ -12,24 +14,23 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = MealRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class MealRestController extends AbstractMealController {
+public class MealRestController {
+    private static final Logger log = LoggerFactory.getLogger(MealRestController.class);
     static final String REST_URL = "/rest/restaurants";
 
     @Autowired
-    public MealRestController(MealService service) {
-        super(service);
-    }
+    private MealService service;
 
-    @Override
     @GetMapping(value = "/{restaurantId}/meals/{mealId}")
     public Meal get(@PathVariable("restaurantId") int restaurantId, @PathVariable(value = "mealId") int mealId) {
-        return super.get(mealId, restaurantId);
+        log.info("get meal {} for Restaurant {}", mealId, restaurantId);
+        return service.get(mealId, restaurantId);
     }
 
-    @Override
     @GetMapping(value = "/{restaurantid}/lunch")
     public List<Meal> getAll(@PathVariable(value = "restaurantid") int restaurantId,
                              @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
-        return super.getAll(restaurantId, date);
+        log.info("getAll for Restaurant {}", restaurantId);
+        return service.getAll(restaurantId, date);
     }
 }
