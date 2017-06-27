@@ -12,6 +12,9 @@ import javax.persistence.PersistenceContext;
 import java.util.Date;
 import java.util.List;
 
+import static java.util.Objects.isNull;
+import static ru.isakovalexey.lunch.util.VoiceUtil.checkingTimeForSecondVote;
+
 @Repository
 @Transactional(readOnly = true)
 public class JpaVoiceRepositoryImpl implements VoiceRepository {
@@ -21,7 +24,13 @@ public class JpaVoiceRepositoryImpl implements VoiceRepository {
 
     @Override
     @Transactional
-    public Voice save(Voice voice, int restaurantId, int userId) {
+    public Voice save(Date date, int restaurantId, int userId) {
+        Voice voice = get(date, userId);
+        if (isNull(voice)) {
+            voice = new Voice();
+        } else {
+            checkingTimeForSecondVote();
+        }
         voice.setRestaurant(em.getReference(Restaurant.class, restaurantId));
         voice.setUser(em.getReference(User.class, userId));
         if (voice.isNew()) {

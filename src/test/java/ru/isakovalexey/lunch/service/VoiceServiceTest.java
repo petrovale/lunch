@@ -17,9 +17,6 @@ import static ru.isakovalexey.lunch.UserTestData.ADMIN_ID;
 import static ru.isakovalexey.lunch.UserTestData.USER_ID;
 import static ru.isakovalexey.lunch.VoiceTestData.MATCHER;
 
-/**
- * Created by user on 17.06.2017.
- */
 public class VoiceServiceTest extends AbstractServiceTest {
 
     @Autowired
@@ -36,13 +33,23 @@ public class VoiceServiceTest extends AbstractServiceTest {
         MATCHER.assertEquals(newVoice, service.get(date, USER_ID));
     }
 
-    @Test(expected = ApplicationException.class)
+    @Test
     public void testAfterVotingIsClosed() throws Exception {
         Date date = new Date();
 
         VoiceUtil.setTime(LocalTime.now().plusHours(-1));
+        Voice newVoice = service.voice(UGOLEK_ID, USER_ID);
+        newVoice.setRestaurantId(UGOLEK_ID);
+        newVoice.setUserId(USER_ID);
+        MATCHER.assertEquals(newVoice, service.get(date, USER_ID));
+    }
+
+    @Test(expected = ApplicationException.class)
+    public void testAfterClosingRepeatVoting() throws Exception {
+        VoiceUtil.setTime(LocalTime.now().plusHours(-1));
+
         service.voice(UGOLEK_ID, USER_ID);
-        service.get(date, USER_ID);
+        service.voice(UGOLEK_ID, USER_ID);
     }
 
     @Test

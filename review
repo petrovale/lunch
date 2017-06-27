@@ -148,21 +148,25 @@ unique можно - restaurant_id, user_id, date_voice (edited)
 dateVoice  -> date (edited)
 ```
 [3:48] 
+```
 и в save можно передавать date, restaurantId, userId в результате
-
+```
 [3:48] 
+```
 и- в логике ошибка, плохо читал ТЗ!! (edited)
-
+```
 [3:49] 
+```
 после 11 нельза менять голос, а голосовать можно
-
+```
 [3:52] 
 в MealProfileRestController и MealAdminRestController одинаковые методы get/getAll
 зачем? не надо в API такого (думаю что это следствие введения в url  profile) (edited)
 
 [3:53] 
+```
 что для юзер хорошо, для остальных плохо
-
+```
 [3:54] 
 ```
 ProfileRestController
