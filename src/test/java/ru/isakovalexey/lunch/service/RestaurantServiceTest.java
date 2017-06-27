@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.util.Assert;
+import ru.isakovalexey.lunch.MealTestData;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.to.RestaurantTo;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
@@ -89,10 +90,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test
     public void testGetAllWithMealsByDate() throws Exception {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = sdf.parse("2017-05-30");
-
-        List<Restaurant> all = service.getAllWithMealsByDate(date);
+        List<Restaurant> all = service.getAllWithMealsByDate(MealTestData.getDate());
         Assert.notNull(all, "restaurants must not be null");
         System.out.println("actual " + all.toString());
     }

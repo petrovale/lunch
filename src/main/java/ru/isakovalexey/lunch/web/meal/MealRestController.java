@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.isakovalexey.lunch.model.Meal;
 import ru.isakovalexey.lunch.service.MealService;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -29,7 +29,7 @@ public class MealRestController {
 
     @GetMapping(value = "/{restaurantid}/lunch")
     public List<Meal> getAll(@PathVariable(value = "restaurantid") int restaurantId,
-                             @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
+                             @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date) {
         log.info("getAll for Restaurant {}", restaurantId);
         return service.getAll(restaurantId, date);
     }

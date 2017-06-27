@@ -8,6 +8,7 @@ import ru.isakovalexey.lunch.util.RestaurantUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     @Transactional
-    public List<Restaurant> getAllWithMealsByDate(Date date) {
+    public List<Restaurant> getAllWithMealsByDate(LocalDate date) {
         return em.createQuery("SELECT DISTINCT r FROM Restaurant r left join fetch r.meals m where m.date=:date", Restaurant.class)
                 .setParameter("date", date)
                 .getResultList();

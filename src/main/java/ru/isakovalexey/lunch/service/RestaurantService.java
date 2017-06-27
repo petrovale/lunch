@@ -4,6 +4,7 @@ import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.to.RestaurantTo;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface RestaurantService {
 
     List<RestaurantTo> getAllWithVoicesByDate(Date date);
 
-    List<Restaurant> getAllWithMealsByDate(Date date);
+    List<Restaurant> getAllWithMealsByDate(LocalDate date);
 
     void evictCache();
 }

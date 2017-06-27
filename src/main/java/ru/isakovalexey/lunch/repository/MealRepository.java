@@ -2,7 +2,7 @@ package ru.isakovalexey.lunch.repository;
 
 import ru.isakovalexey.lunch.model.Meal;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface MealRepository {
@@ -16,5 +16,5 @@ public interface MealRepository {
     Meal get(int id, int restaurantId);
 
     // ORDERED dateTime
-    List<Meal> getAll(int restaurantId, Date date);
+    List<Meal> getAll(int restaurantId, LocalDate date);
 }

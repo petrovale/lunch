@@ -4,8 +4,7 @@ import ru.isakovalexey.lunch.matcher.ModelMatcher;
 import ru.isakovalexey.lunch.model.Meal;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
 import static ru.isakovalexey.lunch.model.BaseEntity.START_SEQ;
@@ -49,16 +48,7 @@ public class MealTestData {
         return new Meal(BLACK_THAI_MEAL_ID, "Обновленный борщ", new BigDecimal("200.00"), BLACK_THAI_MEAL1.getDate());
     }
 
-    public static Date getDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-
-        try {
-            date = sdf.parse("2017-05-30");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return date;
+    public static LocalDate getDate() {
+        return LocalDate.of(2017,5,30);
     }
 }

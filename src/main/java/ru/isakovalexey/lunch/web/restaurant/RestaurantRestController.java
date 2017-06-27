@@ -10,6 +10,7 @@ import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.service.RestaurantService;
 import ru.isakovalexey.lunch.to.RestaurantTo;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class RestaurantRestController {
 
     @GetMapping(value = "/lunches/by-date", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAllWithMealsByDate(@RequestParam("date")
-                                                      @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
+                                                      @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date) {
         List<Restaurant> restaurants = this.service.getAllWithMealsByDate(date);
         return restaurants;
     }

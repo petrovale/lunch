@@ -9,6 +9,7 @@ import ru.isakovalexey.lunch.repository.RestaurantRepository;
 import ru.isakovalexey.lunch.to.RestaurantTo;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Cacheable("restaurants")
     @Override
-    public List<Restaurant> getAllWithMealsByDate(Date date) {
+    public List<Restaurant> getAllWithMealsByDate(LocalDate date) {
         return restaurantRepository.getAllWithMealsByDate(date);
     }
 

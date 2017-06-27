@@ -9,9 +9,6 @@ import java.util.Arrays;
 
 import static ru.isakovalexey.lunch.MealTestData.*;
 
-/**
- * Created by user on 13.06.2017.
- */
 public class MealServiceTest extends AbstractServiceTest {
 
     @Autowired

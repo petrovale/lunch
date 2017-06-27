@@ -11,7 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @NamedQueries({
         @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id AND m.restaurant.id=:restaurantId"),
@@ -29,7 +29,7 @@ public class Meal extends BaseEntity {
 
     @Column(name = "date")
     @NotNull(groups = {View.ValidatedREST.class, Default.class})
-    private Date date = new Date();
+    private LocalDate date = LocalDate.now();
 
     @Column(name = "description")
     @NotBlank(groups = {View.ValidatedREST.class, Default.class})
@@ -56,21 +56,21 @@ public class Meal extends BaseEntity {
     }
 
     public Meal(String description, BigDecimal price) {
-        this(null , description, price, new Date());
+        this(null , description, price, LocalDate.now());
     }
 
-    public Meal(Integer id, String description, BigDecimal price, Date date) {
+    public Meal(Integer id, String description, BigDecimal price, LocalDate date) {
         super(id);
         this.description = description;
         this.price = price;
         this.date = date;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

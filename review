@@ -222,8 +222,9 @@ Contribute to topjava10 development by creating an account on GitHub.
 MealTestData- както у тебя буквы скачут. можно и самелом и uppercase. но не смешивай
 ```
 [4:13] 
+```
 MealTestData.getDate() на индуский код походе. погугли как дату получить. а еще лучше было LocatDateTime использовать
-
+```
 grigory.kislin [4:18 AM] 
 Итого из основного- используй TO- код станет чище
 удаляй все лишнее (например i18n у тебя)
