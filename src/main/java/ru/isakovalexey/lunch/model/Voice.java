@@ -8,18 +8,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-@NamedQueries({
-        @NamedQuery(name = Voice.ALL, query = "SELECT v FROM Voice v WHERE v.restaurant.id=:restaurantId"),
-        @NamedQuery(name = Voice.DELETE, query = "DELETE FROM Voice v WHERE v.id=:id AND v.restaurant.id=:restaurantId"),
-        @NamedQuery(name = Voice.GET_VOICE_DATE, query = "SELECT v FROM Voice v WHERE v.user.id=:userId AND v.date=:date"),
-})
-
+@NamedQuery(name = Voice.GET_BY_DATE, query = "SELECT v FROM Voice v WHERE v.user.id=:userId AND v.date=:date")
 @Entity
 @Table(name = "voices")
 public class Voice extends BaseEntity {
-    public static final String ALL = "Voice.getAll";
-    public static final String DELETE = "Voice.delete";
-    public static final String GET_VOICE_DATE = "Voice.getVoiceDate";
+    public static final String GET_BY_DATE = "Voice.getVoiceDate";
 
     @Column(name = "date")
    // @Temporal(TemporalType.DATE)
