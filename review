@@ -83,8 +83,9 @@ Restaurant.vote- а вот тут я вижу ты все в кучу смеша
 по поводу больших сомнений в этих методах уже написал
 
 [3:23] 
+```
 ALL_VOICES_BY_Date- стили смешал
-
+```
 [3:24] 
 если много юзеров- закешируй еду+рестораны и отдавай. и принимай голоса. все!
 представляешь на больших данный ск-ко будет весить твой ALL_VOICES??
@@ -93,9 +94,9 @@ ALL_VOICES_BY_Date- стили смешал
 [3:26] 
 ```
 JpaUserRepositoryImpl 62: em.createQuery("SELECT u FROM User u ORDER BY u.name, u.email", *User.class*).getResultList()
-```
+
 [3:27] 
-```
+
 и почему тут не named query?
 ```
 [3:30] 
@@ -108,13 +109,14 @@ JpaVoiceRepositoryImpl
 45 catch (NoResultException nre)- в topjava было лучше, без этого
 ```
 [3:32] 
-
+```
 база - лучше без установки, чтоб твое тестовое быстро можно было запустить
 и если не так- как минимум в read.me писать что нужно, чтобы запуститься
-
+```
 [3:33] 
+```
 initDB.sql - meals.price - а тут не вижу default 100.00
-
+```
 [3:34] 
 TABLE voices - ничего не забыл?
 
@@ -174,8 +176,9 @@ spring-db.xml
 55-64 - тоже уши
 ```
 [4:07] 
+```
 LUNCH_ROOT- без этого ничего не запустится! и ни слова в read.me. лучше в classpath вынести, если вообще i18n тебе тут нужна
-
+```
 [4:07] 
 ```
 spring-security.xml

@@ -20,6 +20,17 @@ Each restaurant provides new menu each day.
 
 As a result, provide a link to github repository. It should contain the code, README.md with API documentation and couple curl commands to test it.
 
+# Building and Running the voting system
+
+Setting database postgres
+* database.url=jdbc:postgresql://localhost:5432/lunch
+* database.username=user
+* database.password=password
+
+Set the following user environment variables
+* LUNCH_ROOT : enter your application installation path
+
+
 # REST API
 
 Documentation for REST

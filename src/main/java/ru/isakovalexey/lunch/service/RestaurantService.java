@@ -20,4 +20,6 @@ public interface RestaurantService {
     List<Restaurant> getAllVoice();
 
     List<Restaurant> getAllVoiceByDate(Date dateVoice);
+
+    List<Restaurant> getAllWithMealsByDate(Date date);
 }

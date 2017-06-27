@@ -36,4 +36,11 @@ public class RestaurantProfileRestController extends AbstractRestaurantControlle
     public Restaurant get(@PathVariable("id") int id) {
         return super.get(id);
     }
+
+    @GetMapping(value = "/lunches/by-date", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Restaurant> getAllWithMealsByDate(@RequestParam("date")
+                                                      @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
+        List<Restaurant> restaurants = this.service.getAllWithMealsByDate(date);
+        return restaurants;
+    }
 }

@@ -56,5 +56,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurantRepository.getAllVoiceByDate(dateVoice);
     }
 
-
+    public List<Restaurant> getAllWithMealsByDate(Date date) {
+        return restaurantRepository.getAllWithMealsByDate(date);
+    }
 }

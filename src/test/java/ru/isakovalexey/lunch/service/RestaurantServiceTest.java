@@ -3,6 +3,7 @@ package ru.isakovalexey.lunch.service;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.util.Assert;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
@@ -11,9 +12,6 @@ import java.util.*;
 
 import static ru.isakovalexey.lunch.RestaurantTestData.*;
 
-/**
- * Created by user on 17.06.2017.
- */
 public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Autowired
@@ -68,6 +66,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     public void testGetAll() throws Exception {
         List<Restaurant> all = service.getAll();
         System.out.println("actual " + all.toString());
+        Assert.notNull(all, "restaurants must not be null");
     }
 
     @Test
@@ -89,5 +88,15 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     @Test(expected = NotFoundException.class)
     public void testNotFoundDelete() throws Exception {
         service.delete(1);
+    }
+
+    @Test
+    public void testGetAllWithMealsByDate() throws Exception {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = sdf.parse("2017-05-30");
+
+        List<Restaurant> all = service.getAllWithMealsByDate(date);
+        Assert.notNull(all, "restaurants must not be null");
+        System.out.println("actual " + all.toString());
     }
 }

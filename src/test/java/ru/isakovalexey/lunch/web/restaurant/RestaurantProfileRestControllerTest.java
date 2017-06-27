@@ -13,9 +13,6 @@ import static ru.isakovalexey.lunch.RestaurantTestData.*;
 import static ru.isakovalexey.lunch.TestUtil.userHttpBasic;
 import static ru.isakovalexey.lunch.UserTestData.USER;
 
-/**
- * Created by user on 23.06.2017.
- */
 public class RestaurantProfileRestControllerTest extends AbstractControllerTest{
 
     private static final String REST_URL = RestaurantProfileRestController.REST_URL + '/';
@@ -65,5 +62,14 @@ public class RestaurantProfileRestControllerTest extends AbstractControllerTest{
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER.contentListMatcher(BLACK_THAI, WHITE_RABBIT, UGOLEK)));
+    }
+
+    @Test
+    public void testGetAllWithMealsByDate() throws Exception {
+        mockMvc.perform(get(REST_URL + "/lunches/by-date?date=" + "2017-05-30")
+                .with(userHttpBasic(USER)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andDo(print());
     }
 }

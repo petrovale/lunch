@@ -42,7 +42,7 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     public List<Restaurant> getAll() {
-        return em.createQuery("SELECT r FROM Restaurant r ORDER BY r.name", Restaurant.class).getResultList();
+        return em.createNamedQuery(Restaurant.ALL, Restaurant.class).getResultList();
     }
 
     @Override
@@ -56,9 +56,19 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
     @Override
     @Transactional
     public List<Restaurant> getAllVoiceByDate(Date dateVoice) {
-        List<Object[]> objects = em.createNamedQuery(Restaurant.ALL_VOICES_BY_Date, Object[].class)
+        List<Object[]> objects = em.createNamedQuery(Restaurant.ALL_VOICES_BY_DATE, Object[].class)
                 .setParameter("date", dateVoice)
                 .getResultList();
+        //getWithVoice->createWithVoices?
         return getWithVoice(objects);
     }
+
+    @Override
+    @Transactional
+    public List<Restaurant> getAllWithMealsByDate(Date date) {
+        return em.createQuery("SELECT DISTINCT r FROM Restaurant r left join fetch r.meals m where m.date=:date", Restaurant.class)
+                .setParameter("date", date)
+                .getResultList();
+    }
+
 }

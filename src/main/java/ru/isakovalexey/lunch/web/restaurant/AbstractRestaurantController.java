@@ -23,7 +23,7 @@ public abstract class AbstractRestaurantController {
 
     public static final String EXCEPTION_DUPLICATE_NAME = "exception.restaurant.duplicateName";
 
-    private final RestaurantService service;
+    protected final RestaurantService service;
 
     @Autowired
     private ExceptionInfoHandler exceptionInfoHandler;
