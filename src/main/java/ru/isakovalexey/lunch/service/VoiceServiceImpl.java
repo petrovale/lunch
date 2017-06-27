@@ -41,7 +41,7 @@ public class VoiceServiceImpl implements VoiceService {
         if (!LocalTime.now().isAfter(VoiceUtil.getTime())) {
             voiceUser = repository.get(currentDate, userId);
             if (voiceUser != null) {
-                voiceUser.setRegistered(currentDate);
+                voiceUser.setDate(currentDate);
                 voiceUser = repository.save(voiceUser, restaurantId, userId);
             } else {
                 voiceUser = new Voice();

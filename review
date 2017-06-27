@@ -117,13 +117,14 @@ JpaVoiceRepositoryImpl
 ```
 initDB.sql - meals.price - а тут не вижу default 100.00
 ```
-[3:34] 
+[3:34]
+ ```
 TABLE voices - ничего не забыл?
 
 [3:36] 
 restaurant_id - ?
 unique можно - restaurant_id, user_id, date_voice (edited)
-
+```
 [3:38] 
 я думаю, если нужно время, то сделать time поле (без дублирование date) (edited)
 

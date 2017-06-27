@@ -11,7 +11,7 @@ import java.util.Date;
 @NamedQueries({
         @NamedQuery(name = Voice.ALL, query = "SELECT v FROM Voice v WHERE v.restaurant.id=:restaurantId"),
         @NamedQuery(name = Voice.DELETE, query = "DELETE FROM Voice v WHERE v.id=:id AND v.restaurant.id=:restaurantId"),
-        @NamedQuery(name = Voice.GET_VOICE_DATE, query = "SELECT v FROM Voice v WHERE v.user.id=:userId AND v.dateVoice=:date"),
+        @NamedQuery(name = Voice.GET_VOICE_DATE, query = "SELECT v FROM Voice v WHERE v.user.id=:userId AND v.date=:date"),
 })
 
 @Entity
@@ -21,13 +21,10 @@ public class Voice extends BaseEntity {
     public static final String DELETE = "Voice.delete";
     public static final String GET_VOICE_DATE = "Voice.getVoiceDate";
 
-    @Column(name = "registered", columnDefinition = "timestamp default now()")
-    private Date registered = new Date();
-
-    @Column(name = "date_voice")
+    @Column(name = "date")
    // @Temporal(TemporalType.DATE)
     @JsonIgnore
-    private Date dateVoice = new Date();
+    private Date date = new Date();
 
     @Column(name="restaurant_id", insertable=false, updatable=false)
     private Integer restaurantId;
@@ -52,20 +49,12 @@ public class Voice extends BaseEntity {
     public Voice() {
     }
 
-    public Date getDateVoice() {
-        return dateVoice;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDateVoice(Date dateVoice) {
-        this.dateVoice = dateVoice;
-    }
-
-    public Date getRegistered() {
-        return registered;
-    }
-
-    public void setRegistered(Date registered) {
-        this.registered = registered;
+    public void setDate(Date dateVoice) {
+        this.date = dateVoice;
     }
 
     public Restaurant getRestaurant() {
@@ -103,8 +92,7 @@ public class Voice extends BaseEntity {
     @Override
     public String toString() {
         return "Voice{" +
-                "registered=" + registered +
-                ", dateVoice=" + dateVoice +
+                ", date=" + date +
                 ", restaurantId=" + restaurantId +
                 ", userId=" + userId +
                 '}';

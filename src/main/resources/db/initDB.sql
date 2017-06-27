@@ -50,6 +50,7 @@ CREATE TABLE voices
   restaurant_id INTEGER NOT NULL,
   user_id INTEGER NOT NULL,
   registered TIMESTAMP DEFAULT now(),
-  date_voice DATE DEFAULT now(),
+  date DATE DEFAULT now(),
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
+CREATE UNIQUE INDEX voices_unique_restaurant_user_datevoice_idx ON voices(restaurant_id, user_id, date);

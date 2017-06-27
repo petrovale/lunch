@@ -9,5 +9,5 @@ public interface VoiceRepository {
     Voice save(Voice voice, int restaurantId, int userId);
 
     // null if voice do not belong to userId
-    Voice get(Date dateVoice, int userId);
+    Voice get(Date date, int userId);
 }

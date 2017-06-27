@@ -59,9 +59,9 @@ public abstract class AbstractRestaurantController {
         return service.getAll();
     }
 
-    public List<Restaurant> getAllWithVoicesByDate(Date dateVoice) {
-        log.info("getAllVoiceByDate {}", dateVoice);
-        return service.getAllWithVoicesByDate(dateVoice);
+    public List<Restaurant> getAllWithVoicesByDate(Date date) {
+        log.info("getAllVoiceByDate {}", date);
+        return service.getAllWithVoicesByDate(date);
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
