@@ -47,7 +47,6 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
     }
 
     @Override
-    @Transactional
     public List<RestaurantTo> getAllWithVoicesByDate(Date dateVoice) {
         List<Object[]> objects = em.createNamedQuery(Restaurant.ALL_WITH_VOICES_BY_DATE, Object[].class)
                 .setParameter("date", dateVoice)
@@ -56,7 +55,6 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
     }
 
     @Override
-    @Transactional
     public List<Restaurant> getAllWithMealsByDate(LocalDate date) {
         return em.createQuery("SELECT DISTINCT r FROM Restaurant r left join fetch r.meals m where m.date=:date", Restaurant.class)
                 .setParameter("date", date)

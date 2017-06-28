@@ -27,7 +27,6 @@ public class VoiceServiceImpl implements VoiceService {
     }
 
     @Override
-    @Transactional
     public Voice voice(int restaurantId, int userId) {
         Date currentDate = new Date();
         return repository.save(currentDate, restaurantId, userId);
