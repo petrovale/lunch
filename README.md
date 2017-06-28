@@ -52,38 +52,32 @@ Content-Type: application/json;charset=UTF-8
 Date: Tue, 27 Jun 2017 07:53:26 GMT
 [
       {
+      "id": 100002,
+      "name": "Black Thai",
+      "registered": "2017-06-27T19:37:27.933+0000",
+      "meals": [
+                  {"id": 100005, "date": "2017-05-30", "description": "борщ", "restaurantId": 100002, "price": 500},
+                  {"id": 100007, "date": "2017-05-30", "description": "котлета кур", "restaurantId": 100002, "price": 700},
+                  {"id": 100006, "date": "2017-05-30", "description": "каша гречневая", "restaurantId": 100002, "price": 300}
+      ]
+   },
+      {
       "id": 100003,
       "name": "White Rabbit",
-      "vote": 0,
-      "registered": "2017-06-27T07:52:04.813+0000",
-      "voices": null,
+      "registered": "2017-06-27T19:37:27.936+0000",
       "meals": [
-           {"id": 100010, "date": "2017-05-29T21:00:00.000+0000", "description": "каша молочная", "restaurantId": 100003, "price": 500},
-           {"id": 100009, "date": "2017-05-29T21:00:00.000+0000", "description": "салат по сезону", "restaurantId": 100003, "price": 100},
-           {"id": 100008, "date": "2017-05-29T21:00:00.000+0000", "description": "омлет со спаржей","restaurantId": 100003, "price": 500}
-      ]            
+                  {"id": 100008, "date": "2017-05-30", "description": "омлет со спаржей", "restaurantId": 100003, "price": 500},
+                  {"id": 100009, "date": "2017-05-30", "description": "салат по сезону", "restaurantId": 100003, "price": 100},
+                  {"id": 100010, "date": "2017-05-30", "description": "каша молочная", "restaurantId": 100003, "price": 500}
+      ]
    },
       {
       "id": 100004,
       "name": "Уголек",
-      "vote": 0,
-      "registered": "2017-06-27T07:52:04.835+0000",
-      "voices": null,
+      "registered": "2017-06-27T19:37:27.937+0000",
       "meals": [
-           {"id": 100011, "date": "2017-05-29T21:00:00.000+0000", "description": "суп фасолевый", "restaurantId": 100004, "price": 200},
-           {"id": 100013, "date": "2017-05-29T21:00:00.000+0000", "description": "суп -харчо", "restaurantId": 100004, "price": 300}
-      ]
-   },
-      {
-      "id": 100002,
-      "name": "Black Thai",
-      "vote": 0,
-      "registered": "2017-06-27T07:52:04.788+0000",
-      "voices": null,
-      "meals": [
-           {"id": 100005, "date": "2017-05-29T21:00:00.000+0000", "description": "борщ", "restaurantId": 100002, "price": 500},
-           {"id": 100006, "date": "2017-05-29T21:00:00.000+0000", "description": "каша гречневая", "restaurantId": 100002, "price": 300},
-           {"id": 100007, "date": "2017-05-29T21:00:00.000+0000", "description": "котлета кур", "restaurantId": 100002, "price": 700}
+                  {"id": 100013, "date": "2017-05-30", "description": "суп -харчо", "restaurantId": 100004, "price": 300},
+                  {"id": 100011, "date": "2017-05-30", "description": "суп фасолевый", "restaurantId": 100004, "price": 200}
       ]
    }
 ]
@@ -93,9 +87,9 @@ Date: Tue, 27 Jun 2017 07:53:26 GMT
 HTTP/1.1 500 
 Content-Type: application/json;charset=UTF-8
 {
-   "url": "http://localhost:8080/lunch/rest/profile/restaurants/lunches/by-date",
+   "url": "http://localhost:8080/lunch/rest/restaurants/lunches/by-date",
    "cause": "MissingServletRequestParameterException",
-   "details": ["Required Date parameter 'date' is not present"]
+   "details": ["Required LocalDate parameter 'date' is not present"]
 }
 ```
 
@@ -105,7 +99,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```
 HTTP/1.1
-GET /lunch/rest/profile/restaurants/votes/by-date?date=2017-06-18
+GET /lunch/rest/restaurants/votes/by-date?date=2017-06-18
 Host: localhost:8080
 Authorization: Basic dXNlckB5YW5kZXgucnU6cGFzc3dvcmQ=
 ```
@@ -153,7 +147,7 @@ Content-Type: application/json;charset=UTF-8
 ##### Request:
 
 ```
-GET /lunch/rest/profile/restaurants
+GET /lunch/rest/restaurants
 Host: localhost:8080
 Auth: Basic dXNlckB5YW5kZXgucnU6cGFzc3dvcmQ=
 ```
@@ -186,7 +180,7 @@ Date: Thu, 15 Jun 2017 19:36:07 GMT
 Request:
 ```
 HTTP/1.1
-GET /lunch/rest/profile/restaurants/100003
+GET /lunch/rest/restaurants/100003
 Host: localhost:8080
 Authorization: Basic dXNlckB5YW5kZXgucnU6cGFzc3dvcmQ=
 ```
@@ -199,7 +193,6 @@ Date: Tue, 20 Jun 2017 17:43:14 GMT
 {
    "id": 100003,
    "name": "White Rabbit",
-   "vote": 0,
    "registered": "2017-06-20T17:23:39.656+0000"
 }
 ```
@@ -208,7 +201,7 @@ Error:
 HTTP/1.1 422 
 Content-Type: application/json;charset=UTF-8
 {
-   "url": "http://localhost:8080/lunch/rest/profile/restaurants/100007",
+   "url": "http://localhost:8080/lunch/rest/restaurants/100007",
    "cause": "NotFoundException",
    "details": ["Not found entity with id=100007"]
 }
@@ -234,7 +227,6 @@ Date: Tue, 20 Jun 2017 18:08:42 GMT
 {
    "id": 100019,
    "name": "Black Rabbit",
-   "vote": 0,
    "registered": "2017-06-20T18:08:42.917+0000"
 }
 ```
@@ -294,13 +286,13 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 # Lunch Requests
-## Lunch in the restaurant by date
+## Get Lunch in the restaurant by date
 
 Request:
 
 ```
 HTTP/1.1
-GET /lunch/rest/profile/restaurants/100003/lunch?date=2017-05-30
+GET /lunch/rest/restaurants/100003/lunch?date=2017-05-30
 Host: localhost:8080
 Authorization: Basic dXNlckB5YW5kZXgucnU6cGFzc3dvcmQ=
 ```
@@ -344,7 +336,7 @@ Error:
 HTTP/1.1 500 
 Content-Type: application/json;charset=UTF-8
 {
-   "url": "http://localhost:8080/lunch/rest/profile/restaurants/100002/lunch",
+   "url": "http://localhost:8080/lunch/rest/restaurants/100002/lunch",
    "cause": "MissingServletRequestParameterException",
    "details": ["Required Date parameter 'date' is not present"]
 }
@@ -379,7 +371,7 @@ Error:
 HTTP/1.1 422 
 Content-Type: application/json;charset=UTF-8
 {
-   "url": "http://localhost:8080/lunch/rest/profile/restaurants/100004/meals/100013",
+   "url": "http://localhost:8080/lunch/rest/restaurants/100004/meals/100013",
    "cause": "NotFoundException",
    "details": ["Not found entity with id=100013"]
 }
@@ -404,7 +396,7 @@ Content-Type: application/json;charset=UTF-8
 Date: Sat, 24 Jun 2017 13:09:33 GMT
 {
    "id": 100019,
-   "date": "2017-06-24T13:09:33.823+0000",
+   "date": "2017-06-24",
    "description": "Новый обед",
    "price": 500,
 }
@@ -449,6 +441,29 @@ Date: Sun, 25 Jun 2017 09:13:18 GMT
    "details": ["description must not be empty"]
 }
 ```
+## Delete Meal
+Request:
+```
+HTTP/1.1
+DELETE /lunch/rest/admin/restaurants/100002/meals/100005
+Host: localhost:8080
+Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu
+```
+Returns:
+```
+HTTP/1.1 200 
+Date: Tue, 27 Jun 2017 20:26:51 GMT
+```
+Error:
+```
+HTTP/1.1 422 
+Content-Type: application/json;charset=UTF-8
+{
+   "url": "http://localhost:8080/lunch/rest/admin/restaurants/100002/meals/100005",
+   "cause": "NotFoundException",
+   "details": ["Not found entity with id=100005"]
+}
+```
 # Vote Requests
 
 ## Vote for a restaurant
@@ -467,8 +482,7 @@ HTTP/1.1 201
 Date: Sat, 24 Jun 2017 13:30:49 GMT
 Content-Type: application/json;charset=UTF-8
 {
-   "id": 100017,
-   "registered": "2017-06-24T13:30:50.308+0000"
+   "id": 100017
 }
 ```
 Error:
@@ -479,7 +493,7 @@ Date: Sat, 24 Jun 2017 13:27:05 GMT
 {
    "url": "http://localhost:8080/lunch/rest/profile/restaurants/100002/vote",
    "cause": "ApplicationException",
-   "details": ["The voting was closed at 11:00"]
+   "details": ["Repeated voting is allowed until 11:00"]
 }
 ```
 # Login
@@ -490,7 +504,7 @@ which, together with HTTP verbs, can cover all the actions that can be performed
 
 * /rest/admin - available for ROLE_ADMIN
 
-* /rest/profile - available for ROLE_USER and ROLE_ADMIN
+* /rest/ - available for ROLE_USER and ROLE_ADMIN
 
 ```
 Username:admin@gmail.com

@@ -45,6 +45,7 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public Meal save(Meal meal, int restaurantId) {
+        Assert.notNull(meal, "meal must not be null");
         return mealRepository.save(meal, restaurantId);
     }
 }

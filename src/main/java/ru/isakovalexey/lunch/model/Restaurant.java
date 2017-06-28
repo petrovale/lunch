@@ -1,5 +1,7 @@
 package ru.isakovalexey.lunch.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 import java.util.Date;
@@ -24,6 +26,7 @@ public class Restaurant extends NamedEntity {
     private Date registered = new Date();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    @JsonIgnore
     private List<Voice> voices;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")//, cascade = CascadeType.REMOVE, orphanRemoval = true)

@@ -1,9 +1,5 @@
 package ru.isakovalexey.lunch.web.json;
 
-/**
- * Created by user on 01.06.2017.
- */
-
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
