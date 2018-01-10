@@ -8,7 +8,6 @@ import ru.isakovalexey.lunch.model.Role;
 import ru.isakovalexey.lunch.model.User;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -25,7 +24,7 @@ public class UserServiceTest extends AbstractServiceTest {
         User newUser = new User(null, "New", "new@gmail.com", "newPass", false, new Date(), Collections.singleton(Role.ROLE_USER));
         User created = service.save(newUser);
         newUser.setId(created.getId());
-        MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, newUser, USER), service.getAll());
+        assertMatch(service.getAll(), ADMIN, newUser, USER);
     }
 
     @Test(expected = DataAccessException.class)
@@ -36,7 +35,7 @@ public class UserServiceTest extends AbstractServiceTest {
     @Test
     public void testDelete() throws Exception {
         service.delete(USER_ID);
-        MATCHER.assertCollectionEquals(Collections.singletonList(ADMIN), service.getAll());
+        assertMatch(service.getAll(), ADMIN);
     }
 
     @Test(expected = NotFoundException.class)
@@ -47,7 +46,7 @@ public class UserServiceTest extends AbstractServiceTest {
     @Test
     public void testGet() throws Exception {
         User user = service.get(ADMIN_ID);
-        MATCHER.assertEquals(ADMIN, user);
+        assertMatch(user, ADMIN);
     }
 
     @Test(expected = NotFoundException.class)
@@ -58,13 +57,13 @@ public class UserServiceTest extends AbstractServiceTest {
     @Test
     public void testGetByEmail() throws Exception {
         User user = service.getByEmail("admin@gmail.com");
-        MATCHER.assertEquals(ADMIN, user);
+        assertMatch(user, ADMIN);
     }
 
     @Test
     public void testGetAll() throws Exception {
         Collection<User> all = service.getAll();
-        MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, USER), all);
+        assertMatch(all, ADMIN, USER);
     }
 
     @Test
@@ -73,6 +72,6 @@ public class UserServiceTest extends AbstractServiceTest {
         updated.setName("UpdatedName");
         updated.setRoles(Collections.singletonList(Role.ROLE_ADMIN));
         service.update(updated);
-        MATCHER.assertEquals(updated, service.get(USER_ID));
+        assertMatch(service.get(USER_ID), updated);
     }
 }

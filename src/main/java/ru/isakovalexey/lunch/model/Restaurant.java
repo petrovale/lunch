@@ -3,6 +3,7 @@ package ru.isakovalexey.lunch.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,7 @@ public class Restaurant extends NamedEntity {
     public static final String ALL = "Restaurant.all";
 
     @Column(name = "registered", columnDefinition = "timestamp default now()")
+    @NotNull
     private Date registered = new Date();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")

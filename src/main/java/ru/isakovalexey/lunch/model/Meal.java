@@ -3,7 +3,7 @@ package ru.isakovalexey.lunch.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import ru.isakovalexey.lunch.View;
 
@@ -66,6 +66,14 @@ public class Meal extends BaseEntity {
         this.date = date;
     }
 
+    public Meal(Integer id, String description, BigDecimal price, LocalDate date, Integer restaurantId) {
+        super(id);
+        this.description = description;
+        this.price = price;
+        this.date = date;
+        this.restaurantId = restaurantId;
+    }
+
     public LocalDate getDate() {
         return date;
     }
@@ -117,6 +125,7 @@ public class Meal extends BaseEntity {
                 "date=" + date +
                 ", description='" + description + '\'' +
                 ", price=" + price +
+                ", restaurantId=" + restaurantId +
                 '}';
     }
 }

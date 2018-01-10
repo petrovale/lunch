@@ -12,10 +12,11 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
 
-import static ru.isakovalexey.lunch.RestaurantTestData.*;
+import static ru.isakovalexey.lunch.RestaurantTestData.UGOLEK_ID;
+import static ru.isakovalexey.lunch.RestaurantTestData.WHITE_RABBIT_ID;
 import static ru.isakovalexey.lunch.UserTestData.ADMIN_ID;
 import static ru.isakovalexey.lunch.UserTestData.USER_ID;
-import static ru.isakovalexey.lunch.VoiceTestData.MATCHER;
+import static ru.isakovalexey.lunch.VoiceTestData.*;
 
 public class VoiceServiceTest extends AbstractServiceTest {
 
@@ -30,7 +31,7 @@ public class VoiceServiceTest extends AbstractServiceTest {
         Voice newVoice = service.voice(UGOLEK_ID, USER_ID);
         newVoice.setRestaurantId(UGOLEK_ID);
         newVoice.setUserId(USER_ID);
-        MATCHER.assertEquals(newVoice, service.get(date, USER_ID));
+        assertMatch(service.get(date, USER_ID), newVoice);
     }
 
     @Test
@@ -41,7 +42,7 @@ public class VoiceServiceTest extends AbstractServiceTest {
         Voice newVoice = service.voice(UGOLEK_ID, USER_ID);
         newVoice.setRestaurantId(UGOLEK_ID);
         newVoice.setUserId(USER_ID);
-        MATCHER.assertEquals(newVoice, service.get(date, USER_ID));
+        assertMatch(service.get(date, USER_ID), newVoice);
     }
 
     @Test(expected = ApplicationException.class)
@@ -62,7 +63,7 @@ public class VoiceServiceTest extends AbstractServiceTest {
         secondVoice.setRestaurantId(UGOLEK_ID);
         secondVoice.setUserId(USER_ID);
 
-        MATCHER.assertEquals(secondVoice, service.get(date, USER_ID));
+        assertMatch(service.get(date, USER_ID), secondVoice);
     }
 
     @Test(expected = NotFoundException.class)

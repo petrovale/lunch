@@ -1,6 +1,5 @@
 package ru.isakovalexey.lunch.service;
 
-import org.junit.AfterClass;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.Stopwatch;

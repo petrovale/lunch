@@ -30,7 +30,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
         Restaurant newRestaurant = new Restaurant("New");
         Restaurant created = service.save(newRestaurant);
         newRestaurant.setId(created.getId());
-        MATCHER.assertCollectionEquals(Arrays.asList(BLACK_THAI, newRestaurant, WHITE_RABBIT, UGOLEK), service.getAll());
+        assertMatch(service.getAll(), BLACK_THAI, newRestaurant, WHITE_RABBIT, UGOLEK);
     }
 
     @Test(expected = DataAccessException.class)
@@ -41,7 +41,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     @Test
     public void testGet() throws Exception {
         Restaurant restaurant = service.get(BLACK_THAI_ID);
-        MATCHER.assertEquals(BLACK_THAI, restaurant);
+        assertMatch(restaurant, BLACK_THAI);
     }
 
     @Test(expected = NotFoundException.class)
@@ -58,8 +58,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
         List<RestaurantTo> all = service.getAllWithVoicesByDate(date);
         WHITE_RABBIT_TO.setVote(1);
         UGOLEK_TO.setVote(1);
-        MATCHER_WITH_VOICES.assertCollectionEquals(
-                Arrays.asList(BLACK_THAI_TO, WHITE_RABBIT_TO, UGOLEK_TO), all);
+        assertMatchTo(all, BLACK_THAI_TO, WHITE_RABBIT_TO, UGOLEK_TO);
     }
 
     @Test
@@ -74,13 +73,13 @@ public class RestaurantServiceTest extends AbstractServiceTest {
         Restaurant updated = new Restaurant(WHITE_RABBIT);
         updated.setName("UpdatedName");
         service.update(updated);
-        MATCHER.assertEquals(updated, service.get(WHITE_RABBIT_ID));
+        assertMatch(service.get(WHITE_RABBIT_ID), updated);
     }
 
     @Test
     public void testDelete() throws Exception {
         service.delete(BLACK_THAI_ID);
-        MATCHER.assertCollectionEquals(Arrays.asList(WHITE_RABBIT, UGOLEK), service.getAll());
+        assertMatch(service.getAll(), WHITE_RABBIT, UGOLEK);
     }
 
     @Test(expected = NotFoundException.class)

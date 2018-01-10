@@ -4,8 +4,10 @@ import ru.isakovalexey.lunch.matcher.ModelMatcher;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.to.RestaurantTo;
 
+import java.util.Arrays;
 import java.util.Objects;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static ru.isakovalexey.lunch.model.BaseEntity.START_SEQ;
 
 public class RestaurantTestData {
@@ -21,6 +23,34 @@ public class RestaurantTestData {
     public static final RestaurantTo BLACK_THAI_TO = new RestaurantTo(BLACK_THAI_ID, "Black Thai", 0);
     public static final RestaurantTo WHITE_RABBIT_TO = new RestaurantTo(WHITE_RABBIT_ID, "White Rabbit", 0);
     public static final RestaurantTo UGOLEK_TO = new RestaurantTo(UGOLEK_ID, "Уголек", 0);
+
+    public static void assertMatch(Restaurant actual, Restaurant expected) {
+        assertThat(actual).isEqualToIgnoringGivenFields(expected, "registered", "voices", "meals");
+    }
+
+    public static void assertMatch(Iterable<Restaurant> actual, Restaurant... expected) {
+        assertMatch(actual, Arrays.asList(expected));
+    }
+
+    public static void assertMatch(Iterable<Restaurant> actual, Iterable<Restaurant> expected) {
+        assertThat(actual).usingElementComparatorIgnoringFields("registered", "voices", "meals").isEqualTo(expected);
+    }
+
+    public static void assertMatchTo(Iterable<RestaurantTo> actual, RestaurantTo... expected) {
+        assertMatchTo(actual, Arrays.asList(expected));
+    }
+
+    public static void assertMatchTo(Iterable<RestaurantTo> actual, Iterable<RestaurantTo> expected) {
+        assertThat(actual).usingElementComparatorIgnoringFields("registered", "voices", "meals").isEqualTo(expected);
+    }
+
+    //public static ResultMatcher contentJson(Restaurant... expected) {
+    //    return content().json(writeIgnoreProps(Arrays.asList(expected), "registered"));
+    //}
+
+    //public static ResultMatcher contentJson(Restaurant expected) {
+    //    return content().json(writeIgnoreProps(expected, "registered"));
+    //}
 
     public static final ModelMatcher<Restaurant> MATCHER = ModelMatcher.of(Restaurant.class,
             (expected, actual) -> expected == actual ||
