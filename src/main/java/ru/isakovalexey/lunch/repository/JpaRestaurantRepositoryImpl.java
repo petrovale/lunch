@@ -47,11 +47,11 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
     }
 
     @Override
-    public List<RestaurantTo> getAllWithVoicesByDate(Date dateVoice) {
-        List<Object[]> objects = em.createNamedQuery(Restaurant.ALL_WITH_VOICES_BY_DATE, Object[].class)
-                .setParameter("date", dateVoice)
+    public List<RestaurantTo> getAllWithVotesByDate(Date dateVote) {
+        List<Object[]> objects = em.createNamedQuery(Restaurant.ALL_WITH_VOTES_BY_DATE, Object[].class)
+                .setParameter("date", dateVote)
                 .getResultList();
-        return RestaurantUtil.createWithVoice(objects);
+        return RestaurantUtil.createWithVote(objects);
     }
 
     @Override

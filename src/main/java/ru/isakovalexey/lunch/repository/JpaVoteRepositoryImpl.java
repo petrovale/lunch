@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.model.User;
-import ru.isakovalexey.lunch.model.Voice;
+import ru.isakovalexey.lunch.model.Vote;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,37 +13,37 @@ import java.util.Date;
 import java.util.List;
 
 import static java.util.Objects.isNull;
-import static ru.isakovalexey.lunch.util.VoiceUtil.checkingTimeForSecondVote;
+import static ru.isakovalexey.lunch.util.VoteUtil.checkingTimeForSecondVote;
 
 @Repository
 @Transactional(readOnly = true)
-public class JpaVoiceRepositoryImpl implements VoiceRepository {
+public class JpaVoteRepositoryImpl implements VoteRepository {
 
     @PersistenceContext
     private EntityManager em;
 
     @Override
     @Transactional
-    public Voice save(Date date, int restaurantId, int userId) {
-        Voice voice = get(date, userId);
-        if (isNull(voice)) {
-            voice = new Voice();
+    public Vote save(Date date, int restaurantId, int userId) {
+        Vote vote = get(date, userId);
+        if (isNull(vote)) {
+            vote = new Vote();
         } else {
             checkingTimeForSecondVote();
         }
-        voice.setRestaurant(em.getReference(Restaurant.class, restaurantId));
-        voice.setUser(em.getReference(User.class, userId));
-        if (voice.isNew()) {
-            em.persist(voice);
-            return  voice;
+        vote.setRestaurant(em.getReference(Restaurant.class, restaurantId));
+        vote.setUser(em.getReference(User.class, userId));
+        if (vote.isNew()) {
+            em.persist(vote);
+            return vote;
         } else {
-            return em.merge(voice);
+            return em.merge(vote);
         }
     }
 
     @Override
-    public Voice get(Date date, int userId) {
-        List<Voice> voice = em.createNamedQuery(Voice.GET_BY_DATE, Voice.class)
+    public Vote get(Date date, int userId) {
+        List<Vote> voice = em.createNamedQuery(Vote.GET_BY_DATE, Vote.class)
                 .setParameter("userId", userId)
                 .setParameter("date", date)
                 .getResultList();

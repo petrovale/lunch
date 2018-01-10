@@ -10,7 +10,7 @@ import java.util.List;
 
 public class RestaurantUtil {
 
-    public static List<RestaurantTo> createWithVoice(List<Object[]> objects) {
+    public static List<RestaurantTo> createWithVote(List<Object[]> objects) {
        List<RestaurantTo> restaurantsTo = new ArrayList<>();
 
         objects.forEach(obj -> {

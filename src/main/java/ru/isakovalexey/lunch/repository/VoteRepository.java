@@ -1,13 +1,13 @@
 package ru.isakovalexey.lunch.repository;
 
-import ru.isakovalexey.lunch.model.Voice;
+import ru.isakovalexey.lunch.model.Vote;
 
 import java.util.Date;
 
-public interface VoiceRepository {
+public interface VoteRepository {
     // null if updated voice do not belong to restaurantId
-    Voice save(Date date, int restaurantId, int userId);
+    Vote save(Date date, int restaurantId, int userId);
 
     // null if voice do not belong to userId
-    Voice get(Date date, int userId);
+    Vote get(Date date, int userId);
 }

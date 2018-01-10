@@ -18,7 +18,7 @@ public interface RestaurantRepository {
 
     List<Restaurant> getAll();
 
-    List<RestaurantTo> getAllWithVoicesByDate(Date date);
+    List<RestaurantTo> getAllWithVotesByDate(Date date);
 
     List<Restaurant> getAllWithMealsByDate(LocalDate date);
 }

@@ -55,7 +55,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sdf.parse("2017-06-18");
 
-        List<RestaurantTo> all = service.getAllWithVoicesByDate(date);
+        List<RestaurantTo> all = service.getAllWithVotesByDate(date);
         WHITE_RABBIT_TO.setVote(1);
         UGOLEK_TO.setVote(1);
         assertMatchTo(all, BLACK_THAI_TO, WHITE_RABBIT_TO, UGOLEK_TO);

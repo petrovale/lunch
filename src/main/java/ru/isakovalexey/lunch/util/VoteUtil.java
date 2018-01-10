@@ -5,7 +5,7 @@ import ru.isakovalexey.lunch.util.exception.ApplicationException;
 
 import java.time.LocalTime;
 
-public class VoiceUtil {
+public class VoteUtil {
 
     public static final String EXCEPTION_VOTING_RESTRICTION = "exception.vote.restrictionVote";
 
@@ -16,12 +16,12 @@ public class VoiceUtil {
     }
 
     public static void setTime(LocalTime limitTime) {
-        VoiceUtil.limitTime = limitTime;
+        VoteUtil.limitTime = limitTime;
     }
 
     public static void checkingTimeForSecondVote () {
-        if (LocalTime.now().isAfter(VoiceUtil.getTime())) {
-            throw new ApplicationException(EXCEPTION_VOTING_RESTRICTION, HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS, VoiceUtil.getTime().toString());
+        if (LocalTime.now().isAfter(VoteUtil.getTime())) {
+            throw new ApplicationException(EXCEPTION_VOTING_RESTRICTION, HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS, VoteUtil.getTime().toString());
         }
     }
 }

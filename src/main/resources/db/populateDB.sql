@@ -34,13 +34,13 @@ INSERT INTO meals (date, description, price, restaurant_id) VALUES
   ('2017-06-29', 'рыба запеченная', 1000.00, 100004),
   ('2017-05-30', 'суп -харчо', 300.00, 100004);
 
-INSERT INTO voices (restaurant_id, user_id, date) VALUES
+INSERT INTO votes (restaurant_id, user_id, date) VALUES
   (100004, 100000, '2017-06-18'),
   (100003, 100001, '2017-06-18');
 
-INSERT INTO voices (restaurant_id, user_id, date) VALUES
+INSERT INTO votes (restaurant_id, user_id, date) VALUES
   (100004, 100001, '2017-06-20');
 
-INSERT INTO voices (restaurant_id, user_id, date) VALUES
+INSERT INTO votes (restaurant_id, user_id, date) VALUES
   (100003, 100001, '2017-05-30'),
   (100002, 100000, '2017-05-30');

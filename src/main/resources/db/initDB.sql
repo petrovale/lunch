@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS user_roles;
-DROP TABLE IF EXISTS voices;
+DROP TABLE IF EXISTS votes;
 DROP TABLE IF EXISTS meals;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS restaurants;
@@ -43,7 +43,7 @@ CREATE TABLE meals (
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
 );
 
-CREATE TABLE voices
+CREATE TABLE votes
 (
   id INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   restaurant_id INTEGER NOT NULL,
@@ -51,4 +51,4 @@ CREATE TABLE voices
   date DATE DEFAULT now(),
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
-CREATE UNIQUE INDEX voices_unique_restaurant_user_date_idx ON voices(restaurant_id, user_id, date);
+CREATE UNIQUE INDEX voices_unique_restaurant_user_date_idx ON votes(restaurant_id, user_id, date);

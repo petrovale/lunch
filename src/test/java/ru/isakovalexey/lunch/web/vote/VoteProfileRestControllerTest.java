@@ -1,4 +1,4 @@
-package ru.isakovalexey.lunch.web.voice;
+package ru.isakovalexey.lunch.web.vote;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,9 +6,9 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.util.Assert;
 import ru.isakovalexey.lunch.RestaurantTestData;
 import ru.isakovalexey.lunch.TestUtil;
-import ru.isakovalexey.lunch.model.Voice;
+import ru.isakovalexey.lunch.model.Vote;
 import ru.isakovalexey.lunch.service.RestaurantService;
-import ru.isakovalexey.lunch.util.VoiceUtil;
+import ru.isakovalexey.lunch.util.VoteUtil;
 import ru.isakovalexey.lunch.web.AbstractControllerTest;
 
 import java.time.LocalTime;
@@ -22,27 +22,27 @@ import static ru.isakovalexey.lunch.RestaurantTestData.*;
 import static ru.isakovalexey.lunch.TestUtil.userHttpBasic;
 import static ru.isakovalexey.lunch.UserTestData.USER;
 
-public class VoiceProfileRestControllerTest extends AbstractControllerTest {
-    public static final String REST_URL = VoiceProfileRestController.REST_URL + '/';
+public class VoteProfileRestControllerTest extends AbstractControllerTest {
+    public static final String REST_URL = VoteProfileRestController.REST_URL + '/';
 
     @Autowired
     private RestaurantService service;
 
     @Test
     public void testBeforeCloseOfVoting() throws Exception {
-        VoiceUtil.setTime(LocalTime.now().plusHours(1));
+        VoteUtil.setTime(LocalTime.now().plusHours(1));
 
         ResultActions action = mockMvc.perform(post(REST_URL + WHITE_RABBIT_ID + "/vote")
                 .with(userHttpBasic(USER)))
                 .andDo(print());
 
-        Voice returned = TestUtil.readFromJson(action, Voice.class);
-        Assert.notNull(returned, "voice not found");
+        Vote returned = TestUtil.readFromJson(action, Vote.class);
+        Assert.notNull(returned, "vote not found");
     }
 
     @Test
     public void testAfterClosingRepeatVoting() throws Exception {
-        VoiceUtil.setTime(LocalTime.now().plusHours(-1));
+        VoteUtil.setTime(LocalTime.now().plusHours(-1));
 
         mockMvc.perform(post(REST_URL + WHITE_RABBIT_ID + "/vote")
                 .with(userHttpBasic(USER)))
@@ -57,37 +57,37 @@ public class VoiceProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testAfterVotingIsClosed() throws Exception {
-        VoiceUtil.setTime(LocalTime.now().plusHours(-1));
+        VoteUtil.setTime(LocalTime.now().plusHours(-1));
 
         ResultActions action = mockMvc.perform(post(REST_URL + WHITE_RABBIT_ID + "/vote")
                 .with(userHttpBasic(USER)))
                 .andDo(print());
 
-        Voice returned = TestUtil.readFromJson(action, Voice.class);
-        Assert.notNull(returned, "voice not found");
+        Vote returned = TestUtil.readFromJson(action, Vote.class);
+        Assert.notNull(returned, "vote not found");
     }
 
     @Test
     public void testReVote() throws Exception {
-        VoiceUtil.setTime(LocalTime.now().plusHours(1));
+        VoteUtil.setTime(LocalTime.now().plusHours(1));
 
         ResultActions actionFirst = mockMvc.perform(post(REST_URL + WHITE_RABBIT_ID + "/vote")
                 .with(userHttpBasic(USER)))
                 .andDo(print());
 
-        Voice returnedFirst = TestUtil.readFromJson(actionFirst, Voice.class);
-        Assert.notNull(returnedFirst, "voice not found");
+        Vote returnedFirst = TestUtil.readFromJson(actionFirst, Vote.class);
+        Assert.notNull(returnedFirst, "vote not found");
 
         ResultActions actionSecond = mockMvc.perform(post(REST_URL + WHITE_RABBIT_ID + "/vote")
                 .with(userHttpBasic(USER)))
                 .andDo(print());
 
-        Voice returnedSecond = TestUtil.readFromJson(actionSecond, Voice.class);
-        Assert.notNull(returnedSecond, "voice not found");
+        Vote returnedSecond = TestUtil.readFromJson(actionSecond, Vote.class);
+        Assert.notNull(returnedSecond, "vote not found");
 
         BLACK_THAI_TO.setVote(0);
         UGOLEK_TO.setVote(0);
         WHITE_RABBIT_TO.setVote(1);
-        RestaurantTestData.assertMatchTo(service.getAllWithVoicesByDate(new Date()), BLACK_THAI_TO, WHITE_RABBIT_TO, UGOLEK_TO);
+        RestaurantTestData.assertMatchTo(service.getAllWithVotesByDate(new Date()), BLACK_THAI_TO, WHITE_RABBIT_TO, UGOLEK_TO);
     }
 }

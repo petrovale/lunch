@@ -45,6 +45,6 @@ public class RestaurantRestController {
     @GetMapping(value = "/votes/by-date", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<RestaurantTo> getAllWithVoicesByDate(@RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
         log.info("getAllVoiceByDate {}", date);
-        return service.getAllWithVoicesByDate(date);
+        return service.getAllWithVotesByDate(date);
     }
 }

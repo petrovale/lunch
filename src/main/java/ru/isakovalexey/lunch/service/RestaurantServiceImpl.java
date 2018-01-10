@@ -56,8 +56,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Cacheable("restaurants")
     @Override
-    public List<RestaurantTo> getAllWithVoicesByDate(Date date) {
-        return restaurantRepository.getAllWithVoicesByDate(date);
+    public List<RestaurantTo> getAllWithVotesByDate(Date date) {
+        return restaurantRepository.getAllWithVotesByDate(date);
     }
 
     @Cacheable("restaurants")
