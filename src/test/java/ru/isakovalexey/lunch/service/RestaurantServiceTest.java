@@ -50,7 +50,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testGetAllVoicesByDate() throws Exception {
+    public void testGetAllVotesByDate() throws Exception {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sdf.parse("2017-06-18");

@@ -56,7 +56,7 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     public List<Restaurant> getAllWithMealsByDate(LocalDate date) {
-        return em.createQuery("SELECT DISTINCT r FROM Restaurant r left join fetch r.meals m where m.date=:date", Restaurant.class)
+        return em.createNamedQuery(Restaurant.ALL_WITH_MEALS_BY_DATE, Restaurant.class)
                 .setParameter("date", date)
                 .getResultList();
     }
