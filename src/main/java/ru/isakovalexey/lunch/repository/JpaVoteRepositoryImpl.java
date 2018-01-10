@@ -12,9 +12,6 @@ import javax.persistence.PersistenceContext;
 import java.util.Date;
 import java.util.List;
 
-import static java.util.Objects.isNull;
-import static ru.isakovalexey.lunch.util.VoteUtil.checkingTimeForSecondVote;
-
 @Repository
 @Transactional(readOnly = true)
 public class JpaVoteRepositoryImpl implements VoteRepository {
@@ -24,13 +21,7 @@ public class JpaVoteRepositoryImpl implements VoteRepository {
 
     @Override
     @Transactional
-    public Vote save(Date date, int restaurantId, int userId) {
-        Vote vote = get(date, userId);
-        if (isNull(vote)) {
-            vote = new Vote();
-        } else {
-            checkingTimeForSecondVote();
-        }
+    public Vote save(Vote vote, int restaurantId, int userId) {
         vote.setRestaurant(em.getReference(Restaurant.class, restaurantId));
         vote.setUser(em.getReference(User.class, userId));
         if (vote.isNew()) {
