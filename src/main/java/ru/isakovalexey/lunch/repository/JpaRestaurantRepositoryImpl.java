@@ -3,8 +3,6 @@ package ru.isakovalexey.lunch.repository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.isakovalexey.lunch.model.Restaurant;
-import ru.isakovalexey.lunch.to.RestaurantTo;
-import ru.isakovalexey.lunch.util.RestaurantUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -47,11 +45,10 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
     }
 
     @Override
-    public List<RestaurantTo> getAllWithVotesByDate(Date dateVote) {
-        List<Object[]> objects = em.createNamedQuery(Restaurant.ALL_WITH_VOTES_BY_DATE, Object[].class)
+    public List<Object[]> getAllWithVotesByDate(Date dateVote) {
+        return em.createNamedQuery(Restaurant.ALL_WITH_VOTES_BY_DATE, Object[].class)
                 .setParameter("date", dateVote)
                 .getResultList();
-        return RestaurantUtil.createWithVote(objects);
     }
 
     @Override

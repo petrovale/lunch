@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.repository.RestaurantRepository;
 import ru.isakovalexey.lunch.to.RestaurantTo;
+import ru.isakovalexey.lunch.util.RestaurantUtil;
 import ru.isakovalexey.lunch.util.exception.NotFoundException;
 
 import java.time.LocalDate;
@@ -57,7 +58,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Cacheable("restaurants")
     @Override
     public List<RestaurantTo> getAllWithVotesByDate(Date date) {
-        return restaurantRepository.getAllWithVotesByDate(date);
+        return RestaurantUtil.createWithVote(restaurantRepository.getAllWithVotesByDate(date));
     }
 
     @Cacheable("restaurants")
