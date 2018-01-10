@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.springframework.http.MediaType;
 import ru.isakovalexey.lunch.web.AbstractControllerTest;
 
+import java.util.Arrays;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -11,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static ru.isakovalexey.lunch.MealTestData.*;
 import static ru.isakovalexey.lunch.MealTestData.BLACK_THAI_ID;
 import static ru.isakovalexey.lunch.MealTestData.BLACK_THAI_MEAL_ID;
+import static ru.isakovalexey.lunch.TestUtil.contentJson;
 import static ru.isakovalexey.lunch.TestUtil.userHttpBasic;
 import static ru.isakovalexey.lunch.UserTestData.USER;
 
@@ -24,7 +27,7 @@ public class MealRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentMatcher(BLACK_THAI_MEAL1));
+                .andExpect(contentJson(BLACK_THAI_MEAL1));
     }
 
     @Test
@@ -55,6 +58,6 @@ public class MealRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentListMatcher(BLACK_THAI_MEAL3, BLACK_THAI_MEAL2, BLACK_THAI_MEAL1));
+                .andExpect(contentJson(Arrays.asList(BLACK_THAI_MEAL3, BLACK_THAI_MEAL2, BLACK_THAI_MEAL1)));
     }
 }

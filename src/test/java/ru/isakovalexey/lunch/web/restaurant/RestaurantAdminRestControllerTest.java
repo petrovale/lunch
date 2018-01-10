@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import ru.isakovalexey.lunch.TestUtil;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.service.RestaurantService;
 import ru.isakovalexey.lunch.web.AbstractControllerTest;
@@ -34,7 +35,7 @@ public class RestaurantAdminRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isOk());
-        MATCHER.assertCollectionEquals(Arrays.asList(WHITE_RABBIT, UGOLEK), restaurantService.getAll());
+        assertMatch(restaurantService.getAll(), Arrays.asList(WHITE_RABBIT, UGOLEK));
     }
 
     @Test
@@ -69,7 +70,7 @@ public class RestaurantAdminRestControllerTest extends AbstractControllerTest {
                 .content(JsonUtil.writeValue(updated)))
                 .andExpect(status().isOk());
 
-        MATCHER.assertEquals(updated, restaurantService.get(BLACK_THAI_ID));
+        assertMatch(restaurantService.get(BLACK_THAI_ID), updated);
     }
 
     @Test
@@ -80,11 +81,11 @@ public class RestaurantAdminRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(ADMIN))
                 .content(JsonUtil.writeValue(expected))).andExpect(status().isCreated());
 
-        Restaurant returned = MATCHER.fromJsonAction(action);
+        Restaurant returned = TestUtil.readFromJson(action, Restaurant.class);
         expected.setId(returned.getId());
 
-        MATCHER.assertEquals(expected, returned);
-        MATCHER.assertCollectionEquals(Arrays.asList(BLACK_THAI, expected, WHITE_RABBIT, UGOLEK), restaurantService.getAll());
+        assertMatch(returned, expected);
+        assertMatch(restaurantService.getAll(), BLACK_THAI, expected, WHITE_RABBIT, UGOLEK);
     }
 
     @Test

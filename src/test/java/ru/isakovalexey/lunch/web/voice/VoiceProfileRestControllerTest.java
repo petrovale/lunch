@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.util.Assert;
 import ru.isakovalexey.lunch.RestaurantTestData;
+import ru.isakovalexey.lunch.TestUtil;
 import ru.isakovalexey.lunch.model.Voice;
 import ru.isakovalexey.lunch.service.RestaurantService;
 import ru.isakovalexey.lunch.util.VoiceUtil;
 import ru.isakovalexey.lunch.web.AbstractControllerTest;
 
 import java.time.LocalTime;
-import java.util.Arrays;
 import java.util.Date;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -21,7 +21,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static ru.isakovalexey.lunch.RestaurantTestData.*;
 import static ru.isakovalexey.lunch.TestUtil.userHttpBasic;
 import static ru.isakovalexey.lunch.UserTestData.USER;
-import static ru.isakovalexey.lunch.VoiceTestData.MATCHER;
 
 public class VoiceProfileRestControllerTest extends AbstractControllerTest {
     public static final String REST_URL = VoiceProfileRestController.REST_URL + '/';
@@ -37,7 +36,7 @@ public class VoiceProfileRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(USER)))
                 .andDo(print());
 
-        Voice returned = MATCHER.fromJsonAction(action);
+        Voice returned = TestUtil.readFromJson(action, Voice.class);
         Assert.notNull(returned, "voice not found");
     }
 
@@ -64,7 +63,7 @@ public class VoiceProfileRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(USER)))
                 .andDo(print());
 
-        Voice returned = MATCHER.fromJsonAction(action);
+        Voice returned = TestUtil.readFromJson(action, Voice.class);
         Assert.notNull(returned, "voice not found");
     }
 
@@ -76,20 +75,19 @@ public class VoiceProfileRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(USER)))
                 .andDo(print());
 
-        Voice returnedFirst = MATCHER.fromJsonAction(actionFirst);
+        Voice returnedFirst = TestUtil.readFromJson(actionFirst, Voice.class);
         Assert.notNull(returnedFirst, "voice not found");
 
         ResultActions actionSecond = mockMvc.perform(post(REST_URL + WHITE_RABBIT_ID + "/vote")
                 .with(userHttpBasic(USER)))
                 .andDo(print());
 
-        Voice returnedSecond = MATCHER.fromJsonAction(actionSecond);
+        Voice returnedSecond = TestUtil.readFromJson(actionSecond, Voice.class);
         Assert.notNull(returnedSecond, "voice not found");
 
         BLACK_THAI_TO.setVote(0);
         UGOLEK_TO.setVote(0);
         WHITE_RABBIT_TO.setVote(1);
-        RestaurantTestData.MATCHER_WITH_VOICES.assertCollectionEquals(
-                Arrays.asList(BLACK_THAI_TO, WHITE_RABBIT_TO, UGOLEK_TO), service.getAllWithVoicesByDate(new Date()));
+        RestaurantTestData.assertMatchTo(service.getAllWithVoicesByDate(new Date()), BLACK_THAI_TO, WHITE_RABBIT_TO, UGOLEK_TO);
     }
 }

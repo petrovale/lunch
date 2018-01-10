@@ -11,7 +11,6 @@ import ru.isakovalexey.lunch.model.User;
 import ru.isakovalexey.lunch.web.AbstractControllerTest;
 import ru.isakovalexey.lunch.web.json.JsonUtil;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -20,7 +19,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.isakovalexey.lunch.TestUtil.userHttpBasic;
 import static ru.isakovalexey.lunch.UserTestData.*;
-import static ru.isakovalexey.lunch.UserTestData.MATCHER;
 
 public class AdminRestControllerTest extends AbstractControllerTest {
 
@@ -34,7 +32,7 @@ public class AdminRestControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 // https://jira.spring.io/browse/SPR-14472
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentMatcher(ADMIN));
+                .andExpect(contentJson(ADMIN));
     }
 
     @Test
@@ -51,7 +49,7 @@ public class AdminRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentMatcher(ADMIN));
+                .andExpect(contentJson(ADMIN));
     }
 
     @Test
@@ -60,7 +58,7 @@ public class AdminRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isOk());
-        MATCHER.assertCollectionEquals(Collections.singletonList(ADMIN), userService.getAll());
+        assertMatch(userService.getAll(), Collections.singletonList(ADMIN));
     }
 
     @Test
@@ -94,7 +92,7 @@ public class AdminRestControllerTest extends AbstractControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated)))
                 .andExpect(status().isOk());
-        MATCHER.assertEquals(updated, userService.get(USER_ID));
+        assertMatch(userService.get(USER_ID), updated);
     }
 
     @Test
@@ -106,11 +104,8 @@ public class AdminRestControllerTest extends AbstractControllerTest {
                 .content(JsonUtil.writeValue(expected)))
                 .andExpect(status().isCreated());
 
-        User returned = MATCHER.fromJsonAction(action);
+        User returned = TestUtil.readFromJson(action, User.class);
         expected.setId(returned.getId());
-
-        MATCHER.assertEquals(expected, returned);
-        MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, expected, USER), userService.getAll());
     }
 
     @Test
@@ -119,7 +114,7 @@ public class AdminRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentListMatcher(ADMIN, USER)));
+                .andExpect(contentJson(ADMIN, USER)));
     }
 
     @Test

@@ -11,19 +11,15 @@ import ru.isakovalexey.lunch.util.UserUtil;
 import ru.isakovalexey.lunch.web.AbstractControllerTest;
 import ru.isakovalexey.lunch.web.json.JsonUtil;
 
-import java.util.Collections;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.isakovalexey.lunch.TestUtil.userHttpBasic;
 import static ru.isakovalexey.lunch.UserTestData.*;
+import static ru.isakovalexey.lunch.UserTestData.assertMatch;
 import static ru.isakovalexey.lunch.web.user.ProfileRestController.REST_URL;
 
-/**
- * Created by user on 14.06.2017.
- */
 public class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
@@ -32,7 +28,7 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(USER)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentMatcher(USER)));
+                .andExpect(contentJson(USER)));
     }
 
     @Test
@@ -46,7 +42,7 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
         mockMvc.perform(delete(REST_URL)
                 .with(userHttpBasic(USER)))
                 .andExpect(status().isOk());
-        MATCHER.assertCollectionEquals(Collections.singletonList(ADMIN), userService.getAll());
+        assertMatch(userService.getAll(), ADMIN);
     }
 
     @Test
@@ -59,7 +55,7 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        MATCHER.assertEquals(UserUtil.updateFromTo(new User(USER), updatedTo), userService.getByEmail("newemail@ya"));
+        assertMatch(userService.getByEmail("newemail@ya"), UserUtil.updateFromTo(new User(USER), updatedTo));
     }
 
     @Test

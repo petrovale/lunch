@@ -23,7 +23,7 @@ public class RestaurantRestControllerTest extends AbstractControllerTest{
                 .with(userHttpBasic(USER)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentMatcher(BLACK_THAI)));
+                .andExpect(contentJson(BLACK_THAI)));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class RestaurantRestControllerTest extends AbstractControllerTest{
                 .with(userHttpBasic(USER)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentListMatcher(BLACK_THAI, WHITE_RABBIT, UGOLEK)));
+                .andExpect(contentJson(BLACK_THAI, WHITE_RABBIT, UGOLEK)));
     }
 
     @Test
@@ -61,7 +61,7 @@ public class RestaurantRestControllerTest extends AbstractControllerTest{
                 .with(userHttpBasic(USER)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER_WITH_VOICES.contentListMatcher(BLACK_THAI_TO, WHITE_RABBIT_TO, UGOLEK_TO)));
+                .andExpect(contentJson(BLACK_THAI_TO, WHITE_RABBIT_TO, UGOLEK_TO)));
     }
 
     @Test

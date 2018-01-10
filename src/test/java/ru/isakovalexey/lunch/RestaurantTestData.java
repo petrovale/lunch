@@ -1,14 +1,15 @@
 package ru.isakovalexey.lunch;
 
-import ru.isakovalexey.lunch.matcher.ModelMatcher;
+import org.springframework.test.web.servlet.ResultMatcher;
 import ru.isakovalexey.lunch.model.Restaurant;
 import ru.isakovalexey.lunch.to.RestaurantTo;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static ru.isakovalexey.lunch.model.BaseEntity.START_SEQ;
+import static ru.isakovalexey.lunch.web.json.JsonUtil.writeIgnoreProps;
 
 public class RestaurantTestData {
 
@@ -44,24 +45,19 @@ public class RestaurantTestData {
         assertThat(actual).usingElementComparatorIgnoringFields("registered", "voices", "meals").isEqualTo(expected);
     }
 
-    //public static ResultMatcher contentJson(Restaurant... expected) {
-    //    return content().json(writeIgnoreProps(Arrays.asList(expected), "registered"));
-    //}
+    public static ResultMatcher contentJson(Restaurant... expected) {
+        return content().json(writeIgnoreProps(Arrays.asList(expected), "registered"));
+    }
 
-    //public static ResultMatcher contentJson(Restaurant expected) {
-    //    return content().json(writeIgnoreProps(expected, "registered"));
-    //}
+    public static ResultMatcher contentJson(Restaurant expected) {
+        return content().json(writeIgnoreProps(expected, "registered"));
+    }
 
-    public static final ModelMatcher<Restaurant> MATCHER = ModelMatcher.of(Restaurant.class,
-            (expected, actual) -> expected == actual ||
-                    (Objects.equals(expected.getId(), actual.getId())
-                            && Objects.equals(expected.getName(), actual.getName())
-                            //&& Objects.equals(expected.getVote(), actual.getVote())
-                    )
-    );
-    public static final ModelMatcher<RestaurantTo> MATCHER_WITH_VOICES = ModelMatcher.of(RestaurantTo.class, (expected, actual) -> expected == actual ||
-            (Objects.equals(expected.getId(), actual.getId())
-                    && Objects.equals(expected.getName(), actual.getName())
-                    && Objects.equals(expected.getVote(), actual.getVote())
-            ));
+    public static ResultMatcher contentJson(RestaurantTo... expected) {
+        return content().json(writeIgnoreProps(Arrays.asList(expected), "registered"));
+    }
+
+    public static ResultMatcher contentJson(RestaurantTo expected) {
+        return content().json(writeIgnoreProps(expected, "registered"));
+    }
 }

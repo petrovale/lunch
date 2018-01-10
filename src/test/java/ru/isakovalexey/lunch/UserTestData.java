@@ -1,15 +1,16 @@
 package ru.isakovalexey.lunch;
 
 
+ import org.springframework.test.web.servlet.ResultMatcher;
  import ru.isakovalexey.lunch.model.Role;
- import ru.isakovalexey.lunch.matcher.ModelMatcher;
  import ru.isakovalexey.lunch.model.User;
 
  import java.util.Arrays;
- import java.util.Objects;
 
  import static org.assertj.core.api.Assertions.assertThat;
+ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
  import static ru.isakovalexey.lunch.model.BaseEntity.START_SEQ;
+ import static ru.isakovalexey.lunch.web.json.JsonUtil.writeIgnoreProps;
 
 public class UserTestData {
     public static final int USER_ID = START_SEQ;
@@ -30,14 +31,11 @@ public class UserTestData {
         assertThat(actual).usingElementComparatorIgnoringFields("registered").isEqualTo(expected);
     }
 
-    public static final ModelMatcher<User> MATCHER = ModelMatcher.of(User.class,
-            (expected, actual) -> expected == actual ||
-                    (Objects.equals(expected.getPassword(), actual.getPassword())
-                            && Objects.equals(expected.getId(), actual.getId())
-                            && Objects.equals(expected.getName(), actual.getName())
-                            && Objects.equals(expected.getEmail(), actual.getEmail())
-                            && Objects.equals(expected.isEnabled(), actual.isEnabled())
-                            && Objects.equals(expected.getRoles(), actual.getRoles())
-                    )
-    );
+    public static ResultMatcher contentJson(User... expected) {
+        return content().json(writeIgnoreProps(Arrays.asList(expected), "registered"));
+    }
+
+    public static ResultMatcher contentJson(User expected) {
+        return content().json(writeIgnoreProps(expected, "registered"));
+    }
 }

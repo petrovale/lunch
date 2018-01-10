@@ -1,6 +1,5 @@
 package ru.isakovalexey.lunch;
 
-import ru.isakovalexey.lunch.matcher.ModelMatcher;
 import ru.isakovalexey.lunch.model.Meal;
 
 import java.math.BigDecimal;
@@ -11,15 +10,6 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static ru.isakovalexey.lunch.model.BaseEntity.START_SEQ;
 
 public class MealTestData {
-
-    public static final ModelMatcher<Meal> MATCHER = ModelMatcher.of(Meal.class,
-            (expected, actual) -> expected == actual ||
-                    (Objects.equals(expected.getId(), actual.getId())
-                            && Objects.equals(expected.getDate(), actual.getDate())
-                            && Objects.equals(expected.getDescription(), actual.getDescription())
-                            && Objects.equals(expected.getPrice(), actual.getPrice())
-                    )
-    );
 
     public static final int BLACK_THAI_ID = START_SEQ + 2;
     public static final int WHITE_RABBIT_ID = START_SEQ + 3;

@@ -4,12 +4,11 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
+import ru.isakovalexey.lunch.TestUtil;
 import ru.isakovalexey.lunch.model.Meal;
 import ru.isakovalexey.lunch.service.MealService;
 import ru.isakovalexey.lunch.web.AbstractControllerTest;
 import ru.isakovalexey.lunch.web.json.JsonUtil;
-
-import java.util.Arrays;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -46,7 +45,7 @@ public class MealAdminRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isOk());
-        MATCHER.assertCollectionEquals(Arrays.asList(BLACK_THAI_MEAL3, BLACK_THAI_MEAL2), service.getAll(BLACK_THAI_ID, getDate()));
+        assertMatch(service.getAll(BLACK_THAI_ID, getDate()), BLACK_THAI_MEAL3, BLACK_THAI_MEAL2);
     }
 
     @Test
@@ -67,7 +66,7 @@ public class MealAdminRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print());
 
-        MATCHER.assertEquals(updated, service.get(updated.getId(), BLACK_THAI_ID));
+        assertMatch(service.get(updated.getId(), BLACK_THAI_ID), updated);
     }
 
     @Test
@@ -78,11 +77,11 @@ public class MealAdminRestControllerTest extends AbstractControllerTest {
                 .content(JsonUtil.writeValue(created))
                 .with(userHttpBasic(ADMIN)));
 
-        Meal returned = MATCHER.fromJsonAction(action);
+        Meal returned = TestUtil.readFromJson(action, Meal.class);
         created.setId(returned.getId());
 
-        MATCHER.assertEquals(created, returned);
-        MATCHER.assertCollectionEquals(Arrays.asList(created, BLACK_THAI_MEAL3, BLACK_THAI_MEAL2, BLACK_THAI_MEAL1), service.getAll(BLACK_THAI_ID, getDate()));
+        assertMatch(returned, created);
+        assertMatch(service.getAll(BLACK_THAI_ID, getDate()), created, BLACK_THAI_MEAL3, BLACK_THAI_MEAL2, BLACK_THAI_MEAL1);
     }
 
     @Test
