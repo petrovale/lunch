@@ -31,7 +31,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         return checkNotFoundWithId(restaurantRepository.get(id), id);
     }
 
-    @CacheEvict(value = "restaurants", allEntries = true)
+    @CacheEvict(value = { "restaurants", "restaurantsTo" }, allEntries = true)
     @Override
     public void delete(int id) throws NotFoundException {
         checkNotFoundWithId(restaurantRepository.delete(id), id);
@@ -43,19 +43,19 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurantRepository.getAll();
     }
 
-    @CacheEvict(value = "restaurants", allEntries = true)
+    @CacheEvict(value = { "restaurants", "restaurantsTo" }, allEntries = true)
     @Override
     public Restaurant update(Restaurant restaurant) throws NotFoundException {
         return restaurantRepository.save(restaurant);
     }
 
-    @CacheEvict(value = "restaurants", allEntries = true)
+    @CacheEvict(value = { "restaurants", "restaurantsTo" }, allEntries = true)
     @Override
     public Restaurant save(Restaurant restaurant) {
         return restaurantRepository.save(restaurant);
     }
 
-    @Cacheable("restaurants")
+    @Cacheable("restaurantsTo")
     @Override
     public List<RestaurantTo> getAllWithVotesByDate(Date date) {
         return RestaurantUtil.createWithVote(restaurantRepository.getAllWithVotesByDate(date));
@@ -67,7 +67,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurantRepository.getAllWithMealsByDate(date);
     }
 
-    @CacheEvict(value = "restaurants", allEntries = true)
+    @CacheEvict(value = { "restaurants", "restaurantsTo" }, allEntries = true)
     @Override
     public void evictCache() {
         // only for evict cache
